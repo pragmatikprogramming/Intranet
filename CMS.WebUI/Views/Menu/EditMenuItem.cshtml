@@ -1,0 +1,46 @@
+﻿@using CMS.WebUI.Infrastructure
+@{
+    ViewBag.Title = "EditMenuItem";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style type="text/css">
+    ul {
+        list-style-type: none;
+    }
+
+</style>
+<div class="header">
+    <h1 class="page-title">Edit a custom Menu Item</h1>
+</div>
+<div class="container-fluid">   
+<div class="row-fluid">  
+<div class="formcontainer">
+    <div style="line-height: 30px;">&nbsp;</div>
+    <div style="color: red">@Html.ValidationSummary()</div>
+
+    <div class="formlabel">&nbsp;</div>
+    <div class="formfield"><a href="/Menu/MenuItems/@Model.ParentId"><button class="btn btn-primary"><i class="icon-reply"></i> Cancel</button></a></div>
+    <div class="clear">&nbsp;</div>
+    <div style="line-height: 30px;">&nbsp;</div>
+
+    <form action="/Menu/EditMenuItem" method="post" id="menuItemEdit">
+        <input type="hidden" value="@Model.Id" name="Id" />
+        <input type="hidden" value="@Model.ParentId" name="ParentId" />
+        <div class="formlabel">Menu Item Name:</div>
+        <div class="formfield"><input type="text" class="input-xlarge" name="MenuItemName" value="@Model.MenuItemName"></div>
+        <div class="clear">&nbsp;</div>
+
+        <div class="formlabel">Link Url:</div>
+        <div class="formfield" id="linkurl"><input type="text" class="input-xlarge" name="LinkUrl" value="@Model.LinkUrl" /></div>
+        <div class="clear">&nbsp;</div>
+
+        <div class="formlabel">&nbsp;</div>
+        <div class="formfield">@Html.Menu()</div>
+        <div class="clear">&nbsp;</div>
+
+        <div style="line-height: 30px;">&nbsp;</div>
+        <div class="formlabel">&nbsp;</div>
+        <div class="formfield"><button form="menuItemEdit" class="btn btn-primary"><i class="icon-save"></i> Save</button></div>
+        <div class="clear">&nbsp;</div>
+    </form>
+</div>

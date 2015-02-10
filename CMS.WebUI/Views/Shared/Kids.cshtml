@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Kids";
+    Layout = "~/Views/Shared/_LayoutKids.cshtml";
+}
+
+<div class="margin-top_10"></div>
+
+@if (Model.DisplaySocialMedia == 1)
+{
+    <section>
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_pinterest_large' displayText='Pinterest'></span>
+        <span class='st_email_large' displayText='Email'></span>
+        <span class='st_fblike_large' displayText='Facebook Like'></span><br /><br /><br />      
+    </section>
+}
+        @if(ViewBag.isPostBack == null || ViewBag.isPostBack != 1)
+        {
+            @Html.Raw(Model.Content)
+        }
+
+        @if (ViewBag.PageType == 2)
+        {
+            if (ViewBag.isPostBack == 1)
+            {
+                @Html.Raw(System.Web.HttpUtility.HtmlDecode(ViewBag.Success));
+            }
+            else
+            {
+                @Html.Action("getForm", "Home", new { parentId = Model.PageID, id = ViewBag.id})
+            }
+        }

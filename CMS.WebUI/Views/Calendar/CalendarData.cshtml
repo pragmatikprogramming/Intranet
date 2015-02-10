@@ -1,0 +1,67 @@
+﻿@model IEnumerable<CMS.Domain.Entities.Event>
+
+<script type="text/javascript">
+    var myID = 0;
+
+    function doWork(id)
+    {
+        myID = id;
+    }
+
+</script>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Event Title</th>
+            <th style="width: 10px;padding: 2px;"></th>
+            <th style="width: 10px;padding: 2px;"></th>
+            <th style="width: 10px;padding: 2px;"></th>
+            <th style="width: 10px;padding: 2px;"></th>
+            <th style="width: 10px;padding: 2px;"></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach(var p in Model)
+    {
+        <tr>
+            <td>@p.EventTitle</td>
+            <td style="padding: 2px;">
+                @if(p.LockedBy > 0)
+                {
+                    <a href="/Calendar/EventUnlock/@p.EventID"><i class="icon-lock"></i></a>
+                }
+            </td>
+            <td style="padding: 2px;">
+                @if(p.PageWorkFlowState == 1)
+                {
+                    <a href="/Calendar/EventPublish/@p.EventID"><i class="icon-book"></i></a>
+                }
+            </td>
+            <td style="padding: 2px;">
+                <a href="/Calendar/EventPreview/@p.EventID" target="_blank"><i class="icon-picture"></i></a>
+            </td>
+            <td style="padding: 2px;">
+                <a href="/Calendar/Edit/@p.EventID"><i class="icon-pencil"></i></a>
+            </td>
+            <td style="padding: 2px;">
+                <a href="#myModal" role="button" data-toggle="modal" id="1" onclick="doWork(@p.EventID);"><i class="icon-remove"></i></a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3 id="myModalLabel">Delete Confirmation</h3>
+    </div>
+    <div class="modal-body">
+        <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Are you sure you want to delete the Event?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-danger" data-dismiss="modal" onclick="document.location.href ='/Calendar/Delete/' + myID;">Delete</button>
+    </div>
+</div>

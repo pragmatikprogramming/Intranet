@@ -1,0 +1,160 @@
+﻿@{
+    ViewBag.Name = HttpContext.Current.Session["Name"];
+}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>@ViewBag.Title</title>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/general-style.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/theme.css" />
+    <link rel="stylesheet" href="~/Content/font-awesome.css" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    
+    <script src="~/Content/CKEditor/ckeditor.js"></script>
+
+    <!-- Demo page code -->
+
+    <style type="text/css">
+        #line-chart {
+            height:300px;
+            width:800px;
+            margin: 0px auto;
+            margin-top: 1em;
+        }
+        .brand { font-family: georgia, serif; }
+        .brand .first {
+            color: #ccc;
+            font-style: italic;
+        }
+        .brand .second {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        @if (Session["BarColor"] != null && Session["BarColor"].ToString().Length > 0)
+        {
+            @:.navbar .navbar-inner{ background: repeat scroll 0 0 padding-box rgba(0, 0, 0, 0); background-color: @Session["BarColor"] }
+        }
+    </style>
+   
+
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+  </head>
+
+  <!--[if lt IE 7 ]> <body class="ie ie6"> <![endif]-->
+  <!--[if IE 7 ]> <body class="ie ie7 "> <![endif]-->
+  <!--[if IE 8 ]> <body class="ie ie8 "> <![endif]-->
+  <!--[if IE 9 ]> <body class="ie ie9 "> <![endif]-->
+  <!--[if (gt IE 9)|!(IE)]><!--> 
+<body class=""> 
+  <!--<![endif]-->
+    
+    <div class="navbar">
+        <div class="navbar-inner">
+            <ul class="nav pull-right">    
+                <li><a href="/SystemSettings/Index" class="dropdown" role="button">Settings</a></li>
+                <li id="fat-menu" class="dropdown">
+                    <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-user"></i> @ViewBag.Name
+                        <i class="icon-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">                       
+                        <li><a tabindex="-1" href="/Admin/Logout/">Logout</a></li>
+                    </ul>
+                </li>    
+            </ul>
+            <a class="brand" href="index.html"><img src="@Url.Action("GetAdminLogo", "ImageHandler")" width="149" height="20" alt="Logo"></a>
+        </div><!-- end navbar-inner-->
+    </div><!-- end navbar -->
+    
+    <div class="sidebar-nav">
+        <a href="/Admin/Index" class="nav-header"><i class="icon-home"></i>Dashboard</a>
+        <a href="/Page/Index" class="nav-header" ><i class="icon-book"></i>Pages</a>
+        <a href="#blog-menu" class="nav-header" data-toggle="collapse"><i class="icon-bullhorn"></i>Blog</a>
+            <ul id="blog-menu" class="nav nav-list collapse">
+                <li ><a href="/BlogPost/Index">Blog Posts</a></li>
+                <li ><a href="/Category/Index">Categories</a></li>
+            </ul>
+        <a href="#users-menu" class="nav-header" data-toggle="collapse"><i class="icon-user"></i>Users</a>
+            <ul id="users-menu" class="nav nav-list collapse">
+                <li ><a href="/User/Add">Add User</a></li>
+                <li ><a href="/User/Manage">Manage Users</a></li>
+            </ul>
+        <a href="#groups-menu" class="nav-header" data-toggle="collapse"><i class="icon-group"></i>Groups</a>
+            <ul id="groups-menu" class="nav nav-list collapse">
+                <li ><a href="#">Add Group</a></li>
+                <li ><a href="#">Manage Groups</a></li>
+            </ul>
+        <a href="/Menu/Index" class="nav-header" ><i class="icon-sitemap"></i>Menus</a>
+	    <a href="#media-menu" class="nav-header" data-toggle="collapse"><i class="icon-picture"></i>Media</a>
+            <ul id="media-menu" class="nav nav-list collapse">
+                <li><a href="/Gallery/Index">Image Gallery</a></li>
+                <li><a href="/Document/Index">Document Repository</a></li>
+            </ul>
+        <a href="#extensions-menu" class="nav-header" data-toggle="collapse"><i class="icon-puzzle-piece"></i>Extensions</a>
+            <ul id="extensions-menu" class="nav nav-list collapse">
+                <li ><a href="/Calendar/Index">Calendar</a></li>
+                <li ><a href="/FAQ/Index">FAQ</a></li>
+                <li><a href="#form-builder" data-toggle="collapse" >Form Builder</a>
+                    <ul id="form-builder" class="nave nave-list collapse">
+                        <li><a href="/FormField/Index">Form Fields</a></li>
+                        <li><a href="/Form/Index">Forms</a></li>
+                        <li><a href="/Form/ExtractFormData">Extract Form Data</a></li>
+                    </ul>
+                </li>
+            </ul>
+        <a href="#widgets-menu" class="nav-header" data-toggle="collapse"><i class="icon-gear"></i>Widgets</a>
+        <ul id="widgets-menu" class="nav nav-list collapse">
+            <li><a href="/HTMLWidget/Index">HTML Widgets</a></li>
+            <li><a href="/WidgetNewsRotator/Index">News Rotator</a></li>
+        </ul>
+        <a href="/WidgetContainer/Index" class="nav-header"><i class="icon-briefcase"></i>Containers</a>
+        <a href="/Trash/Index" class="nav-header"><i class="icon-trash"></i>Recycle Bin</a>
+        <a href="#" class="nav-header" ><i class="icon-question-sign"></i>Help</a>
+    </div><!-- end sidebar-nav-->
+    
+    <div class="content">
+
+        @RenderBody()                
+    
+            <footer>
+                <hr>
+                <p class="pull-right">Privacy Policy</p>
+                <p>&copy; </p>
+            </footer>
+        </div><!-- end row-fluid inside of view -->
+    </div><!-- end content -->
+
+    <script src="~/Content/bootstrap.js"></script>
+    <script type="text/javascript">
+        $("[rel=tooltip]").tooltip();
+        $(function () {
+            $('.demo-cancel-click').click(function () { return false; });
+        });
+    </script> 
+  </body>
+</html>
+
+

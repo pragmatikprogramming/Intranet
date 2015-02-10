@@ -1,0 +1,255 @@
+﻿@model CMS.Domain.Entities.Page
+@{
+    ViewBag.Title = "Edit - Pages";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<script>
+    $(function () {
+        $("#PublishDate").datepicker();
+    });
+
+    $(function () {
+        $("#ExpireDate").datepicker();
+    });
+
+    var tid = setInterval(savePageData, 180000);
+    var tid3;
+    function savePageData() {
+        //var data = $("#pageEdit").serialize();    
+        $("#Content").val(CKEDITOR.instances['Content'].getData());
+        //alert($("#Content").val());
+        $.post("/Page/EditPage", $("#pageEdit").serialize());
+        $("#message").replaceWith('<div id="message"><div class="alert alert-info" ><button type="button" class="close" data-dismiss="alert">x</button><strong>Saved changes successfully</strong></div></div>');
+        tid3 = setTimeout(displayMessage, 10000);
+    }
+    var tid2 = setTimeout(alertSessionExpire, 1200000);
+    function alertSessionExpire() {
+        alert("Your session will be expiring soon.  Save your work and refresh page");
+    }
+    function displayMessage() {
+        $("#message").replaceWith('<div id="message" style="line-height: 60px;">&nbsp;</div>');
+    }
+</script>
+
+<div class="header">
+    <h1 class="page-title">Edit Page</h1>
+</div>
+<div class="container-fluid">
+<div class="row-fluid">
+<div class="formcontainer">
+    <div id="message" style="line-height: 60px;">&nbsp        
+    </div>
+    <div style="color: red">@Html.ValidationSummary()</div>
+    <div class="formlabel">&nbsp;</div>
+    <div class="formfield"><a href="/Page/Index/@Model.ParentId"><button class="btn btn-primary"><i class="icon-reply"></i> Cancel</button></a></div>
+    <div class="clear">&nbsp;</div>
+    <div style="line-height: 30px;">&nbsp;</div>
+
+    <form action="/Page/getPageTypeIds" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#PageType" method="post">
+        <div class="formlabel">Page Type:</div>
+        <div class="formfield">
+            <select name="mPageType" onchange="$(this.form).submit();">
+                <option value="1" 
+                    @if(Model.PageType == 1) 
+                    { 
+                        @:selected="selected" 
+                    } 
+                >Default Content Page</option>
+                <option value="2"
+                    @if(Model.PageType == 2) 
+                    { 
+                        @:selected="selected" 
+                    }
+                >Forms Page</option>
+                <option value="3"
+                    @if(Model.PageType == 3) 
+                    { 
+                        @:selected="selected" 
+                    }
+                >FAQ's Page</option>
+                <option value="4"
+                    @if(Model.PageType == 4) 
+                    { 
+                        @:selected="selected" 
+                    }
+                >Blog Page</option>
+            </select>
+        </div>
+        <div class="clear">&nbsp;</div>
+    </form>
+    <form action="/Page/EditPage" method="post" id="pageEdit">
+        <div id="PageType">
+            @Html.Action("getPageTypeIds", new{ mPageType = Model.PageType, id = Model.Id })
+            
+            <!--<input type="hidden" name="PageType" value="1" />
+            <input type="hidden" name="PageTypeId" value="0" />
+
+            <div class="formlabel">Template:</div>
+            <div class="formfield">
+                <select name="TemplateId">
+                    <option value="">-- Select a Template --</option>
+                    @foreach (var Template in ViewBag.Templates)
+                    {
+                        if (Template.TemplateId == Model.TemplateId)
+                        {
+                            <option value="@Template.TemplateId" selected="selected">@Template.FriendlyName</option>
+                        }
+                        else
+                        {
+                            <option value="@Template.TemplateId">@Template.FriendlyName</option>
+                        }
+                        }
+                </select>
+            </div>
+            <div class="clear">&nbsp;</div>-->
+        </div>
+        <input type="hidden" name="Id" id="Id" value="@Model.Id" />
+        <input type="hidden" name="PageID" id="PageID" value="@Model.PageID" />
+        <input type="hidden" name="ParentId" id="ParentId" value="@Model.ParentId" />
+        <div class="formlabel">Content Group:</div>
+        <div class="formfield"><select name="ContentGroup">
+            <option value="">-- Select a Content Group --</option>
+            @foreach (var GroupName in ViewBag.myContentGroups)
+                {
+                    if (GroupName.GroupID == Model.ContentGroup)
+                    {
+                        <option value="@GroupName.GroupID" selected="selected">@GroupName.ContentGroupName</option>
+                    }
+                    else
+                    {
+                        <option value="@GroupName.GroupID">@GroupName.ContentGroupName</option>
+                    }
+                 }
+            </select>
+        </div>
+        <div class="clear">&nbsp;</div>
+
+        <div class="formlabel">Page Title:</div>
+        <div class="formfield"><input type="text" name="PageTitle" value="@Model.PageTitle" /></div>
+        <div class="clear">&nbsp;</div>
+
+        <div class="formlabel">Navigation Name:</div>
+        <div class="formfield"><input type="text" name="NavigationName" value="@Model.NavigationName" /></div>
+        <div class="clear">&nbsp;</div>
+        
+        <div class="formlabel">Friendly URL:</div>
+        <div class="formfield"><input type="text" name="FriendlyURL" value="@Model.FriendlyURL" /></div>
+        <div class="clear">&nbsp;</div>
+
+        <div class="formlabel">Redirect URL:</div>
+        <div class="formfield"><input type="text" name="RedirectURL" value="@Model.RedirectURL" /></div>
+        <div class="clear">&nbsp;</div>
+        
+        <div class="formlabel">Container:</div>
+        <div class="formfield">
+            <select name="WidgetContainerId">
+                <option value="0">-- Select a Container --</option>
+                @foreach (var widget in ViewBag.Widgets)
+                {
+                    if (@widget.Id == Model.WidgetContainerId)
+                    {
+                        <option value="@widget.Id" selected="selected">@widget.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@widget.Id">@widget.Name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="clear">&nbsp;</div>
+
+        <div class="formlabel">Publish Date:</div>
+        <div class="formfield"><input type="text" name="PublishDate" id="PublishDate" value="
+            @if(Model.PublishDate.ToString() != "1/1/0001 12:00:00 AM")
+            {
+                @Model.PublishDate.ToString("MM/dd/yyyy");
+            }" /></div>
+        <div class="clear">&nbsp;</div>
+
+
+        @if(@Model.ParentId > 0)
+        {
+            <div class="formlabel">Expiration Date:</div>
+            <div class="formfield"><input type="text" name="ExpireDate" id="ExpireDate" value="
+                @if(Model.PublishDate.ToString() != "1/1/0001 12:00:00 AM")
+                {
+                    @Model.ExpireDate.ToString("MM/dd/yyyy");
+                }
+                " /></div>
+            <div class="clear">&nbsp;</div>
+        }
+
+        <textarea name="Content" id="Content" style="width: 80%">@Model.Content</textarea>
+        
+        <script>
+            CKEDITOR.replace('Content', {
+                "extraPlugins": "imagebrowser",
+                "imageBrowser_listUrl": "/JSON/getImages"
+            }, '');
+            </script>
+
+        <div style="line-height: 30px;">&nbsp;</div>
+
+        <div id="myImage">
+            <div class="formlabel">Banner:</div>
+            <div class="formfield"><input type="text" name="BannerImageName" value="@Model.BannerImageName" /><a href="#myModal" role="button" data-toggle="modal">&nbsp;&nbsp;select an image</a></div>
+            <div class="clear">&nbsp;</div>
+            <input type="hidden" name="BannerImageId" value="0" />
+        </div>
+
+        <div class="formlabel">Submenu:</div>
+        <div class="formfield"><input type="checkbox" name="DisplayOnSubmenu" id="DisplayOnSubmenu" value="1"
+            @if(Model.DisplayOnSubmenu == 1)
+            {
+                @:checked="checked"
+            }
+        /></div>
+        <div class="clear">&nbsp;</div>
+
+        <div class="formlabel">Social Media:</div>
+        <div class="formfield"><input type="checkbox" name="DisplaySocialMedia" id="DisplaySocialMedia" value="1"
+            @if(Model.DisplaySocialMedia == 1)
+            {
+                @:checked="checked"
+            }
+        /></div>
+        <div class="clear">&nbsp;</div>
+
+        <div style="line-height: 10px;">&nbsp;</div>
+
+        <div class="formlabel">Review Schedule:</div>
+        <div class="formfield"><input type="text" name="review_schedule" readonly="readonly" />&nbsp; <i class="icon-calendar icon-2x"></i></div>
+        <div class="clear">&nbsp;</div>
+
+        <div class="formlabel">Meta Description:</div>
+        <div class="formfield"><textarea cols="20" rows="5" name="MetaDescription">@Model.MetaDescription</textarea></div>
+        <div class="clear">&nbsp;</div>
+
+        @*<div style="line-height: 30px;">&nbsp;</div>*@
+        <div class="formlabel">&nbsp;</div>
+        <div class="formfield"><button form="pageEdit" class="btn btn-primary"><i class="icon-save"></i> Save</button></div>
+        <div class="clear">&nbsp;</div>
+    </form>
+
+        <div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h3 id="myModalLabel">Choos An Image</h3>
+            </div>
+            <div class="modal-body">
+                @foreach(var image in ViewBag.BannerImages)
+                {
+                    <p class="error-text"><a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#myImage" href="/Page/ImageSelect?ImageName=@image.Name.@image.FileType&ImageId=@image.Id"  data-dismiss="modal">@image.Name.@image.FileType</a></p>
+                }
+            </div>
+
+            <div class="modal-footer">
+                <!--<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                <button class="btn btn-danger" data-dismiss="modal" onclick="document.location.href ='/Gallery/DeleteGallery/' + myID;">Delete</button>-->
+            </div>
+        </div>
+
+</div>
+

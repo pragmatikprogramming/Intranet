@@ -1,0 +1,156 @@
+﻿@{
+    ViewBag.Title = "Add - Blog Post";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<script>
+    $(function () {
+        $("#PublishDate").datepicker();
+    });
+
+    $(function () {
+        $("#ExpirationDate").datepicker();
+    });
+
+    var tid2 = setTimeout(alertSessionExpire, 1200000);
+    function alertSessionExpire() {
+        alert("Your session will be expiring soon.  Save your work and refresh page");
+    }
+</script>
+
+
+<div class="header">
+    <h1 class="page-title">Create Blog Post</h1>
+</div>
+
+<div class="container-fluid">   
+<div class="row-fluid">  
+<div class="formcontainer">
+    <div style="line-height: 30px;">&nbsp;</div>
+    <div style="color: red">@Html.ValidationSummary()</div>
+
+    <div class="formlabel">&nbsp;</div>
+    <div class="formfield"><a href="/BlogPost/Index"><button class="btn btn-primary"><i class="icon-reply"></i> Cancel</button></a></div>
+    <div class="clear">&nbsp;</div>
+    <div style="line-height: 30px;">&nbsp;</div>
+
+    <form action="/BlogPost/AddBlogPost" method="post" id="blogpostAdd">
+        <div class="formlabel">Content Group:</div>
+        <div class="formfield"><select name="ContentGroup">
+            <option value="">-- Select a Content Group --</option>
+            @foreach (var GroupName in ViewBag.myContentGroups)
+                {
+                    if (GroupName.GroupID == Model.ContentGroup)
+                    {
+                        <option value="@GroupName.GroupID" selected="selected">@GroupName.ContentGroupName</option>
+                    }
+                    else
+                    {
+                        <option value="@GroupName.GroupID">@GroupName.ContentGroupName</option>
+                    }
+                 }
+            </select>
+        </div>
+        <div class="clear">&nbsp;</div>
+
+        <div class="formlabel">Blog Title:</div>
+        <div class="formfield"><input type="text" name="Title" value="@Model.Title" /></div>
+        <div class="clear">&nbsp;</div>
+        
+        <div class="formlabel">Author:</div>
+        <div class="formfield"><input type="text" name="Author" id="Author" value="@Model.Author" /></div>
+        <div class="clear">&nbsp;</div>
+
+        <div class="formlabel">Intro Text:</div>
+        <div class="formfield"><textarea cols="10" rows="5" name="IntroText" id="IntroText">@Model.IntroText</textarea></div>
+        <div class="clear">&nbsp;</div>
+
+        <div class="formlabel">Publish Date:</div>
+        <div class="formfield"><input type="text" name="PublishDate" id="PublishDate" readonly="readonly" value="@if(Model.PublishDate.Year != 0001 ){ @Model.PublishDate }" /></div>
+        <div class="clear">&nbsp;</div>
+
+        <div class="formlabel">Expiration Date:</div>
+        <div class="formfield"><input type="text" name="ExpirationDate" id="ExpirationDate" readonly="readonly" value="@if(Model.PublishDate.Year != 0001){ @Model.ExpirationDate }" /></div>
+        <div class="clear">&nbsp;</div>
+
+        <div class="formlabel">Redirect Url:</div>
+        <div class="formfield"><input type="text" name="RedirectUrl" id="RedirectUrl" value="@Model.RedirectUrl" /></div>
+        <div class="clear">&nbsp;</div>
+
+        <textarea name="Content" id="Content" style="width: 80%">@Model.Content</textarea>
+        
+        <script>
+            CKEDITOR.replace('Content', {
+                "extraPlugins": "imagebrowser",
+                "imageBrowser_listUrl": "/JSON/getImages"
+            }, '');
+        </script>
+
+        <div style="line-height: 30px;">&nbsp;</div>
+
+        <div id="myImage">
+            <div class="formlabel">Image:</div>
+            <div class="formfield"><input type="text" name="NewsImageName" value="@Model.NewsImageName" /><a href="#myModal" role="button" data-toggle="modal">&nbsp;&nbsp;select an image</a></div>
+            <div class="clear">&nbsp;</div>
+            <input type="hidden" name="NewsImageId" value="0" />
+        </div>
+
+        <div style="line-height: 30px;">&nbsp;</div>
+        <div class="formlabel">Categories:</div>
+        <div class="formfield">
+            @foreach (var cat in ViewBag.Categories)
+            {
+                <div style="float: left; padding-right: 25px;">
+                  <label><input type="checkbox" name="Categories" id="Categories" value="@cat.Id" 
+                  @if(Model.Categories != null && Model.Categories.IndexOf(cat.Id) != -1)
+                  {
+                    @:checked="checked"   
+                  }    
+                  /> @cat.CategoryTitle</label>
+                </div>
+            }
+        </div>
+        <div class="clear">&nbsp;</div>
+        <div style="line-height: 30px;">&nbsp;</div>
+        <div class="formlabel">&nbsp;</div>
+        <div class="formfield">
+            <select name="Comments">
+                <option value="1">Comments On</option>
+                @if(Model.Comments == 0)
+                {
+                    <option value="0" selected="selected">Comments Off</option>
+                }
+                else
+                {
+                    <option value="0">Comments Off</option>
+                }
+            </select>
+        </div>
+        <div class="clear">&nbsp;</div>
+
+        <div style="line-height: 30px;">&nbsp;</div>
+        <div class="formlabel">&nbsp;</div>
+        <div class="formfield"><button form="blogpostAdd" class="btn btn-primary"><i class="icon-save"></i> Save</button></div>
+        <div class="clear">&nbsp;</div>
+    </form>
+
+        <div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h3 id="myModalLabel">Choos An Image</h3>
+            </div>
+            <div class="modal-body">
+                @foreach(var image in ViewBag.NewsImages)
+                {
+                    <p class="error-text"><a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#myImage" href="/BlogPost/ImageSelect?ImageName=@image.Name.@image.FileType&ImageId=@image.Id"  data-dismiss="modal">@image.Name.@image.FileType</a></p>
+                }
+            </div>
+
+            <div class="modal-footer">
+                <!--<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                <button class="btn btn-danger" data-dismiss="modal" onclick="document.location.href ='/Gallery/DeleteGallery/' + myID;">Delete</button>-->
+            </div>
+        </div>
+
+</div>
+

@@ -1,0 +1,151 @@
+﻿@{
+    ViewBag.Title = "ViewFull";
+    ViewBag.Name = HttpContext.Current.Session["Name"];
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.weekNum = 0;
+    ViewBag.dayNum = 1;
+     
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/css/calendar.css" />
+
+<div class="header">
+    <div class="stats">
+
+    </div>
+
+    <h1 class="page-title">Calendar</h1>
+</div>
+        
+<div class="container-fluid">   
+<div class="row-fluid">  
+    <div class="row-fluid">
+        <link rel='stylesheet' type='text/css' href='~/Content/fullcalendar.css' />
+        <link rel='stylesheet' type='text/css' href='~/Content/fullcalendar.print.css' media='print' />
+        <script type='text/javascript' src='~/Content/fullcalendar.min.js'></script>
+
+
+
+        <style type='text/css'>
+
+	        #calendar {
+		    width: 100%;
+		    margin: 0 auto;
+		    }
+        </style>
+
+        <div style="float: right; margin-top: 1em;">
+            <a href="/Calendar/Add"><button class="btn btn-primary"><i class="icon-plus"></i> Add Event</button></a>
+            <!--<a href="/Calendar/Add"><img src="~/Content/images/calendarAdd.png" /></a>-->
+        </div>
+
+        <h2>Upcoming Events</h2>
+        <h2 style="text-align: center;"><div style="font-size: 15px; display: inline;"><a href="/Calendar/Index/@ViewBag.PreviousMonth">« Prev</a>&nbsp;&nbsp;&nbsp;&nbsp;</div>@ViewBag.MyMonth<div style="font-size: 15px; display: inline;">&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Calendar/Index/@ViewBag.NextMonth">Next »</a></div></h2>
+        <div class="calcol1">
+            <div id='calendar'>
+            <div class="fc-content" style="position: relative; min-height: 1px;">
+                <div class="fc-view fc-view-month fc-grid" style="position: relative;" unselectable="on" id="myInject">
+                    <table class="fc-border-separate" style="width:100%" cellspacing="0">
+                        <thead>
+                            <tr class="fc-first fc-last">
+                                <th class="fc-sun fc-widget-header fc-first" style="width: 14%">Sun</th>
+                                <th class="fc-mon fc-widget-header" style="width: 14%">Mon</th>
+                                <th class="fc-tue fc-widget-header" style="width: 14%">Tue</th>
+                                <th class="fc-wed fc-widget-header" style="width: 14%">Wed</th>
+                                <th class="fc-thu fc-widget-header" style="width: 14%">Thu</th>
+                                <th class="fc-fri fc-widget-header" style="width: 14%">Fri</th>
+                                <th class="fc-sat fc-widget-header fc-last" style="width: 14%">Sat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                    @foreach (var i in ViewBag.MyCal)
+                    {
+                        if(ViewBag.weekNum == 0){
+                            @:<tr class="fc-first" >
+                        }
+                        else if(ViewBag.weekNum == 5){
+                            @:<tr class="fc-last">
+                        }
+                        else{
+                            @:<tr>
+                        }
+                        
+  
+                        
+                        foreach (var j in i)
+                        {
+
+                            ViewBag.AnchorDate = ViewBag.MyDate.Month + "-" + j + "-" + ViewBag.MyDate.Year;
+                            if (ViewBag.weekNum == 0 && j > 15)
+                            {
+                                @:<td class="fc-widget-content fc-other-month">
+                            }
+                            else if((ViewBag.WeekNum == 4 || ViewBag.WeekNum == 5) && j < 15)
+                            {
+                                if (ViewBag.dayNum % 7 == 0)
+                                {
+                                    @:<td class="fc-widget-content fc-other-month fc-last">
+                                }
+                                else
+                                {
+                                    @:<td class="fc-widget-content fc-other-month">
+                                }
+                            }
+                            else if(ViewBag.dayNum % 7 == 0)
+                            {
+                                @:<td class="fc-widget-content fc-last">
+                                //@Ajax.ActionLink(" ", "getCalendarData", new{myDate = ViewBag.MyDate.Month + "-" + j + "-" + ViewBag.MyDate.Year}, new AjaxOptions{UpdateTargetId = "eventList"})
+                                 @:<a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#eventList" href="/Calendar/getCalendarData?myDate=@ViewBag.AnchorDate">
+                            }
+                            else
+                            {
+                                @:<td class="fc-widget-content">
+                                //@Ajax.ActionLink(" ", "getCalendarData", new{myDate = ViewBag.MyDate.Month + "-" + j + "-" + ViewBag.MyDate.Year}, new AjaxOptions{UpdateTargetId = "eventList"})
+                                @:<a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#eventList" href="/Calendar/getCalendarData?myDate=@ViewBag.AnchorDate">
+                            }
+                                if(ViewBag.Today == j && (j < 15 && ViewBag.weekNum < 4))
+                                {
+                                    @:<div style="min-height: 7vh;" class="fc-state-highlight">
+                                }
+                                else
+                                {
+                                    @:<div style="min-height: 7vh;">
+                                }
+                                    <div class="fc-day-number">@j</div>
+                                    @:<div class="fc-day-content">
+                                        @:<div style="position: relative; height: 0px;">&nbsp;</div>
+                                    @:</div>
+                                @:</div>
+                            @:</td>
+
+                            ViewBag.dayNum++;
+                        }
+
+                        @:</tr>
+
+                        ViewBag.WeekNum++;
+    
+                    }
+                        </tbody>
+                    </table>
+
+                    <div style="position:absolute;z-index:8;top:0;left:0"></div>
+
+                </div>
+
+            </div>
+
+            </div>
+        </div>
+        <div class="calcol2" style="padding-left: 5%" id="eventList">
+            @Html.Action("getCalendarData", new { myDate = ViewBag.MyDate.ToString() })
+        </div>
+        <div class="clear">
+            &nbsp;
+        </div>
+    </div>
+</div>
+
+
+
+

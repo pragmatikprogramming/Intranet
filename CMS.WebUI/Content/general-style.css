@@ -1,0 +1,175 @@
+﻿.row_unlock_container {
+    width: 31%;
+    float:left;
+    padding: 0px;
+    margin: 0px;
+    text-align: right;
+}
+.row_trash_container {
+    width: 34%;
+    float: left;
+    padding: 0px;
+    margin: 0px;
+    text-align: right;
+}
+.row_approval_container {
+    width: 67%;
+    float: left;
+    padding: 0px;
+    margin: 0px;
+    text-align: right;
+}
+.col1 {
+    width: 68%;
+    text-align: left;
+    float: left;
+}
+
+.col2 {
+    padding-right: 10px;
+    display: inline;
+}
+
+.col3 {
+    display: inline;
+}
+
+.clear {
+    clear: left;
+    line-height: 7px;
+}
+.clear_right {
+    clear: right;
+    line-height: 7px;
+}
+.trash_col1 {
+    width: 66%;
+    text-align: left;
+    float: left;
+}
+.trash_col2 {
+    padding-right: 10px;
+    display: inline;
+}
+.trash_col3 {
+    display: inline;
+}
+.approval_col1 {
+    width: 33%;
+    text-align: left;
+    float: left;
+}
+
+.approval_col2 {
+    padding-right: 10px;
+    display: inline;
+}
+
+.approval_col3 {
+    padding-right: 10px;
+    display: inline;
+}
+
+.approval_col4 {
+    padding-right: 10px;
+    display: inline;
+}
+
+.approval_col5 {
+    padding-right: 10px;
+    display: inline;
+}
+
+.approval_col6 {
+    display: inline;
+}
+
+.container_padding {
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.formlabel {
+    width: 10%;
+    text-align: right;
+    float: left;
+}
+
+.formfield {
+    text-align: left;
+    padding-left: 15px;
+    float: left;
+}
+.formcontainer {
+    padding-top: 25px;
+    padding-left: 40px;
+}
+.myckeditor {
+    width: 75%;
+}
+.dashboardbutton {
+    width: 31%;
+    text-align: left;
+    float: left;
+    padding-left: 4%;
+}
+.dashboardpag {
+    width: 64%;
+    float: left;
+    padding: 0px;
+    margin: 0px;
+    text-align: right;
+}
+.dashboardapprbutton {
+    width: 31%;
+    text-align: left;
+    float: left;
+    padding-left: 2%;
+}
+.dashboardapprpag {
+    width: 67%;
+    float: left;
+    padding: 0px;
+    margin: 0px;
+    text-align: right;
+}
+.dashboardtrashbutton {
+    width: 35%;
+    text-align: left;
+    float: left;
+    padding-left: 4%;
+}
+.dashboardtrashpag {
+    width: 61%;
+    float: left;
+    padding: 0px;
+    margin: 0px;
+    text-align: right;
+}
+.calcol1 {
+    width: 50%;
+    float: left;
+}
+.calcol2 {
+    width: 45%;
+    float: left;
+}
+
+.formdesigner {
+    width: 75%;
+}
+
+.fdleftcol {
+    width: 50%;
+    float: left;
+}
+
+.fdrightcol {
+    width: 50%;
+    float: left;
+}
+
+#sortable1 {
+    background-color: grey;
+}
+

@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Add -FAQ Questions";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Name = HttpContext.Current.Session["Name"];
+}
+
+<div class="header">
+    <h1 class="page-title">Create FAQ Question</h1>
+</div>
+<div class="container-fluid">   
+<div class="row-fluid">  
+<div class="formcontainer">
+    <div style="line-height: 30px;">&nbsp;</div>
+    <div style="color: red">@Html.ValidationSummary()</div>
+
+    <div class="formfield"><a href="/FAQ/FAQQuestions/@ViewBag.FAQID"><button class="btn btn-primary"><i class="icon-reply"></i> Cancel</button></a></div>
+    <div class="clear">&nbsp;</div>
+    <div style="line-height: 30px;">&nbsp;</div>
+
+        <form action="/FAQ/FAQQuestionAdd" method="post" id="faqQuestionAdd">
+            <input type="hidden" name="FaqID" value="@ViewBag.FAQID" />
+            Question:<br style="line-height: 40px;"/>
+            <textarea cols="80" rows="5" name="FaqQuestion">@Model.FaqQuestion</textarea><br/>
+            Answer:<br />
+            <div style="line-height: 30px;">&nbsp;</div>
+            <textarea name="FaqAnswer" id="FaqAnswer" style="width: 80%">@Model.FaqAnswer</textarea>
+        
+            <script>
+                CKEDITOR.replace('FaqAnswer', {
+                    "extraPlugins": "imagebrowser",
+                    "imageBrowser_listUrl": "/Content/images/images_list.json"
+                }, '');
+            </script>
+            
+            <div style="line-height: 30px;">&nbsp;</div>
+            <div class="formfield"><button form="faqQuestionAdd" class="btn btn-primary"><i class="icon-save"></i> Save</button></div>
+            <div class="clear">&nbsp;</div>
+        </form>
+    </div>
+</div>

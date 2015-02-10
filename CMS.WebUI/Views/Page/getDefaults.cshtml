@@ -1,0 +1,19 @@
+﻿<input type="hidden" name="PageType" value="1" />
+<input type="hidden" name="PageTypeId" value="0" />
+
+<div class="formlabel">Template:</div>
+<div class="formfield">
+    <select name="TemplateId">
+        <option value="">-- Select a Template --</option>
+        @foreach (var Template in ViewBag.Templates)
+        {
+            <option value="@Template.TemplateId"
+                @if(ViewBag.m_Page.TemplateId == Template.TemplateId)
+                {
+                    @: selected="selected"
+                }
+            >@Template.FriendlyName</option>
+        }
+    </select>
+</div>
+<div class="clear">&nbsp;</div>
