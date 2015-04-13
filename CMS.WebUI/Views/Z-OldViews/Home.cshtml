@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<div class="left_part">
+    <div class="catagory">
+        <div class="collumn1">
+            @Html.Action("NonSystemMenu", "Home", new{ id = 8, viewName = "HomePageMenuModule"})
+            @Html.Action("NonSystemMenu", "Home", new{ id = 11, viewName = "HomePageMenuModule"})
+        </div>
+                
+        <div class="collumn1">
+            @Html.Action("NonSystemMenu", "Home", new{ id = 9, viewName = "HomePageMenuModule"})
+            @Html.Action("NonSystemMenu", "Home", new{ id = 12, viewName = "HomePageMenuModule"})
+        </div>
+                
+        <div class="collumn1">
+            @Html.Action("NonSystemMenu", "Home", new{ id = 10, viewName = "HomePageMenuModule"})
+            @Html.Action("NonSystemMenu", "Home", new{ id = 13, viewName = "HomePageMenuModule"})
+        </div>
+        <div class="clear"></div>
+    </div><!--end catagory-->
+       		
+    <div class="news-box">
+        @Html.Action("getNews", "Home")
+    </div>
+                
+    <div class="event-box">
+        @Html.Action("FeaturedEvents", "Home")
+    </div><!--end events-->
+    <div class="clear"></div>
+</div><!--end left_part-->
+            
+<div class="right_part">
+    <div class="margin-top_10" style="line-height: 0px;">&nbsp;</div>
+    @if ((ViewBag.Network == "192.168.101" && ViewBag.LastIpOctet > 240) || (ViewBag.Network == "192.168.103" && ViewBag.LastIpOctet > 240) || (ViewBag.Network == "192.168.105" && ViewBag.LastIpOctet > 240) || (ViewBag.Network == "192.168.107" && ViewBag.LastIpOctet > 240) || (ViewBag.Network == "192.168.109" && ViewBag.LastIpOctet > 240) || (ViewBag.Network == "192.168.111" && ViewBag.LastIpOctet > 240) || (ViewBag.Network == "192.168.113" && ViewBag.LastIpOctet > 240) || (ViewBag.Network == "192.168.115" && ViewBag.LastIpOctet > 240))
+    {
+        @Html.Action("WirelessPrint", "Home", new{ id = ViewBag.Network })
+    }
+    @if(Model.WidgetContainerId > 0)
+    {
+        @Html.Action("Container", "Home", new{ id = Model.WidgetContainerId })
+    }
+</div> <!--end right part-->

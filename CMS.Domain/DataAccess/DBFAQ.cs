@@ -16,7 +16,7 @@ namespace CMS.Domain.DataAccess
             SqlConnection conn = DB.DbConnect();
             conn.Open();
 
-            string queryString = "INSERT INTO CMS_FAQs(faqName, contentGroup) VALUES(@faqName, @contentGroup)";
+            string queryString = "INSERT INTO CMS_FAQs(faqName, contentGroup, pageWorkFlowState) VALUES(@faqName, @contentGroup, 2)";
             SqlCommand insertFAQ = new SqlCommand(queryString, conn);
             insertFAQ.Parameters.AddWithValue("faqName", m_FAQ.FaqName);
             insertFAQ.Parameters.AddWithValue("contentGroup", m_FAQ.ContentGroup);
@@ -121,7 +121,7 @@ namespace CMS.Domain.DataAccess
 
             int sortOrder = getSortOrder(m_FAQQuestion.FaqID);
 
-            string queryString = "INSERT INTO CMS_FAQQuestions(faqID, faqQuestion, faqAnswer, sortOrder) VALUES(@faqID, @faqQuestion, @faqAnswer, @sortOrder)";
+            string queryString = "INSERT INTO CMS_FAQQuestions(faqID, faqQuestion, faqAnswer, sortOrder, pageWorkFlowState) VALUES(@faqID, @faqQuestion, @faqAnswer, @sortOrder, 2)";
             SqlCommand insertFAQQuestion = new SqlCommand(queryString, conn);
             insertFAQQuestion.Parameters.AddWithValue("faqID", m_FAQQuestion.FaqID);
             insertFAQQuestion.Parameters.AddWithValue("faqQuestion", m_FAQQuestion.FaqQuestion);

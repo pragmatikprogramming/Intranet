@@ -21,6 +21,7 @@ namespace CMS.Domain.Abstract
         void publishBlogPost(int id);
         List<Category> getCategories();
         List<BlogPost> RetrieveAllByCategory(int Category);
+        List<BlogPost> RetrievePublishedByCategory(int Category);
         List<BlogPostComment> GetComments(int BlogId);
         void CommentPublish(int id);
         void CommentDelete(int id);

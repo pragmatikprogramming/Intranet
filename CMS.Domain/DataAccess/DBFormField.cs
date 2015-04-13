@@ -15,7 +15,7 @@ namespace CMS.Domain.DataAccess
             SqlConnection conn = DB.DbConnect();
             conn.Open();
 
-            string queryString = "INSERT INTO CMS_FormFields(label, fieldType, parentId, validationType, fieldText) VALUES(@label, @fieldType, @parentId, @validationType, @fieldText)";
+            string queryString = "INSERT INTO CMS_FormFields(label, fieldType, parentId, validationType, fieldText, pageWorkFlowState) VALUES(@label, @fieldType, @parentId, @validationType, @fieldText, 2)";
             SqlCommand insertFormField = new SqlCommand(queryString, conn);
             insertFormField.Parameters.AddWithValue("label", m_FormField.Label ?? "");
             insertFormField.Parameters.AddWithValue("fieldType", m_FormField.FieldType);
@@ -31,7 +31,7 @@ namespace CMS.Domain.DataAccess
 
             foreach (FormField temp in m_FormField.Children)
             {
-                queryString = "INSERT INTO CMS_FormFields(label, fieldType, parentId) VALUES(@label, @fieldType, @parentId)";
+                queryString = "INSERT INTO CMS_FormFields(label, fieldType, parentId, pageWorkFlowState) VALUES(@label, @fieldType, @parentId, 2)";
                 SqlCommand insertTemp = new SqlCommand(queryString, conn);
                 insertTemp.Parameters.AddWithValue("label", temp.Label ?? "");
                 insertTemp.Parameters.AddWithValue("fieldType", temp.FieldType);

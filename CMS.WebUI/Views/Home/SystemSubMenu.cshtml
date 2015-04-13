@@ -1,48 +1,16 @@
-﻿<h3>@ViewBag.ParentName Links</h3>
-
-<div id="innerwrap">
-    <div id="leftcolumn">
-        <ul class="catlog_nav">
-            @foreach (var page in Model)
-            {
-                if(page.DisplayOnSubmenu == 1)
-                {
-                    if(ViewBag.MyCountOdd % 2 == 1)
-                    {
-                        <li><a href="/@page.PageID" title="@page.NavigationName">@page.NavigationName</a></li>
-                    }
-                    ViewBag.MyCountOdd = ViewBag.MyCountOdd + 1;
-                }
-            }
-        </ul>
-    </div>
-    <div id="content">
-        <ul class="catlog_nav">
-            @foreach (var page in Model)
-            {
-                if(page.DisplayOnSubmenu == 1)
-                {
-                    if(ViewBag.MyCountEven % 2 == 0)
-                    {
-                        <li><a href="/@page.PageID" title="@page.NavigationName">@page.NavigationName</a></li>
-                    }
-                    ViewBag.MyCountEven = ViewBag.MyCountEven + 1;
-                }
-            }
-        </ul>
-    </div>
-</div>
-<div style="clear:both;"></div>
-
-
-
-<!--<ul class="catlog_nav">
-    @foreach (var page in Model)
-    {
-        if(page.DisplayOnSubmenu == 1)
+﻿@if(Model.Count != 0)
+{
+    <ul>
+        @foreach(var page in Model)
         {
-            <li><a href="/@page.PageID" title="@page.NavigationName">@page.NavigationName</a></li>
+            if (page.FriendlyURL.Length > 0)
+            {
+                <li><a href="/@page.FriendlyURL">@page.PageTitle</a></li>
+            }
+            else
+            {
+                <li><a href="/@page.PageID">@page.PageTitle</a></li>
+            }
         }
-    }
-  
-</ul>-->
+    </ul>
+}

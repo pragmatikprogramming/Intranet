@@ -21,13 +21,15 @@ namespace CMS.WebUI.Controllers
         IFAQRepository FAQRepository;
         IBlogPostRepository BlogPostRepository;
         IEventRepository EventRepository;
+        IHTMLWidgetRepository HTMLWidgetRepository;
+        IEmployeeDirectoryRepository EmployeeDirectoryRepository;
 
         public HomeController()
         {
 
         }
 
-        public HomeController(IPageRepository PageRepo, IHomeRepository HomeRepo, IImageRepository ImageRepo, IFormRepository FormRepo, IFAQRepository FAQRepo, IBlogPostRepository BlogPostRepo, IEventRepository EventRepo)
+        public HomeController(IPageRepository PageRepo, IHomeRepository HomeRepo, IImageRepository ImageRepo, IFormRepository FormRepo, IFAQRepository FAQRepo, IBlogPostRepository BlogPostRepo, IEventRepository EventRepo, IHTMLWidgetRepository HTMLWidgetRepo, IEmployeeDirectoryRepository EmployeeRepo)
         {
             PageRepository = PageRepo;
             HomeRepository = HomeRepo;
@@ -36,18 +38,13 @@ namespace CMS.WebUI.Controllers
             FAQRepository = FAQRepo;
             BlogPostRepository = BlogPostRepo;
             EventRepository = EventRepo;
+            HTMLWidgetRepository = HTMLWidgetRepo;
+            EmployeeDirectoryRepository = EmployeeRepo;
         }
 
         public ActionResult Index(string friendlyURL, int id = 0)
         {
             ViewBag.CurrentYear = DateTime.Now.Year;
-            string[] ip_address = Request.UserHostAddress.Split('.');
-            if (ip_address.Length == 4 && ip_address[0] != "127")
-            {
-                string m_Network = ip_address[0] + "." + ip_address[1] + "." + ip_address[2];
-                ViewBag.Network = m_Network;
-                ViewBag.LastIpOctet = Int32.Parse(ip_address[3]);
-            }
 
             if (id == 0 && friendlyURL == "Home")
             {
@@ -92,16 +89,32 @@ namespace CMS.WebUI.Controllers
             }
         }
 
+        //MENU FUNCTIONS
+
         public ActionResult MainMenu()
         {
             List<Page> m_Pages = HomeRepository.MainMenu();
             return View("MainMenu", m_Pages);
         }
 
-        public ActionResult Container(int id)
+        public ActionResult SystemSubMenu(int id)
         {
-            WidgetContainer m_Container = HomeRepository.getContainer(id);
-            return View("Container", m_Container);
+            List<Page> m_Pages = PageRepository.RetrieveAll(id);
+            return View("SystemSubMenu", m_Pages);
+        }
+
+        public ActionResult SystemMenuTopLevel(int parentId, int id)
+        {
+            List<Page> m_Pages = PageRepository.RetrieveAll(parentId);
+            Page m_Page = PageRepository.RetrieveOne(parentId);
+            ViewBag.PageId = id;
+            return View("SystemMenuTopLevel", m_Pages);
+        }
+
+        public ActionResult SystemMenuSecondLevel(int id)
+        {
+            List<Page> m_Pages = PageRepository.RetrieveAll(id);
+            return View("SystemMenuSecondLevel", m_Pages);
         }
 
         public ActionResult NonSystemMenu(int id, string viewName)
@@ -111,14 +124,99 @@ namespace CMS.WebUI.Controllers
             return View(viewName, m_MenuItems);
         }
 
-        public ActionResult SystemSubMenu(int id)
+        //END MENU FUNCTIONS
+
+        public ActionResult HTMLWidget(int id)
         {
-            List<Page> m_Pages = PageRepository.RetrieveAll(id);
-            Page m_Page = PageRepository.RetrieveOne(id);
-            ViewBag.ParentName = m_Page.NavigationName;
-            ViewBag.MyCountOdd = 1;
-            ViewBag.MyCountEven = 1;
-            return View("SystemSubMenu", m_Pages);
+            HTMLWidget m_Widget = HTMLWidgetRepository.RetrieveOne(id);
+            return View("HTMLWidgetDisplay", m_Widget);
+        }
+
+        public ActionResult FeaturedEvents()
+        {
+            List<Event> m_Events = HomeRepository.FeaturedEvents();
+            return View("FeaturedEvents", m_Events);
+        }
+
+        public ActionResult GetWhatsNew(int id)
+        {
+            List<BlogPost> m_BlogPosts = BlogPostRepository.RetrievePublishedByCategory(id);
+            return View("WhatsNew", m_BlogPosts);
+        }
+
+        public ActionResult getFAQ(int id)
+        {
+            List<FAQQuestions> m_Questions = FAQRepository.RetrieveAllFAQQuestions(id);
+            return View("getFAQ", m_Questions);
+        }
+
+        public ActionResult getForm(int parentId, int id)
+        {
+            ViewBag.ParentId = parentId;
+            ViewBag.Count = 0;
+            Form m_Form = FormRepository.RetrieveOne(id);
+            return View("getForm", m_Form);
+        }
+
+        public ActionResult getBlog(int parentId, int id)
+        {
+            ViewBag.Count = 0;
+            ViewBag.TemplateId = parentId;
+            List<BlogPost> m_BlogPosts = HomeRepository.GetBlog(id);
+            return View("getBlog", m_BlogPosts);
+        }
+
+        public ActionResult BlogPost(int id, int parentId = 5)
+        {
+            BlogPost m_BlogPost = BlogPostRepository.RetrieveOne(id);
+            ViewBag.PageType = 5;
+            ViewBag.PageId = null;
+            ViewBag.TemplateId = parentId;
+            ViewBag.Comment = new BlogPostComment();
+            string m_Template = Utility.GetTemplateById(parentId);
+
+            return View(m_Template, m_BlogPost);
+        }
+
+        public ActionResult getEmployeeDirectory()
+        {
+            List<Employee> m_Employees = EmployeeDirectoryRepository.RetrieveAll();
+
+            return View("getEmployeeDirectory", m_Employees);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public ActionResult getNews()
+        {
+            ViewBag.Count = 1;
+            List<BlogPost> m_BlogPosts = HomeRepository.GetNews();
+            ViewBag.NewsId = m_BlogPosts[0].Id;
+            return View("getNews", m_BlogPosts);
+        }
+
+        public ActionResult Container(int id)
+        {
+            WidgetContainer m_Container = HomeRepository.getContainer(id);
+            return View("Container", m_Container);
         }
 
         public RedirectResult Search(string q, int searchType)
@@ -141,12 +239,6 @@ namespace CMS.WebUI.Controllers
             }
         }
 
-        public ActionResult FeaturedEvents()
-        {
-            List<Event> m_Events = HomeRepository.FeaturedEvents();
-            return View("FeaturedEvents", m_Events);
-        }
-
         public ActionResult Event(int id)
         {
             Event m_Event = EventRepository.RetrieveOne(id);
@@ -161,36 +253,6 @@ namespace CMS.WebUI.Controllers
             return View("WirelessPrint");
         }
 
-        public ActionResult getBlog(int parentId, int id)
-        {
-            ViewBag.Count = 0;
-            ViewBag.TemplateId = parentId;
-            List<BlogPost> m_BlogPosts = HomeRepository.GetBlog(id);
-            return View("getBlog", m_BlogPosts);
-        }
-
-        public ActionResult getNews()
-        {
-            ViewBag.Count = 1;
-            List<BlogPost> m_BlogPosts = HomeRepository.GetNews();
-            ViewBag.NewsId = m_BlogPosts[0].Id;
-            return View("getNews", m_BlogPosts);
-        }
-
-        public ActionResult getForm(int parentId, int id)
-        {
-            ViewBag.ParentId = parentId;
-            ViewBag.Count = 0;
-            Form m_Form = FormRepository.RetrieveOne(id);
-            return View("getForm", m_Form);
-        }
-
-        public ActionResult getFAQ(int id)
-        {
-            List<FAQQuestions> m_Questions = FAQRepository.RetrieveAllFAQQuestions(id);
-            return View("getFAQ", m_Questions);
-        }
-
         public ActionResult SwapNews(int id)
         {
             ViewBag.BlogPost = HomeRepository.SwapNews(id);
@@ -201,19 +263,7 @@ namespace CMS.WebUI.Controllers
             return View("SwapNews", m_BlogPosts);
         }
 
-        public ActionResult BlogPost(int id, int parentId = 5)
-        {
-            BlogPost m_BlogPost = BlogPostRepository.RetrieveOne(id);
-            ViewBag.PageType = 5;
-            ViewBag.PageId = null;
-            ViewBag.TemplateId = parentId;
-            ViewBag.Comment = new BlogPostComment();
-            string m_Template = Utility.GetTemplateById(parentId);
-
-            return View(m_Template, m_BlogPost);
-        }
-
-
+        
         [HttpPost]
         public ActionResult SubmitComment(BlogPostComment m_Comment, string recaptcha_challenge_field, string recaptcha_response_field, int TemplateId, int Id)
         {
@@ -356,11 +406,5 @@ namespace CMS.WebUI.Controllers
             }
         }
 
-        /*public FileContentResult ExportCSV()
-        {
-            string csv = "1,2,3,4,5,6,7,8,9";
-
-            return File(new System.Text.UTF8Encoding().GetBytes(csv), "text/csv", "Report123.csv");
-        }*/
     }
 }

@@ -292,6 +292,7 @@ namespace CMS.WebUI.Controllers
             ViewBag.PageType = mPageType;
 
             Page m_Page = new Page();
+            List<Template> m_Templates = Utility.GetTemplates();
 
             if (id != 0)
             {
@@ -299,6 +300,7 @@ namespace CMS.WebUI.Controllers
             }
 
             ViewBag.m_Page = m_Page;
+            ViewBag.Templates = m_Templates;
 
             if (mPageType == 2)
             {
@@ -314,6 +316,10 @@ namespace CMS.WebUI.Controllers
             {
                 List<Category> m_Categories = BlogPostRepository.getCategories();
                 return View("getCategories", m_Categories);
+            }
+            else if (mPageType == 5)
+            {
+                return View("getEmpDir");
             }
             else
             {

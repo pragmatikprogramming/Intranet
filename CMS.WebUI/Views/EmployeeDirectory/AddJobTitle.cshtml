@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "AddJobtTitle";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="header">
+    <h1 class="page-title">Add Job Title</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="formcontainer">
+            <div style="line-height: 30px;">&nbsp;</div>
+            <div style="color: red">@Html.ValidationSummary()</div>
+
+            <div class="formlabel">&nbsp;</div>
+            <div class="formfield"><a href="/EmployeeDirectory/JobTitles"><button class="btn btn-primary"><i class="icon-reply"></i> Cancel</button></a></div>
+            <div class="clear">&nbsp;</div>
+            <div style="line-height: 30px;">&nbsp;</div>
+
+            <form action="/EmployeeDirectory/AddTitle" method="post" id="add">
+                <div class="formlabel">Job Title:</div>
+                <div class="formfield"><input type="text" name="JobTitle" id="JobTitle" value="" /></div>
+                <div class="clear">&nbsp;</div>
+
+                <div style="line-height: 30px;">&nbsp;</div>
+                <div class="formlabel">&nbsp;</div>
+                <div class="formfield"><button form="add" class="btn btn-primary"><i class="icon-save"></i> Save</button></div>
+                <div class="clear">&nbsp;</div>
+            </form>
+        </div>

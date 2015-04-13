@@ -1,0 +1,23 @@
+﻿<input type="hidden" value="@ViewBag.PageType" name="PageType" />
+
+
+<div class="formlabel">Template:</div>
+<div class="formfield">
+    <select name="TemplateId" aria-readonly="true">
+        @foreach (var template in ViewBag.Templates)
+        {
+            if (template.TemplateName != "Home")
+            {
+                if (template.TemplateId == ViewBag.m_Page.TemplateId)
+                {
+                    <option value="@template.TemplateId" selected="selected">@template.TemplateName</option>
+                }
+                else
+                {
+                    <option value="@template.TemplateId">@template.TemplateName</option>
+                }
+            }
+        }
+    </select>
+</div>
+<div class="clear">&nbsp;</div>

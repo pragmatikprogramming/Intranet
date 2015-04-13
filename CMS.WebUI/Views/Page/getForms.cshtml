@@ -18,7 +18,21 @@
 <div class="formlabel">Template:</div>
 <div class="formfield">
     <select name="TemplateId" aria-readonly="true">
-        @if (ViewBag.m_Page.TemplateId == 15)
+        @foreach (var template in ViewBag.Templates)
+        {
+            if (template.TemplateName != "Home")
+            {
+                if (template.TemplateId == ViewBag.m_Page.TemplateId)
+                {
+                    <option value="@template.TemplateId" selected="selected">@template.TemplateName</option>
+                }
+                else
+                {
+                    <option value="@template.TemplateId">@template.TemplateName</option>
+                }
+            }
+        }
+        <!--@if (ViewBag.m_Page.TemplateId == 15)
         {
             <option value="15" selected="selected">Home - Full Width</option>
         }
@@ -57,7 +71,7 @@
         else
         {
             <option value="7" >Teens</option>
-        }
+        }-->
     </select>
 </div>
 <div class="clear">&nbsp;</div>

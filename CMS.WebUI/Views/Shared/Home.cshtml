@@ -3,43 +3,48 @@
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
 
-<div class="left_part">
-    <div class="catagory">
-        <div class="collumn1">
-            @Html.Action("NonSystemMenu", "Home", new{ id = 8, viewName = "HomePageMenuModule"})
-            @Html.Action("NonSystemMenu", "Home", new{ id = 11, viewName = "HomePageMenuModule"})
+<main class="main" role="main">
+    <div class="content-holder">
+        <!-- main content of the page -->
+        <div class="row wrap">
+            <div class="col-lg">
+                <article class="latest-news">
+                    <h2 class="heading">What's New <span>The latest content, events & announcements </span></h2>
+                    <div class="text-holder">
+                        @Html.Action("GetWhatsNew", "Home", new { id = 1 })
+                    </div>
+                </article>
+            </div>
+            <div class="col last">
+                <article class="widget-block">
+                    <h2 class="heading">Featured Events</h2>
+                    <div class="text-holder">
+                        @Html.Action("FeaturedEvents", "Home")
+                    </div>
+                </article>
+            </div>
         </div>
-                
-        <div class="collumn1">
-            @Html.Action("NonSystemMenu", "Home", new{ id = 9, viewName = "HomePageMenuModule"})
-            @Html.Action("NonSystemMenu", "Home", new{ id = 12, viewName = "HomePageMenuModule"})
+        <div class="row wrap">
+            <article class="col">
+                <h2 class="heading">Staff Training </h2>
+                <div class="text-holder">
+                    @Html.Action("HTMLWidget", "Home", new { id = 3 })
+                </div>
+            </article>
+            <article class="col">
+                <h2 class="heading">Automation Tips & Tricks </h2>
+                <div class="text-holder">
+                    @Html.Action("HTMLWidget", "Home", new { id = 2 })
+                </div>
+            </article>
+            <article class="col last">
+                <div class="widget-block">
+                    <h2 class="heading">Director's Corner</h2>
+                    <div class="text-holder text">
+                        @Html.Action("HTMLWidget", "Home", new { id = 1 })
+                    </div>
+                </div>
+            </article>
         </div>
-                
-        <div class="collumn1">
-            @Html.Action("NonSystemMenu", "Home", new{ id = 10, viewName = "HomePageMenuModule"})
-            @Html.Action("NonSystemMenu", "Home", new{ id = 13, viewName = "HomePageMenuModule"})
-        </div>
-        <div class="clear"></div>
-    </div><!--end catagory-->
-       		
-    <div class="news-box">
-        @Html.Action("getNews", "Home")
     </div>
-                
-    <div class="event-box">
-        @Html.Action("FeaturedEvents", "Home")
-    </div><!--end events-->
-    <div class="clear"></div>
-</div><!--end left_part-->
-            
-<div class="right_part">
-    <div class="margin-top_10" style="line-height: 0px;">&nbsp;</div>
-    @if ((ViewBag.Network == "192.168.101" && ViewBag.LastIpOctet > 240) || (ViewBag.Network == "192.168.103" && ViewBag.LastIpOctet > 240) || (ViewBag.Network == "192.168.105" && ViewBag.LastIpOctet > 240) || (ViewBag.Network == "192.168.107" && ViewBag.LastIpOctet > 240) || (ViewBag.Network == "192.168.109" && ViewBag.LastIpOctet > 240) || (ViewBag.Network == "192.168.111" && ViewBag.LastIpOctet > 240) || (ViewBag.Network == "192.168.113" && ViewBag.LastIpOctet > 240) || (ViewBag.Network == "192.168.115" && ViewBag.LastIpOctet > 240))
-    {
-        @Html.Action("WirelessPrint", "Home", new{ id = ViewBag.Network })
-    }
-    @if(Model.WidgetContainerId > 0)
-    {
-        @Html.Action("Container", "Home", new{ id = Model.WidgetContainerId })
-    }
-</div> <!--end right part-->
+</main>

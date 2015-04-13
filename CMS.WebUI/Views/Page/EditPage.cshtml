@@ -74,6 +74,12 @@
                         @:selected="selected" 
                     }
                 >Blog Page</option>
+                <option value="5"
+                    @if(Model.PageType == 5)
+                    {
+                        @:selected="selected"
+                    }
+                >Employee Directory</option>
             </select>
         </div>
         <div class="clear">&nbsp;</div>

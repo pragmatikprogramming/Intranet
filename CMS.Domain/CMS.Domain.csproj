@@ -125,6 +125,7 @@
     <Compile Include="Abstract\IBlogPostRepository.cs" />
     <Compile Include="Abstract\ICategoryRepository.cs" />
     <Compile Include="Abstract\IDocumentRepository.cs" />
+    <Compile Include="Abstract\IEmployeeDirectoryRepository.cs" />
     <Compile Include="Abstract\IEventRepository.cs" />
     <Compile Include="Abstract\IFAQRepository.cs" />
     <Compile Include="Abstract\IFolderRepository.cs" />
@@ -134,11 +135,13 @@
     <Compile Include="Abstract\IHomeRepository.cs" />
     <Compile Include="Abstract\IHTMLWidgetRepository.cs" />
     <Compile Include="Abstract\IImageRepository.cs" />
+    <Compile Include="Abstract\IJobTitleRepository.cs" />
     <Compile Include="Abstract\IJSONRepository.cs" />
     <Compile Include="Abstract\IMenuItemRepository.cs" />
     <Compile Include="Abstract\IMenuRepository.cs" />
     <Compile Include="Abstract\INewsRepository.cs" />
     <Compile Include="Abstract\IPageRepository.cs" />
+    <Compile Include="Abstract\ISkillsRegistryRepository.cs" />
     <Compile Include="Abstract\ISystemSettingsRepository.cs" />
     <Compile Include="Abstract\ITrashRepository.cs" />
     <Compile Include="Abstract\IUserRepository.cs" />
@@ -151,6 +154,7 @@
     <Compile Include="DataAccess\DBBlogPost.cs" />
     <Compile Include="DataAccess\DBCategory.cs" />
     <Compile Include="DataAccess\DBDocument.cs" />
+    <Compile Include="DataAccess\DBEmployeeDirectory.cs" />
     <Compile Include="DataAccess\DBFolder.cs" />
     <Compile Include="DataAccess\DBEvent.cs" />
     <Compile Include="DataAccess\DBFAQ.cs" />
@@ -160,10 +164,12 @@
     <Compile Include="DataAccess\DBHome.cs" />
     <Compile Include="DataAccess\DBHTMLWidget.cs" />
     <Compile Include="DataAccess\DBImage.cs" />
+    <Compile Include="DataAccess\DBJobTitle.cs" />
     <Compile Include="DataAccess\DBJSON.cs" />
     <Compile Include="DataAccess\DBMenu.cs" />
     <Compile Include="DataAccess\DBMenuItem.cs" />
     <Compile Include="DataAccess\DBPage.cs" />
+    <Compile Include="DataAccess\DBSkillsRegistry.cs" />
     <Compile Include="DataAccess\DBSystemSettings.cs" />
     <Compile Include="DataAccess\DBTrash.cs" />
     <Compile Include="DataAccess\DBUser.cs" />
@@ -175,6 +181,7 @@
     <Compile Include="Entities\Branch.cs" />
     <Compile Include="Entities\ContentGroup.cs" />
     <Compile Include="Entities\Document.cs" />
+    <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\Event.cs" />
     <Compile Include="Entities\FAQ.cs" />
     <Compile Include="Entities\FAQQuestions.cs" />
@@ -184,10 +191,12 @@
     <Compile Include="Entities\Gallery.cs" />
     <Compile Include="Entities\HTMLWidget.cs" />
     <Compile Include="Entities\Image.cs" />
+    <Compile Include="Entities\JobTitles.cs" />
     <Compile Include="Entities\JSONImages.cs" />
     <Compile Include="Entities\Menu.cs" />
     <Compile Include="Entities\MenuItem.cs" />
     <Compile Include="Entities\Page.cs" />
+    <Compile Include="Entities\SkillsRegistry.cs" />
     <Compile Include="Entities\SystemSettings.cs" />
     <Compile Include="Entities\Template.cs" />
     <Compile Include="Entities\Trash.cs" />
@@ -206,6 +215,7 @@
     <Compile Include="Models\BlogPostRepository.cs" />
     <Compile Include="Models\CategoryRepository.cs" />
     <Compile Include="Models\DocumentRepository.cs" />
+    <Compile Include="Models\EmployeeDirectoryRepository.cs" />
     <Compile Include="Models\EventRepository.cs" />
     <Compile Include="Models\FAQRepository.cs" />
     <Compile Include="Models\FolderRepository.cs" />
@@ -215,11 +225,13 @@
     <Compile Include="Models\HomeRepository.cs" />
     <Compile Include="Models\HTMLWidgetRepository.cs" />
     <Compile Include="Models\ImageRepository.cs" />
+    <Compile Include="Models\JobTitleRepository.cs" />
     <Compile Include="Models\JSONRepository.cs" />
     <Compile Include="Models\MenuItemRepository.cs" />
     <Compile Include="Models\MenuRepository.cs" />
     <Compile Include="Models\NewsRepository.cs" />
     <Compile Include="Models\PageRepository.cs" />
+    <Compile Include="Models\SkillsRegistryRepository.cs" />
     <Compile Include="Models\SystemSettingsRepository.cs" />
     <Compile Include="Models\TrashRepository.cs" />
     <Compile Include="Models\UserRepository.cs" />

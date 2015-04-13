@@ -1,0 +1,138 @@
+﻿@{
+    ViewBag.Title = "EditEmployee";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var Count = 0;
+}
+
+<div class="header">
+    <h1 class="page-title">Edit Employee</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="formcontainer">
+            <div style="line-height: 30px;">&nbsp;</div>
+            <div style="color: red">@Html.ValidationSummary()</div>
+
+            <div class="formlabel">&nbsp;</div>
+            <div class="formfield"><a href="/EmployeeDirectory/"><button class="btn btn-primary"><i class="icon-reply"></i> Cancel</button></a></div>
+            <div class="clear">&nbsp;</div>
+            <div style="line-height: 30px;">&nbsp;</div>
+
+            <form action="/EmployeeDirectory/EditEmployee" method="post" id="add">
+                <input type="hidden" name="Id" value="@Model.Id" id="Id" />
+                <div class="formlabel">First Name:</div>
+                <div class="formfield"><input type="text" name="FirstName" value="@Model.FirstName" id="FirstName" /></div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">Last Name:</div>
+                <div class="formfield"><input type="text" name="LastName" value="@Model.LastName" id="LastName" /></div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">Job Title:</div>
+                <div class="formfield">
+                    <select name="JobTitle" id="JobTitle">
+                        @foreach (var job in ViewBag.JobTitles)
+                        {
+                            if (job.Id == Model.JobTitle)
+                            {
+                                <option value="@job.Id" selected="selected">@job.JobTitle</option>
+                            }
+                            else
+                            {
+                                <option value="@job.Id">@job.JobTitle</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">Phone:</div>
+                <div class="formfield"><input type="text" name="Phone" value="@Model.Phone" id="Phone" /></div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">Intercom:</div>
+                <div class="formfield"><input type="text" name="Intercom" value="@Model.Intercom" id="Intercom" /></div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">Fax:</div>
+                <div class="formfield"><input type="text" name="Fax" value="@Model.Fax" id="Fax" /></div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">Email:</div>
+                <div class="formfield"><input type="text" name="Email" value="@Model.Email" id="Email" /></div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">Location:</div>
+                <div class="formfield">
+                    <select name="Location" id="Location">
+                        @foreach (var location in ViewBag.Branches)
+                        {
+                            if (location.Id == Model.Location)
+                            {
+                                <option value="@location.Id" selected="selected">@location.Abreviation</option>
+                            }
+                            else
+                            {
+                                <option value="@location.Id">@location.Abreviation</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">Photo:</div>
+                <div class="formfield"><input type="text" name="Photo" value="" id="Photo" /></div>
+                <div class="clear">&nbsp;</div>
+
+                <div style="line-height: 30px;">&nbsp;</div>
+
+                <div class="formlabel">Skills Registry:</div>
+                <div class="formfield">
+                    <table>
+                        @foreach (var skill in ViewBag.Skills)
+                        {
+                            if (Count % 4 == 0)
+                            {
+                                @:<tr>
+                            }
+                            if (Model.Skills != null && Model.Skills.Contains(skill.Id))
+                            {
+                                <td align="right">@skill.SkillName &nbsp;&nbsp;<input type="checkbox" value="@skill.Id" name="Skills" id="Skills" checked="checked" />&nbsp;&nbsp;</td>
+                            }
+                            else
+                            {
+                                <td align="right">@skill.SkillName &nbsp;&nbsp;<input type="checkbox" value="@skill.Id" name="Skills" id="Skills" />&nbsp;&nbsp;</td>
+                            }
+                            if (Count % 4 == 3)
+                            {
+                                @:</tr>
+                            }
+
+                            Count = Count + 1;
+                        }
+                        @if (Count % 4 != 3)
+                        {
+                            @:</tr>
+                        }
+                    </table>
+                </div>
+                <div class="clear">&nbsp;</div>
+
+                <div style="line-height: 30px;">&nbsp;</div>
+
+                <div class="formlabel">Additional Information:</div>
+                <div class="formfield"><textarea name="Info" id="Info" rows="10" cols="10">@Model.About</textarea></div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">It's all about me</div>
+                <div class="formfield"><textarea name="About" id="About" rows="10" cols="10">@Model.Info</textarea></div>
+                <div class="clear">&nbsp;</div>
+
+                <div style="line-height: 30px;">&nbsp;</div>
+                <div class="formlabel">&nbsp;</div>
+                <div class="formfield"><button form="add" class="btn btn-primary"><i class="icon-save"></i> Save</button></div>
+                <div class="clear">&nbsp;</div>
+            </form>
+        </div>

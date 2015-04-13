@@ -24,7 +24,7 @@ namespace CMS.WebUI
                 name: "FriendlyURL",
                 url: "{friendlyURL}",
                 defaults: new { controller = "Home", action = "Index", friendlyURL = "Home" },
-                constraints: new { friendlyURL = "^(?!Admin|BlogPost|Calendar|Category|Document|FAQ|Form|FormField|Gallery|HTMLWidget|JSON|Menu|News|Page|Trash|User|WidgetContainer)(([a-zA-z]+-?)+)$" }
+                constraints: new { friendlyURL = "^(?!Admin|BlogPost|Calendar|Category|Document|EmployeeDirectory|FAQ|Form|FormField|Gallery|HTMLWidget|JSON|Menu|News|Page|Trash|User|WidgetContainer)(([a-zA-z]+-?)+)$" }
 
             );
 

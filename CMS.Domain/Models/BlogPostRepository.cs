@@ -86,6 +86,12 @@ namespace CMS.Domain.Models
             return m_BlogPosts;
         }
 
+        public List<BlogPost> RetrievePublishedByCategory(int Category)
+        {
+            List<BlogPost> m_BlogPosts = DBBlogPost.RetrievePublishedByCategory(Category);
+            return m_BlogPosts;
+        }
+
         public List<BlogPostComment> GetComments(int BlogId)
         {
             List<BlogPostComment> m_Comments = DBBlogPost.GetComments(BlogId);

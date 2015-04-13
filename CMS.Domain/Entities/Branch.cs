@@ -9,6 +9,7 @@ namespace CMS.Domain.Entities
     {
         private int id;
         private string branchName;
+        private string abreviation;
 
         public int Id
         {
@@ -31,6 +32,18 @@ namespace CMS.Domain.Entities
             set 
             { 
                 branchName = value; 
+            }
+        }
+
+        public string Abreviation
+        {
+            get
+            {
+                return abreviation;
+            }
+            set
+            {
+                abreviation = value;
             }
         }
     }

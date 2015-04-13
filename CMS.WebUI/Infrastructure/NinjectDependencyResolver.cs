@@ -55,6 +55,9 @@ namespace CMS.WebUI.Infrastructure
             kernel.Bind<IHomeRepository>().To<HomeRepository>();
             kernel.Bind<INewsRepository>().To<NewsRepository>();
             kernel.Bind<ISystemSettingsRepository>().To<SystemSettingsRepository>();
+            kernel.Bind<IEmployeeDirectoryRepository>().To<EmployeeDirectoryRepository>();
+            kernel.Bind<IJobTitleRepository>().To<JobTitleRepository>();
+            kernel.Bind<ISkillsRegistryRepository>().To<SkillsRegistryRepository>();
         }
     }
 }

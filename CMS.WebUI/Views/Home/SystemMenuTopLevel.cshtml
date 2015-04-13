@@ -1,0 +1,31 @@
+﻿<ul class="sub-menu">
+    @foreach (var page in Model)
+    {
+        if (page.PageTitle != "Hidden Pages")
+        {
+            if (page.FriendlyURL.Length > 0)
+            {
+                if(page.PageID == ViewBag.PageId)
+                { 
+                    @:<li class="active"><a href="/@page.FriendlyURL" class="opener">@page.NavigationName</a>@Html.Action("SystemMenuSecondLevel", "Home", new { id = page.PageID })</li>
+                }
+                else
+                {
+                    @:<li><a href="/@page.FriendlyURL" class="opener">@page.NavigationName</a>@Html.Action("SystemMenuSecondLevel", "Home", new { id = page.PageID })</li>
+                }
+            }
+            else
+            {
+                if(page.PageID == ViewBag.PageId)
+                { 
+                    @:<li class="active"><a href="/@page.PageID" class="opener">@page.NavigationName</a>@Html.Action("SystemMenuSecondLevel", "Home", new { id = page.PageID })</li>
+                }
+                else
+                {
+                    @:<li><a href="/@page.PageID" class="opener">@page.NavigationName</a>@Html.Action("SystemMenuSecondLevel", "Home", new { id = page.PageID })</li>
+                }
+            }
+        }
+    }
+</ul>
+

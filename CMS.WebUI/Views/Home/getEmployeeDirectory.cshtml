@@ -1,0 +1,28 @@
+﻿<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Location</th>
+            <th>Job Title</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>@employee.FirstName</td>
+                <td>@employee.LastName</td>
+                <td>@employee.Phone</td>
+                <td>@employee.Email</td>
+                <td>@employee.Location</td>
+                <td>@employee.JobTitle</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+

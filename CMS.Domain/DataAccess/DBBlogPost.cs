@@ -281,6 +281,78 @@ namespace CMS.Domain.DataAccess
             return m_BlogPosts;
         }
 
+        public static List<BlogPost> RetrievePublishedByCategory(int Category)
+        {
+            SqlConnection conn = DB.DbConnect();
+            conn.Open();
+
+            string queryString = "SELECT * FROM CMS_BlogPostsToCategories WHERE categoryId = @catId";
+            SqlCommand getCats = new SqlCommand(queryString, conn);
+            getCats.Parameters.AddWithValue("catId", Category);
+
+
+            SqlDataReader catsReader = getCats.ExecuteReader();
+
+            List<int> m_BlogIds = new List<int>();
+
+            while (catsReader.Read())
+            {
+                m_BlogIds.Add(catsReader.GetInt32(1));
+            }
+
+            conn.Close();
+            conn.Open();
+
+            string BlogIds = string.Join(",", m_BlogIds.ToArray());
+
+            queryString = "SELECT * FROM CMS_BlogPosts WHERE pageWorkFlowState = 2 AND publishDate <= @m_Date AND ExpirationDate >= @m_EndDate AND BlogId IN (" + BlogIds + ") ORDER BY blogId, id desc";
+            SqlCommand getBlogPosts = new SqlCommand(queryString, conn);
+            getBlogPosts.Parameters.AddWithValue("m_Date", DateTime.Now);
+            getBlogPosts.Parameters.AddWithValue("m_EndDate", DateTime.Now);
+            SqlDataReader blogReader = getBlogPosts.ExecuteReader();
+
+            int previousPageId = 0;
+
+            List<BlogPost> m_BlogPosts = new List<BlogPost>();
+
+            while (blogReader.Read())
+            {
+                BlogPost m_BlogPost = new BlogPost();
+
+                m_BlogPost.Id = blogReader.GetInt32(0);
+                m_BlogPost.BlogId = blogReader.GetInt32(1);
+                m_BlogPost.Title = blogReader.GetString(2);
+                m_BlogPost.PublishDate = blogReader.GetDateTime(3);
+                m_BlogPost.ContentGroup = blogReader.GetInt32(4);
+                m_BlogPost.Content = blogReader.GetString(5);
+                m_BlogPost.PageWorkFlowState = blogReader.GetInt32(6);
+                m_BlogPost.LockedBy = blogReader.GetInt32(7);
+                m_BlogPost.LastModifiedBy = blogReader.GetInt32(8);
+                m_BlogPost.LastModifiedDate = blogReader.GetDateTime(9);
+                m_BlogPost.Comments = blogReader.GetInt32(10);
+                m_BlogPost.ExpirationDate = blogReader.GetDateTime(11);
+                m_BlogPost.NewsImageId = blogReader.GetInt32(12);
+                m_BlogPost.Author = blogReader.GetString(13);
+                m_BlogPost.IntroText = blogReader.GetString(14);
+                m_BlogPost.NewsImageName = blogReader.GetString(15);
+                m_BlogPost.RedirectUrl = blogReader.GetString(16);
+
+                m_BlogPost.LockedByName = DBPage.GetLockedByName(m_BlogPost.LockedBy);
+                m_BlogPost.LastModifiedByName = DBPage.GetLockedByName(m_BlogPost.LastModifiedBy);
+
+                if (previousPageId != m_BlogPost.BlogId)
+                {
+                    m_BlogPosts.Add(m_BlogPost);
+                }
+
+                previousPageId = m_BlogPost.BlogId;
+            }
+
+            conn.Close();
+            m_BlogPosts.Reverse();
+            return m_BlogPosts;
+        }
+
         public static void Update(BlogPost m_BlogPost)
         {
             SqlConnection conn = DB.DbConnect();

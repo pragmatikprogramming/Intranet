@@ -1,59 +1,30 @@
-﻿<div class="title2">Featured Events</div>
-            <figcaption>
-                <table>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td style="padding-left: 10px;"><a href="/branch-calendars">Branch Calendars</a></td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                @foreach(var mEvent in Model)
-                {
-                    if (mEvent.EventStartMin == 0)
-                    {
-                        ViewBag.StartTime = mEvent.EventStartHour + ":00 " + mEvent.AmpmStart;
-                    }
-                    else
-                    {
-                        ViewBag.StartTime = mEvent.EventStartHour + ":" + mEvent.EventStartMin + " " + mEvent.AmpmStart;
-                    }
-                    if (mEvent.EventEndMin == 0)
-                    {
-                        ViewBag.EndTime = mEvent.EventEndHour + ":00 " + mEvent.AmpmEnd;
-                    }
-                    else
-                    {
-                        ViewBag.EndTime = mEvent.EventEndHour + ":" + mEvent.EventEndMin + " " + mEvent.AmpmEnd;
-                    }
-                    <tr>
-                        <td>@mEvent.EventStartDate.ToString("MM")/@mEvent.EventStartDate.ToString("dd"):</td>
-                        <td style="padding-left: 10px;"><a href="/Home/Event/@mEvent.EventID">@mEvent.EventTitle</a></td>
-                    </tr>  
-                    if(mEvent.EventStartHour != 0)
-                    {   
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td style="padding-left: 10px;">
-                                @ViewBag.StartTime
-                                @if(mEvent.EventEndHour != 0)
-                                {
-                                    @: - @ViewBag.EndTime   
-                                }
-                            </td>
-                        </tr>
-                    }  
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td style="padding-left: 10px;">@mEvent.BranchName</td>
-                    </tr>    
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>        
-                    
-                }
-                </table>               
-                
-            </figcaption>
+﻿<ul class="schedule">
+    @foreach (var mEvent in Model)
+    {
+        if (mEvent.EventStartMin == 0)
+        {
+            ViewBag.StartTime = mEvent.EventStartHour + ":00 " + mEvent.AmpmStart;
+        }
+        else
+        {
+            ViewBag.StartTime = mEvent.EventStartHour + ":" + mEvent.EventStartMin + " " + mEvent.AmpmStart;
+        }
+        if (mEvent.EventEndMin == 0)
+        {
+            ViewBag.EndTime = mEvent.EventEndHour + ":00 " + mEvent.AmpmEnd;
+        }
+        else
+        {
+            ViewBag.EndTime = mEvent.EventEndHour + ":" + mEvent.EventEndMin + " " + mEvent.AmpmEnd;
+        }
+
+        <li>
+            <time class="align-left" datetime="2011-07-15T20:00">@mEvent.EventStartDate.ToString("MM")/@mEvent.EventStartDate.ToString("dd")</time><span class="time"><a href="/Home/Event/@mEvent.EventID">@mEvent.EventTitle</a><time datetime="2015-07-15T15:00-08:00">@ViewBag.StartTime
+            @if (mEvent.EventEndHour != 0)
+            {
+                @: - @ViewBag.EndTime
+            }, @mEvent.BranchName</time></span>
+        </li>
+    }
+</ul>
+

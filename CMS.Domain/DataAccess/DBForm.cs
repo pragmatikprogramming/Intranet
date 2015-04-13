@@ -15,7 +15,7 @@ namespace CMS.Domain.DataAccess
             SqlConnection conn = DB.DbConnect();
             conn.Open();
 
-            string queryString = "INSERT INTO CMS_Forms(formName, submissionEmail, submission, fromEmail) VALUES(@formName, @submissionEmail, @success, @fromEmail)";
+            string queryString = "INSERT INTO CMS_Forms(formName, submissionEmail, submission, fromEmail, pageWorkFlowState) VALUES(@formName, @submissionEmail, @success, @fromEmail, 2)";
             SqlCommand insertForm = new SqlCommand(queryString, conn);
             insertForm.Parameters.AddWithValue("formName", m_Form.FormName);
             insertForm.Parameters.AddWithValue("submissionEmail", m_Form.SubmissionEmail);
@@ -35,7 +35,7 @@ namespace CMS.Domain.DataAccess
 
                 conn.Open();
 
-                queryString = "INSERT INTO CMS_FormToFormFields(formId, formFieldId, sortOrder) VALUES(@formId, @formFieldId, @sortOrder)";
+                queryString = "INSERT INTO CMS_FormToFormFields(formId, formFieldId, sortOrder, isRequired) VALUES(@formId, @formFieldId, @sortOrder, 0)";
                 SqlCommand insertInfo = new SqlCommand(queryString, conn);
                 insertInfo.Parameters.AddWithValue("formId", m_FormId);
                 insertInfo.Parameters.AddWithValue("formFieldId", FormField);

@@ -52,6 +52,7 @@ namespace CMS.Domain.HelperClasses
                 Branch m_Branch = new Branch();
                 m_Branch.Id = BranchNames.GetInt32(0);
                 m_Branch.BranchName = BranchNames.GetString(1);
+                m_Branch.Abreviation = BranchNames.GetString(2);
                 m_Branchs.Add(m_Branch);
             }
 
