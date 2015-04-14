@@ -2335,15 +2335,6 @@
     <Content Include="Views\Page\Pages.cshtml" />
     <Content Include="Views\Page\AddPage.cshtml" />
     <Content Include="Views\Page\EditPage.cshtml" />
-    <Content Include="Views\Z-OldViews\_LayoutHome.cshtml" />
-    <Content Include="Views\Z-OldViews\Home.cshtml" />
-    <Content Include="Views\Z-OldViews\HomeSubMenu.cshtml" />
-    <Content Include="Views\Z-OldViews\_LayoutKids.cshtml" />
-    <Content Include="Views\Z-OldViews\Kids.cshtml" />
-    <Content Include="Views\Z-OldViews\_LayoutTeens.cshtml" />
-    <Content Include="Views\Z-OldViews\Teens.cshtml" />
-    <Content Include="Views\Z-OldViews\_LayoutELibrary.cshtml" />
-    <Content Include="Views\Z-OldViews\eLibrary.cshtml" />
     <Content Include="Views\Trash\Trash.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
     <Content Include="Views\Menu\AddMenu.cshtml" />
@@ -2355,7 +2346,6 @@
     <Content Include="Views\Admin\getTrash.cshtml" />
     <Content Include="Views\Admin\getLockedContent.cshtml" />
     <Content Include="Views\Admin\Preview.cshtml" />
-    <Content Include="Views\Z-OldViews\HomeInterior.cshtml" />
     <Content Include="Views\Calendar\getContent.cshtml" />
     <Content Include="Views\Page\getContent.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
@@ -2399,7 +2389,6 @@
     <Content Include="Views\Page\getFAQ.cshtml" />
     <Content Include="Views\Home\getFAQ.cshtml" />
     <Content Include="Views\Page\getDefaults.cshtml" />
-    <Content Include="Views\Z-OldViews\HomeFullWidth.cshtml" />
     <Content Include="Views\News\News.cshtml" />
     <Content Include="Views\Home\SwapNews.cshtml" />
     <Content Include="Views\Form\FormPreview.cshtml" />
