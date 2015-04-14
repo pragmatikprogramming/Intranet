@@ -2273,6 +2273,9 @@
     <Content Include="Content\js\cufon-yui.js" />
     <Content Include="Content\js\cycle2.js" />
     <Content Include="Content\js\DD_belatedPNG.js" />
+    <Content Include="Content\js\ie.js" />
+    <Content Include="Content\js\jquery-1.11.2.min.js" />
+    <Content Include="Content\js\jquery.main.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\CKEditor\CHANGES.md" />
     <Content Include="Content\CKEditor\LICENSE.md" />
