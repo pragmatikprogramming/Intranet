@@ -61,7 +61,7 @@ namespace CMS.Domain.Entities
             }
         }
 
-        public string Rating
+        public int Rating
         {
             get
             {
