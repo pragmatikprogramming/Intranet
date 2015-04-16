@@ -2299,6 +2299,7 @@
     <None Include="Properties\PublishProfiles\Intranet DEVELOPMENT.pubxml" />
     <None Include="Properties\PublishProfiles\MJSDEV.pubxml" />
     <None Include="Properties\PublishProfiles\SOLANO LIBRARY LIVE.pubxml" />
+    <Content Include="Views\Web.config" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2429,7 +2430,6 @@
     <Content Include="Views\EmployeeDirectory\Display.cshtml" />
     <Content Include="Views\Home\getEmployeeDirectory.cshtml" />
     <Content Include="Views\Page\getEmpDir.cshtml" />
-    <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,7 +5,7 @@ using System.Web;
 using CMS.Domain.Abstract;
 using CMS.Domain.Entities;
 using CMS.Domain.DataAccess;
-
+using CMS.Domain.HelperClasses;
 
 namespace CMS.Domain.Models
 {

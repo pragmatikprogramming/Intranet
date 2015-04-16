@@ -138,6 +138,14 @@ namespace CMS.WebUI.Controllers
             return View("FeaturedEvents", m_Events);
         }
 
+        public ActionResult Event(int id)
+        {
+            Event m_Event = EventRepository.RetrieveOne(id);
+            ViewBag.PageType = 6;
+
+            return View("HomeFullWidth", m_Event);
+        }
+
         public ActionResult GetWhatsNew(int id)
         {
             List<BlogPost> m_BlogPosts = BlogPostRepository.RetrievePublishedByCategory(id);
@@ -239,13 +247,7 @@ namespace CMS.WebUI.Controllers
             }
         }
 
-        public ActionResult Event(int id)
-        {
-            Event m_Event = EventRepository.RetrieveOne(id);
-            ViewBag.PageType = 6;
-
-            return View("HomeFullWidth", m_Event);
-        }
+        
 
         public ActionResult WirelessPrint(string id)
         {

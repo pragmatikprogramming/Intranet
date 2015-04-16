@@ -53,15 +53,17 @@ namespace CMS.Domain.DataAccess
             SqlCommand empId = new SqlCommand(queryString, conn);
             int m_Id = (int)(decimal)empId.ExecuteScalar();
 
-            foreach (int i in m_Employee.Skills)
+            if (m_Employee.Skills != null)
             {
-                queryString = "INSERT INTO CMS_EmployeeToSkills(employeeId, skillId) VALUES(@employeeId, @skillId)";
-                SqlCommand insSkill = new SqlCommand(queryString, conn);
-                insSkill.Parameters.AddWithValue("employeeId", m_Id);
-                insSkill.Parameters.AddWithValue("skillId", i);
-                insSkill.ExecuteNonQuery();
+                foreach (int i in m_Employee.Skills)
+                {
+                    queryString = "INSERT INTO CMS_EmployeeToSkills(employeeId, skillId) VALUES(@employeeId, @skillId)";
+                    SqlCommand insSkill = new SqlCommand(queryString, conn);
+                    insSkill.Parameters.AddWithValue("employeeId", m_Id);
+                    insSkill.Parameters.AddWithValue("skillId", i);
+                    insSkill.ExecuteNonQuery();
+                }
             }
-            
             conn.Close();
 
         }
@@ -199,13 +201,17 @@ namespace CMS.Domain.DataAccess
             delSkills.Parameters.AddWithValue("id", m_Employee.Id);
             delSkills.ExecuteNonQuery();
 
-            foreach (int i in m_Employee.Skills)
+
+            if (m_Employee.Skills != null)
             {
-                queryString = "INSERT INTO CMS_EmployeeToSkills(employeeId, skillId) VALUES(@employeeId, @skillId)";
-                SqlCommand insSkill = new SqlCommand(queryString, conn);
-                insSkill.Parameters.AddWithValue("employeeId", m_Employee.Id);
-                insSkill.Parameters.AddWithValue("skillId", i);
-                insSkill.ExecuteNonQuery();
+                foreach (int i in m_Employee.Skills)
+                {
+                    queryString = "INSERT INTO CMS_EmployeeToSkills(employeeId, skillId) VALUES(@employeeId, @skillId)";
+                    SqlCommand insSkill = new SqlCommand(queryString, conn);
+                    insSkill.Parameters.AddWithValue("employeeId", m_Employee.Id);
+                    insSkill.Parameters.AddWithValue("skillId", i);
+                    insSkill.ExecuteNonQuery();
+                }
             }
 
             conn.Close();

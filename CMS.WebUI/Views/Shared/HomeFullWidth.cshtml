@@ -55,6 +55,59 @@
         {
             @Html.Action("getEmployeeDirectory", "Home")
         }
+        else if (ViewBag.PageType == 6)
+        {
+
+
+            <section>
+                <span class='st_facebook_large' displaytext='Facebook'></span>
+                <span class='st_twitter_large' displaytext='Tweet'></span>
+                <span class='st_pinterest_large' displaytext='Pinterest'></span>
+                <span class='st_email_large' displaytext='Email'></span>
+                <span class='st_fblike_large' displaytext='Facebook Like'></span><br /><br /><br />
+            </section>
+
+            <h2>@Model.EventTitle</h2><br /><br />
+            <p>
+                @Model.EventStartDate.ToString("MMM d, yyyy")
+                @if (Model.EventStartDate.ToString("MMM d, yyyy") != Model.EventEndDate.ToString("MMM d, yyyy"))
+                {
+                    @: - @Model.EventEndDate.ToString("MMM d, yyyy")
+                    }
+            </p>
+            if (Model.EventStartHour != 0)
+            {
+                if (Model.EventStartMin != 0)
+                {
+                    ViewBag.StartTime = Model.EventStartHour + ":" + Model.EventStartMin + Model.AmpmStart;
+                }
+                else
+                {
+                    ViewBag.StartTime = Model.EventStartHour + ":00" + Model.AmpmStart;
+                }
+
+                if (Model.EventEndHour != 0)
+                {
+                    if (Model.EventEndMin != 0)
+                    {
+                        ViewBag.EndTime = Model.EventEndHour + ":" + Model.EventEndMin + Model.AmpmEnd;
+                    }
+                    else
+                    {
+                        ViewBag.EndTime = Model.EventEndHour + ":00" + Model.AmpmEnd;
+                    }
+                }
+            }
+            <p>
+                @ViewBag.StartTime
+                @if (Model.EventEndHour != 0)
+                {
+                    @: - @ViewBag.EndTime
+                }
+            </p>
+            <br /><br /><br />
+            <p>@Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Body))</p>
+        }
         else
         {
             @Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Content))

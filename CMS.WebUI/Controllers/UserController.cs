@@ -24,7 +24,7 @@ namespace CMS.WebUI.Controllers
         [CMSAuth]
         public ActionResult Index()
         {
-            return View("UsersManage");
+            return View("Manage");
         }
 
         [CMSAuth]

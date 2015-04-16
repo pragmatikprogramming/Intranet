@@ -5,6 +5,7 @@ using System.Web;
 using CMS.Domain.Entities;
 using CMS.Domain.HelperClasses;
 using System.Data.SqlClient;
+using CMS.Domain.HelperClasses;
 
 namespace CMS.Domain.DataAccess
 {
@@ -305,6 +306,13 @@ namespace CMS.Domain.DataAccess
 
             string BlogIds = string.Join(",", m_BlogIds.ToArray());
 
+            List<BlogPost> m_BlogPosts = new List<BlogPost>();
+
+            if(BlogIds.Length == 0)
+            {
+                return m_BlogPosts;
+            }
+
             queryString = "SELECT * FROM CMS_BlogPosts WHERE pageWorkFlowState = 2 AND publishDate <= @m_Date AND ExpirationDate >= @m_EndDate AND BlogId IN (" + BlogIds + ") ORDER BY blogId, id desc";
             SqlCommand getBlogPosts = new SqlCommand(queryString, conn);
             getBlogPosts.Parameters.AddWithValue("m_Date", DateTime.Now);
@@ -313,7 +321,9 @@ namespace CMS.Domain.DataAccess
 
             int previousPageId = 0;
 
-            List<BlogPost> m_BlogPosts = new List<BlogPost>();
+            Logger.LogEvent(queryString);
+
+            
 
             while (blogReader.Read())
             {
