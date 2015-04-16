@@ -1,6 +1,6 @@
 ﻿<ul class="lists">
     @foreach (var blogPost in Model)
     {
-        <li><a href="#">@blogPost.Title</a></li>
+        <li><a href="/Home/BlogPost/@blogPost.Id">@blogPost.Title</a></li>
     }
 </ul>
