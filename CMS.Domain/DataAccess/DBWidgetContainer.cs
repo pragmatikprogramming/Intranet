@@ -15,7 +15,7 @@ namespace CMS.Domain.DataAccess
             SqlConnection conn = DB.DbConnect();
             conn.Open();
 
-            string queryString = "INSERT INTO CMS_WidgetContainers(name) VALUES(@name)";
+            string queryString = "INSERT INTO CMS_WidgetContainers(name, templateId, pageWorkFlowState) VALUES(@name, 0, 2)";
             SqlCommand insertContainer = new SqlCommand(queryString, conn);
             insertContainer.Parameters.AddWithValue("name", m_Container.Name);
             insertContainer.ExecuteNonQuery();

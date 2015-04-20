@@ -130,6 +130,8 @@
     </div>
     <!-- contain sidebar of the page (right side bar)-->
     <aside class="sidebar">
+        @Html.Action("Container", "Home", new { id = Model.WidgetContainerId })
+        <!--
         <div class="wrap">
             <article class="box-content">
                 <div class="info">
@@ -194,6 +196,6 @@
                     <a href="#" class="more">More</a>
                 </div>
             </div>
-        </article>
+        </article> -->
     </aside>
 </main>

@@ -193,7 +193,11 @@ namespace CMS.WebUI.Controllers
             return View("getEmployeeDirectory", m_Employees);
         }
 
-
+        public ActionResult Container(int id)
+        {
+            WidgetContainer m_Container = HomeRepository.getContainer(id);
+            return View("Container", m_Container);
+        }
 
 
 
@@ -221,11 +225,7 @@ namespace CMS.WebUI.Controllers
             return View("getNews", m_BlogPosts);
         }
 
-        public ActionResult Container(int id)
-        {
-            WidgetContainer m_Container = HomeRepository.getContainer(id);
-            return View("Container", m_Container);
-        }
+       
 
         public RedirectResult Search(string q, int searchType)
         {

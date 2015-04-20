@@ -12,7 +12,7 @@ namespace CMS.Domain.Entities
         private string programTitle;
         private string description;
         private float cost;
-        private int duration;
+        private float duration;
         private string notes;
 
         public int Id
@@ -75,7 +75,7 @@ namespace CMS.Domain.Entities
             }
         }
 
-        public int Duration
+        public float Duration
         {
             get
             {
