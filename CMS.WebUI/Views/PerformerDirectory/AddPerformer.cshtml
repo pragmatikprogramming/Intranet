@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "AddPerformer";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="header">
+    <h1 class="page-title">Add Performer</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="formcontainer">
+            <div style="line-height: 30px;">&nbsp;</div>
+            <div style="color: red">@Html.ValidationSummary()</div>
+
+            <div class="formlabel">&nbsp;</div>
+            <div class="formfield"><a href="/PerformerDirectory/Index"><button class="btn btn-primary"><i class="icon-reply"></i> Cancel</button></a></div>
+            <div class="clear">&nbsp;</div>
+            <div style="line-height: 30px;">&nbsp;</div>
+
+            <form action="/PerformerDirectory/AddPerformer" method="post" id="performerAdd">
+                <div class="formlabel">First Name:</div>
+                <div class="formfield"><input type="text" name="FirstName" id="FirstName" value="@Model.FirstName" /></div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">Last Name:</div>
+                <div class="formfield"><input type="text" name="LastName" id="LastName" value="@Model.LastName" /></div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">Address:</div>
+                <div class="formfield"><input type="text" name="Address" id="Address" value="@Model.Address" /></div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">Phone:</div>
+                <div class="formfield"><input type="text" name="Phone" id="Phone" value="@Model.Phone" /></div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">Fax:</div>
+                <div class="formfield"><input type="text" name="Fax" id="Fax" value="@Model.Fax" /></div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">Email:</div>
+                <div class="formfield"><input type="text" name="Email" id="Email" value="@Model.Email" /></div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">Website:</div>
+                <div class="formfield"><input type="text" name="Website" id="Website" value="@Model.Website" /></div>
+                <div class="clear">&nbsp;</div>
+
+                <div style="line-height: 30px;">&nbsp;</div>
+                <div class="formlabel">&nbsp;</div>
+                <div class="formfield"><button form="performerAdd" class="btn btn-primary"><i class="icon-save"></i> Save</button></div>
+                <div class="clear">&nbsp;</div>
+            </form>
+        </div>

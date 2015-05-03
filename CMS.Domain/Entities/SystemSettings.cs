@@ -7,9 +7,10 @@ namespace CMS.Domain.Entities
 {
     public class SystemSettings
     {
-        string domainName;
-        byte[] imageBinary;
-        string barColor;
+        private string domainName;
+        private byte[] imageBinary;
+        private string barColor;
+        private byte[] defaultPhoto;
 
 
         public string DomainName
@@ -45,6 +46,18 @@ namespace CMS.Domain.Entities
             set
             {
                 barColor = value;
+            }
+        }
+
+        public byte[] DefaultPhoto
+        {
+            get
+            {
+                return defaultPhoto;
+            }
+            set
+            {
+                defaultPhoto = value;
             }
         }
     }

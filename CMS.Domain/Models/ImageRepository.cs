@@ -5,6 +5,7 @@ using System.Web;
 using CMS.Domain.Abstract;
 using CMS.Domain.Entities;
 using CMS.Domain.DataAccess;
+using CMS.Domain.HelperClasses;
 using System.Configuration;
 using System.IO;
 
@@ -117,8 +118,10 @@ namespace CMS.Domain.Models
 
             if (myFile != null && myFile.ContentLength > 0)
             {
+                Logger.LogEvent(myFile.ContentLength.ToString());
                 content = new byte[myFile.ContentLength];
                 myFile.InputStream.Read(content, 0, myFile.ContentLength);
+                Logger.LogEvent(content.Length.ToString());
             }
 
             return content;

@@ -5,6 +5,7 @@ using System.Web;
 using CMS.Domain.Abstract;
 using CMS.Domain.Entities;
 using CMS.Domain.DataAccess;
+using CMS.Domain.HelperClasses;
 
 namespace CMS.Domain.Models
 {
@@ -35,6 +36,18 @@ namespace CMS.Domain.Models
         public void Delete(int id)
         {
             DBEmployeeDirectory.Delete(id);
+        }
+
+        public string getLocation(int id)
+        {
+            string branchName = Utility.getBranchName(id);
+            return branchName;
+        }
+
+        public string getJobTitle(int id)
+        {
+            JobTitles m_Job = DBJobTitle.RetrieveOne(id);
+            return m_Job.JobTitle;
         }
     }
 }

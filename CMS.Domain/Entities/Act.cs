@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace CMS.Domain.Entities
 {
@@ -11,8 +12,10 @@ namespace CMS.Domain.Entities
         private int performerId;
         private string programTitle;
         private string description;
-        private float cost;
-        private float duration;
+        private double cost;
+        private double duration;
+        private List<int> branches;
+        private List<int> audiences;
         private string notes;
 
         public int Id
@@ -39,6 +42,7 @@ namespace CMS.Domain.Entities
             }
         }
 
+        [Required(ErrorMessage = "Please Enter a program title")]
         public string ProgramTitle
         {
             get
@@ -51,6 +55,7 @@ namespace CMS.Domain.Entities
             }
         }
 
+        [Required(ErrorMessage = "Please Enter a description")]
         public string Description
         {
             get
@@ -63,7 +68,9 @@ namespace CMS.Domain.Entities
             }
         }
 
-        public float Cost
+        [Required(ErrorMessage = "Please Enter a cost")]
+        [RegularExpression(@"\d*\.?\d+%?", ErrorMessage = "Please enter a valid cost")]
+        public double Cost
         {
             get
             {
@@ -75,7 +82,9 @@ namespace CMS.Domain.Entities
             }
         }
 
-        public float Duration
+        [Required(ErrorMessage = "Please Enter a duration")]
+        [RegularExpression(@"\d*\.?\d+%?", ErrorMessage = "Please enter a valid duration")]
+        public double Duration
         {
             get
             {
@@ -84,6 +93,30 @@ namespace CMS.Domain.Entities
             set
             {
                 duration = value;
+            }
+        }
+
+        public List<int> Branches
+        {
+            get
+            {
+                return branches;
+            }
+            set
+            {
+                branches = value;
+            }
+        }
+
+        public List<int> Audiences
+        {
+            get
+            {
+                return audiences;
+            }
+            set
+            {
+                audiences = value;
             }
         }
 

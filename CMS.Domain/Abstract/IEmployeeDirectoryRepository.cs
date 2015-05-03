@@ -14,5 +14,7 @@ namespace CMS.Domain.Abstract
         List<Employee> RetrieveAll();
         void Update(Employee m_Employee);
         void Delete(int id);
+        string getLocation(int id);
+        string getJobTitle(int id);
     }
 }

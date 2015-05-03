@@ -7,7 +7,21 @@
 /* ---------------------------------------------------------
    1. Embedded fonts styles
    ---------------------------------------------------------*/
+.formlabel {
 
+    text-align: right;
+    float: left;
+}
+
+.formfield {
+    text-align: left;
+    padding-left: 15px;
+    float: left;
+}
+.clear {
+    clear: left;
+    line-height: 7px;
+}
 @font-face {
 	font-family: "handwritingmedium";
 	src: url("handwriting-webfont.eot");
@@ -597,6 +611,17 @@ table {
 .content-holder .sidebar {
 	width: 300px;
 }
+
+.content-holder .directory-table {width:100%;border:1px solid #cecfce;}
+.content-holder .directory-table td, .content-holder .directory-table th {border:1px solid #cecfce;padding:4px;}
+
+.content-holder .directory-table th {text-align:left;background:#dedfde url(../images/arrow-none.gif) right center no-repeat;color:#525552;border-bottom:1px solid #313031;}
+
+.content-holder .directory-table th.active {text-align:left;background:#cecfce url(../images/arrow-down.gif) right center no-repeat;color:#525552;border-bottom:1px solid #313031;}
+
+.content-holder .directory-table tr {background:#ffffff;}
+.content-holder .directory-table tr.altrow {background:#f7f7f7;}
+
 
 .twocolumns {
 	float: left;

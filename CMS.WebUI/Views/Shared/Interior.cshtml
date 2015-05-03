@@ -121,6 +121,10 @@
                 <br /><br /><br />
                 <p>@Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Body))</p>
             }
+            else if(ViewBag.PageType == 7)
+            {
+                
+            }
             else
             {
                 @Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Content))
@@ -130,72 +134,8 @@
     </div>
     <!-- contain sidebar of the page (right side bar)-->
     <aside class="sidebar">
+        
         @Html.Action("Container", "Home", new { id = Model.WidgetContainerId })
-        <!--
-        <div class="wrap">
-            <article class="box-content">
-                <div class="info">
-                    <h1><img class="image-holder" src="images/img4.png" alt="image-description" width="36" height="57">Quick Facts</h1>
-                    <dl class="contact-info">
-                        <dt>Branch Manager: </dt>
-                        <dd>Jane Doe</dd>
-                        <dt>Supervising Librarian: </dt>
-                        <dd>James Roe</dd>
-                        <dt>Main Number: </dt>
-                        <dd><a class="tel-link" href="tel:5555555555">555-555-5555</a></dd>
-                        <dt>Reference Desk: </dt>
-                        <dd><a class="tel-link" href="tel:5555555555">555-555-5555</a></dd>
-                        <dt>Other Number: </dt>
-                        <dd><a class="tel-link" href="tel:5555555555">555-555-5555</a></dd>
-                    </dl>
-                    <p><a href="#">Fairfield CC Staff Directory</a></p>
-                    <ul class="question">
-                        <li>Quick Questions?</li>
-                        <li><a href="#">Check the Fairfield CC</a></li>
-                        <li><a href="#">Branch FAQ</a></li>
-                    </ul>
-                    <p>This is not a fixed height box. You can add as much text here as you want.</p>
-                    <p>Here is a second line</p>
-                </div>
-            </article>
-            <article class="widget-block">
-                <h2 class="heading">Branch Resources</h2>
-                <div class="text-holder">
-                    <p>Automation staff maintain department documents on the Z: drive on the HQ office network.</p>
-                    <ul class="question">
-                        <li><a href="#">All Staff Meeting Minutes (05/12/06)</a></li>
-                        <li><a href="#">Map of Fairfield CC (PDF)</a></li>
-                        <li><a href="#">Another Resource.</a></li>
-                        <li><a href="#">Another Resource.</a></li>
-                        <li><a href="#">Another Resource.</a></li>
-                        <li><a href="#">Another Resource.</a></li>
-                        <li><a href="#">Another Resource.</a></li>
-                        <li><a href="#">Another Resource.</a></li>
-                    </ul>
-                    <div class="btn-holder">
-                        <a href="#" class="more">More</a>
-                    </div>
-                </div>
-            </article>
-        </div>
-        <article class="widget-block">
-            <h2 class="heading">Staff Training</h2>
-            <div class="text-holder">
-                <ul class="schedule">
-                    <li>
-                        <time datetime="2015-07-15T15:00-08:00">07/15: <a href="#">Ektron Training</a></time><span class="time"><time datetime="2015-07-15T15:00-08:00">10:00am – 12:15pm, Fairfield</time></span>
-                    </li>
-                    <li>
-                        <time datetime="2015-08-13T15:00-08:00">08/13: <a href="#">Ektron TrainingII</a></time><span class="time"><time datetime="2015-07-21T15:00-08:00">1:30pm – 4:30pm, Vallejo</time></span>
-                    </li>
-                    <li>
-                        <time datetime="2015-08-13T15:00-08:00">08/13: <a href="#">Ektron TrainingIII</a></time><span class="time"><time datetime="2015-07-15T15:00-08:00">10:00am – 12:15pm, Fairfield</time></span>
-                    </li>
-                </ul>
-                <div class="btn-holder">
-                    <a href="#" class="more">More</a>
-                </div>
-            </div>
-        </article> -->
+        
     </aside>
 </main>

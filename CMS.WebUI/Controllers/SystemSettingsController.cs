@@ -33,9 +33,10 @@ namespace CMS.WebUI.Controllers
         }
 
         [CMSAuth]
-        public ActionResult SaveSettings(SystemSettings m_Settings, HttpPostedFileBase fileUpload)
+        public ActionResult SaveSettings(SystemSettings m_Settings, HttpPostedFileBase fileUpload, HttpPostedFileBase photoUpload)
         {
             m_Settings.ImageBinary = ImageRepository.ToBinary(fileUpload);
+            m_Settings.DefaultPhoto = ImageRepository.ToBinary(photoUpload);
             SystemSettingsRepository.UpdateSystemSettings(m_Settings);
 
             return Redirect("/Admin/Index");

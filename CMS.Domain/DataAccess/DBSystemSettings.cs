@@ -33,6 +33,7 @@ namespace CMS.Domain.DataAccess
                 {
                     m_Settings.BarColor = settingsReader.GetString(2);
                 }
+                m_Settings.DefaultPhoto = (byte[])settingsReader[3];
             }
 
 
@@ -53,6 +54,11 @@ namespace CMS.Domain.DataAccess
                 queryString += ", imageBinary = @imageBinary";
             }
 
+            if(m_Settings.DefaultPhoto.Length > 0)
+            {
+                queryString += ", defaultPhoto = @defaultPhoto";
+            }
+
             SqlCommand updSettings = new SqlCommand(queryString, conn);
             updSettings.Parameters.AddWithValue("domainName", m_Settings.DomainName);
             updSettings.Parameters.AddWithValue("barColor", m_Settings.BarColor ?? "");
@@ -60,6 +66,10 @@ namespace CMS.Domain.DataAccess
             if (m_Settings.ImageBinary.Length > 0)
             {
                 updSettings.Parameters.AddWithValue("imageBinary", m_Settings.ImageBinary);
+            }
+            if(m_Settings.DefaultPhoto.Length > 0)
+            {
+                updSettings.Parameters.AddWithValue("defaultPhoto", m_Settings.DefaultPhoto);
             }
 
             updSettings.ExecuteNonQuery();

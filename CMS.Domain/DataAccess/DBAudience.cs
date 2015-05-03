@@ -17,7 +17,7 @@ namespace CMS.Domain.DataAccess
 
             string queryString = "INSERT INTO CMS_Audiences(Audience) VALUES(@audience)";
             SqlCommand insAud = new SqlCommand(queryString, conn);
-            insAud.Parameters.AddWithValue("audience", m_Audience.m_Audience);
+            insAud.Parameters.AddWithValue("audience", m_Audience.Name ?? "");
             insAud.ExecuteNonQuery();
 
             conn.Close();
@@ -38,7 +38,7 @@ namespace CMS.Domain.DataAccess
             if(audReader.Read())
             {
                 m_Audience.Id = audReader.GetInt32(0);
-                m_Audience.m_Audience = audReader.GetString(1);
+                m_Audience.Name = audReader.GetString(1);
             }
             else
             {
@@ -65,7 +65,7 @@ namespace CMS.Domain.DataAccess
             {
                 Audience m_Audience = new Audience();
                 m_Audience.Id = audReader.GetInt32(0);
-                m_Audience.m_Audience = audReader.GetString(1);
+                m_Audience.Name = audReader.GetString(1);
 
                 m_Audiences.Add(m_Audience);
             }
@@ -82,7 +82,7 @@ namespace CMS.Domain.DataAccess
 
             string queryString = "UPDATE CMS_Audiences SET audience = @audience WHERE id = @id";
             SqlCommand updAud = new SqlCommand(queryString, conn);
-            updAud.Parameters.AddWithValue("audience", m_Audience.m_Audience);
+            updAud.Parameters.AddWithValue("audience", m_Audience.Name);
             updAud.Parameters.AddWithValue("id", m_Audience.Id);
             updAud.ExecuteNonQuery();
 

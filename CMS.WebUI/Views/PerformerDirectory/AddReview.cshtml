@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "AddReview";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="header">
+    <h1 class="page-title">Add Review</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="formcontainer">
+            <div style="line-height: 30px;">&nbsp;</div>
+            <div style="color: red">@Html.ValidationSummary()</div>
+
+            <div class="formlabel">&nbsp;</div>
+            <div class="formfield"><a href="/PerformerDirectory/Reviews/@ViewBag.ActId"><button class="btn btn-primary"><i class="icon-reply"></i> Cancel</button></a></div>
+            <div class="clear">&nbsp;</div>
+            <div style="line-height: 30px;">&nbsp;</div>
+
+            <form action="/PerformerDirectory/AddReview" method="post" id="reviewAdd">
+                <input type="hidden" name="ActId" id="ActId" value="@ViewBag.ActId" />
+
+                <div class="formlabel">Name:</div>
+                <div class="formfield"><input type="text" name="Name" id="Name" value="@Model.Name" /></div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">Comments:</div>
+                <div class="formfield"><textarea rows="5" cols="10" name="Comments" id="Comments">@Model.Comments</textarea></div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">Rating:</div>
+                <div class="formfield">
+                    <select name="Rating" id="Rating">
+                        <option value="1">One Star</option>
+                        <option value="2">Two Star's</option>
+                        <option value="3">Three Star's</option>
+                        <option value="4">Four Star's</option>
+                        <option value="5">Five Star's</option>
+                    </select>
+                </div>
+                <div class="clear">&nbsp;</div>
+
+                <div style="line-height: 30px;">&nbsp;</div>
+                <div class="formlabel">&nbsp;</div>
+                <div class="formfield"><button form="reviewAdd" class="btn btn-primary"><i class="icon-save"></i> Save</button></div>
+                <div class="clear">&nbsp;</div>
+            </form>
+        </div>

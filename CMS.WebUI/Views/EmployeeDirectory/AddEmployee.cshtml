@@ -19,7 +19,7 @@
             <div class="clear">&nbsp;</div>
             <div style="line-height: 30px;">&nbsp;</div>
 
-            <form action="/EmployeeDirectory/AddEmployee" method="post" id="add">
+            <form action="/EmployeeDirectory/AddEmployee" method="post" id="add" enctype="multipart/form-data">
                 <div class="formlabel">First Name:</div>
                 <div class="formfield"><input type="text" name="FirstName" value="@Model.FirstName" id="FirstName" /></div>
                 <div class="clear">&nbsp;</div>
@@ -31,7 +31,7 @@
                 <div class="formlabel">Job Title:</div>
                 <div class="formfield">
                     <select name="JobTitle" id="JobTitle">
-                        @foreach(var job in ViewBag.JobTitles)
+                        @foreach (var job in ViewBag.JobTitles)
                         {
                             if (job.Id == Model.JobTitle)
                             {
@@ -82,7 +82,7 @@
                 <div class="clear">&nbsp;</div>
 
                 <div class="formlabel">Photo:</div>
-                <div class="formfield"><input type="text" name="Photo" value="" id="Photo" /></div>
+                <div class="formfield"><input type="file" name="fileUpload" value="" id="fileUpload" /></div>
                 <div class="clear">&nbsp;</div>
 
                 <div style="line-height: 30px;">&nbsp;</div>
@@ -90,28 +90,28 @@
                 <div class="formlabel">Skills Registry:</div>
                 <div class="formfield">
                     <table>
-                        @foreach(var skill in ViewBag.Skills)
+                        @foreach (var skill in ViewBag.Skills)
                         {
-                            if(Count % 4 == 0)
-                            { 
+                            if (Count % 4 == 0)
+                            {
                                 @:<tr>
                             }
                             if (Model.Skills != null && Model.Skills.Contains(skill.Id))
                             {
-                                <td align="right">@skill.SkillName &nbsp;&nbsp;<input type="checkbox" value="@skill.Id" name="Skills" id="Skills" checked="checked"/>&nbsp;&nbsp;</td>
+                                <td align="right">@skill.SkillName &nbsp;&nbsp;<input type="checkbox" value="@skill.Id" name="Skills" id="Skills" checked="checked" />&nbsp;&nbsp;</td>
                             }
                             else
                             {
                                 <td align="right">@skill.SkillName &nbsp;&nbsp;<input type="checkbox" value="@skill.Id" name="Skills" id="Skills" />&nbsp;&nbsp;</td>
                             }
-                            if(Count % 4 == 3)
+                            if (Count % 4 == 3)
                             {
                                 @:</tr>
                             }
 
                             Count = Count + 1;
                         }
-                        @if(Count % 4 != 3)
+                        @if (Count % 4 != 3)
                         {
                             @:</tr>
                         }

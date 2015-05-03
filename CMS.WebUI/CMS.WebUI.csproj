@@ -149,6 +149,7 @@
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PageController.cs" />
+    <Compile Include="Controllers\PerformerDirectoryController.cs" />
     <Compile Include="Controllers\SystemSettingsController.cs" />
     <Compile Include="Controllers\TrashController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -2257,6 +2258,8 @@
     <Content Include="Content\images\Admin\pdfIcon.jpg" />
     <Content Include="Content\images\Admin\rss.png" />
     <Content Include="Content\images\Admin\wordIcon.jpg" />
+    <Content Include="Content\images\arrow-down.gif" />
+    <Content Include="Content\images\arrow-none.gif" />
     <Content Include="Content\images\bg-header.png" />
     <Content Include="Content\images\ico1.png" />
     <Content Include="Content\images\img1.png" />
@@ -2430,6 +2433,23 @@
     <Content Include="Views\EmployeeDirectory\Display.cshtml" />
     <Content Include="Views\Home\getEmployeeDirectory.cshtml" />
     <Content Include="Views\Page\getEmpDir.cshtml" />
+    <Content Include="Views\PerformerDirectory\Index.cshtml" />
+    <Content Include="Views\PerformerDirectory\AddPerformer.cshtml" />
+    <Content Include="Views\PerformerDirectory\EditPerformer.cshtml" />
+    <Content Include="Views\PerformerDirectory\Acts.cshtml" />
+    <Content Include="Views\PerformerDirectory\AddAct.cshtml" />
+    <Content Include="Views\PerformerDirectory\EditAct.cshtml" />
+    <Content Include="Views\PerformerDirectory\Reviews.cshtml" />
+    <Content Include="Views\PerformerDirectory\AddReview.cshtml" />
+    <Content Include="Views\PerformerDirectory\EditReview.cshtml" />
+    <Content Include="Views\EmployeeDirectory\getLocation.cshtml" />
+    <Content Include="Views\EmployeeDirectory\getJobTitle.cshtml" />
+    <Content Include="Views\EmployeeDirectory\Edit.cshtml" />
+    <Content Include="Views\PerformerDirectory\Audiences.cshtml" />
+    <Content Include="Views\PerformerDirectory\AddAudience.cshtml" />
+    <Content Include="Views\PerformerDirectory\EditAudience.cshtml" />
+    <Content Include="Views\Page\getPerfDir.cshtml" />
+    <Content Include="Views\PerformerDirectory\Display.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

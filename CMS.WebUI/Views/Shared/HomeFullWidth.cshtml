@@ -108,6 +108,10 @@
             <br /><br /><br />
             <p>@Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Body))</p>
         }
+        else if (ViewBag.PageType == 7)
+        {
+            @Html.Action("Display", "PerformerDirectory")
+        }
         else
         {
             @Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Content))

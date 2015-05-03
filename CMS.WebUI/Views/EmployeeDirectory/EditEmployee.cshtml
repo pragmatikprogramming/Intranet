@@ -19,7 +19,7 @@
             <div class="clear">&nbsp;</div>
             <div style="line-height: 30px;">&nbsp;</div>
 
-            <form action="/EmployeeDirectory/EditEmployee" method="post" id="add">
+            <form action="/EmployeeDirectory/EditEmployee" method="post" id="add" enctype="multipart/form-data">
                 <input type="hidden" name="Id" value="@Model.Id" id="Id" />
                 <div class="formlabel">First Name:</div>
                 <div class="formfield"><input type="text" name="FirstName" value="@Model.FirstName" id="FirstName" /></div>
@@ -83,7 +83,11 @@
                 <div class="clear">&nbsp;</div>
 
                 <div class="formlabel">Photo:</div>
-                <div class="formfield"><input type="text" name="Photo" value="" id="Photo" /></div>
+                <div class="formfield"><input type="file" name="fileUpload" value="" id="fileUpload" /></div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">&nbsp;</div>
+                <div class="formfield"><img src="@Url.Action("GetEmployeePhoto", "ImageHandler", new{ id = @Model.Id })" alt="Employee Photo"></div>
                 <div class="clear">&nbsp;</div>
 
                 <div style="line-height: 30px;">&nbsp;</div>

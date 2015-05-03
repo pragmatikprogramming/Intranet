@@ -144,7 +144,7 @@ namespace CMS.Domain.Entities
             }
             set
             {
-
+                photo = value;
             }
         }
 

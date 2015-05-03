@@ -4,7 +4,7 @@
 }
 
 <div class="header">
-    <h2>Employee Directory</h2>
+    <h2>Performers Directory</h2>
 </div>
 <script type="text/javascript">
     var myID = 0;
@@ -18,7 +18,7 @@
     <div class="row-fluid">
         <div class="row-fluid">
             <div class="btn-toolbar">
-                <a href="/EmployeeDirectory/AddEmployee/"><button class="btn btn-primary"><i class="icon-plus"></i> Add Employee</button></a>
+                <a href="/PerformerDirectory/AddPerformer/"><button class="btn btn-primary"><i class="icon-plus"></i> Add Performer</button></a>
                 <div class="btn-group">
 
                 </div>
@@ -28,36 +28,20 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Location</th>
-                            <th>Job Title</th>
+                            <th>Performer Name</th>
                             <th style="width: 13px; text-align: right;">&nbsp;</th>
                             <th style="width: 13px; text-align: right;">&nbsp;</th>
-
                         </tr>
                     </thead>
                     <tbody>
-
-                        @foreach(var employee in Model)
+                        @foreach(var performer in Model)
                         {
                             <tr>
-                                <td>@employee.FirstName</td>
-                                <td>@employee.LastName</td>
-                                <td>@employee.Phone</td>
-                                <td>@employee.Email</td>
-                                <td>@Html.Action("getLocation", "EmployeeDirectory", new{ id = employee.Location })</td>
-                                <td>@Html.Action("getJobTitle", "EmployeeDirectory", new{ id = employee.JobTitle })</td>
-                                <td><a href="/EmployeeDirectory/EditEmployee/@employee.Id"><i class="icon-pencil" title="Edit" alt="Edit"></i></a></td>
-                                <td><a href="#myModal" role="button" data-toggle="modal" id="1" onclick="doWork(@employee.Id);"><i class="icon-remove" title="Delete" alt="Delete"></i></a></td>
+                                <td><a href="/PerformerDirectory/Acts/@performer.Id">@performer.FirstName @performer.LastName</a></td>
+                                <td><a href="/PerformerDirectory/EditPerformer/@performer.Id"><i class="icon-pencil" title="Edit" alt="Edit"></i></a></td>
+                                <td><a href="#myModal" role="button" data-toggle="modal" id="1" onclick="doWork(@performer.Id);"><i class="icon-remove" title="Delete" alt="Delete"></i></a></td>
                             </tr>
                         }
-
-
-
-
                     </tbody>
                 </table>
             </div>
@@ -67,12 +51,12 @@
                     <h3 id="myModalLabel">Delete Confirmation</h3>
                 </div>
                 <div class="modal-body">
-                    <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Are you sure you want to delete the Employee?</p>
+                    <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Are you sure you want to delete the Performer?</p>
                 </div>
 
                 <div class="modal-footer">
                     <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                    <button class="btn btn-danger" data-dismiss="modal" onclick="document.location.href ='/EmployeeDirectory/DeleteEmployee/' + myID;">Delete</button>
+                    <button class="btn btn-danger" data-dismiss="modal" onclick="document.location.href ='/PerformerDirectory/DeletePerformer/' + myID;">Delete</button>
                 </div>
             </div>
         </div>

@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace CMS.Domain.Entities
 {
     public class Audience
     {
         private int id;
-        private string audience;
+        private string name;
 
         public int Id
         {
@@ -22,15 +23,16 @@ namespace CMS.Domain.Entities
             }
         }
 
-        public string m_Audience
+        [Required(ErrorMessage = "Please Enter an audience name")]
+        public string Name
         {
             get
             {
-                return audience;
+                return name;
             }
             set
             {
-                audience = value;
+                name = value;
             }
         }
     }

@@ -3,4 +3,55 @@
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
 
-<h2>Display</h2>
+<div style="padding-left: 45px; padding-top: 20px">
+    <h2>Staff Directory</h2>
+    <div style="line-height: 30px;">&nbsp;</div>
+    <div class="formlabel">
+        <img src="@Url.Action("GetEmployeePhoto", "ImageHandler", new{ id = @Model.Id })" alt="Employee Photo">
+    </div>
+    <div class="formfield">
+        @Model.FirstName, @Model.LastName &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/EmployeeDirectory/Edit/@Model.Id
+                                                                           ">Edit</a><br />
+        @Html.Action("getJobTitle", "EmployeeDirectory", new { id = Model.JobTitle }) <br />
+        @Html.Action("getLocation", "EmployeeDirectory", new { id = Model.Location }) <br /><br />
+        P: @Model.Phone <br />
+        @if (Model.Intercom.Length > 0)
+        {
+            @:I: @Model.Intercom <br />
+    }
+        @if (Model.Fax.Length > 0)
+        {
+            @:F: @Model.Fax <br />
+    }
+        @Model.Email <br /><br />
+
+        @if (Model.Skills.Count > 0)
+        {
+            <b>Skills Registry</b><br />
+            @:<ul>
+        foreach (var skill in ViewBag.Skills)
+        {
+            if(Model.Skills != null && Model.Skills.Contains(skill.Id))
+            { 
+                @:<li>@skill.SkillName</li>
+            }
+        }
+        @:</ul>
+    }
+
+        @if (Model.Info.Length > 0)
+        {
+            <b>Additional Staff Information</b><br />
+            @Model.Info <br /><br />
+        }
+
+        @if (Model.About.Length > 0)
+        {
+            <b>About</b><br />
+            @Model.About <br /><br />
+        }
+        <a href="/employee-directory">Back to Staff Listing</a>
+    </div>
+    <div class="clear">&nbsp;</div>
+    <div style="line-height: 30px;">&nbsp;</div>
+</div>

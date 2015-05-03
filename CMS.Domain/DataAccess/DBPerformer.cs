@@ -15,12 +15,11 @@ namespace CMS.Domain.DataAccess
             SqlConnection conn = DB.DbConnect();
             conn.Open();
 
-            string queryString = "INSERT INTO CMS_Performers(firstName, lastName, address, phone, fax, email, website) VALUES(@firstName, @lastName, @address, @phone, @fax, @email, @website";
+            string queryString = "INSERT INTO CMS_Performers(firstName, lastName, address, phone, fax, email, website) VALUES(@firstName, @lastName, @address, @phone, @fax, @email, @website)";
             SqlCommand insPerf = new SqlCommand(queryString, conn);
             insPerf.Parameters.AddWithValue("firstName", m_Performer.FirstName ?? "");
             insPerf.Parameters.AddWithValue("lastName", m_Performer.LastName ?? "");
-            insPerf.Parameters.AddWithValue("firstName", m_Performer.Address ?? "");
-            insPerf.Parameters.AddWithValue("address", m_Performer.Phone ?? "");
+            insPerf.Parameters.AddWithValue("address", m_Performer.Address ?? "");
             insPerf.Parameters.AddWithValue("phone", m_Performer.Phone ?? "");
             insPerf.Parameters.AddWithValue("fax", m_Performer.Fax ?? "");
             insPerf.Parameters.AddWithValue("email", m_Performer.Email ?? "");

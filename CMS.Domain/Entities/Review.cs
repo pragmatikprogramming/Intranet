@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace CMS.Domain.Entities
 {
@@ -37,6 +38,7 @@ namespace CMS.Domain.Entities
             }
         }
 
+        [Required(ErrorMessage = "Please enter a Name")]
         public string Name
         {
             get
@@ -49,6 +51,7 @@ namespace CMS.Domain.Entities
             }
         }
 
+        [Required(ErrorMessage = "Please enter Comments")]
         public string Comments
         {
             get

@@ -16,12 +16,14 @@ namespace CMS.WebUI.Controllers
         IEmployeeDirectoryRepository EmployeeDirectoryRepository;
         IJobTitleRepository JobTitleRepository;
         ISkillsRegistryRepository SkillsRegistryRepository;
+        IImageRepository ImageRepository;
         
-        public EmployeeDirectoryController(IEmployeeDirectoryRepository EmployeeDirectoryRepo, IJobTitleRepository JobTitleRepo, ISkillsRegistryRepository SkillsRegistryRepo)
+        public EmployeeDirectoryController(IEmployeeDirectoryRepository EmployeeDirectoryRepo, IJobTitleRepository JobTitleRepo, ISkillsRegistryRepository SkillsRegistryRepo, IImageRepository ImageRepo)
         {
             EmployeeDirectoryRepository = EmployeeDirectoryRepo;
             JobTitleRepository = JobTitleRepo;
             SkillsRegistryRepository = SkillsRegistryRepo;
+            ImageRepository = ImageRepo;
         }
 
         /*[HttpGet]
@@ -189,10 +191,19 @@ namespace CMS.WebUI.Controllers
 
         [CMSAuth]
         [HttpPost]
-        public ActionResult AddEmployee(Employee m_Employee)
+        public ActionResult AddEmployee(Employee m_Employee, HttpPostedFileBase fileUpload)
         {
+            if (fileUpload != null && fileUpload.ContentLength > 0)
+            {
+                if (fileUpload.ContentType != "image/jpg" && fileUpload.ContentType != "image/jpeg" && fileUpload.ContentType != "image/png" && fileUpload.ContentType != "image/gif" && fileUpload.ContentType != "image/bmp")
+                {
+                    ModelState.AddModelError("Name", "An invalid file type was uploaded.  Please select a different file");
+                }
+            }
+
             if (ModelState.IsValid)
             {
+                m_Employee.Photo = ImageRepository.ToBinary(fileUpload);
                 EmployeeDirectoryRepository.Create(m_Employee);
                 return RedirectToAction("Index");
 
@@ -229,10 +240,18 @@ namespace CMS.WebUI.Controllers
 
         [CMSAuth]
         [HttpPost]
-        public ActionResult EditEmployee(Employee m_Employee)
+        public ActionResult EditEmployee(Employee m_Employee, HttpPostedFileBase fileUpload)
         {
+            if (fileUpload != null && fileUpload.ContentLength > 0)
+            {
+                if (fileUpload.ContentType != "image/jpg" && fileUpload.ContentType != "image/jpeg" && fileUpload.ContentType != "image/png" && fileUpload.ContentType != "image/gif" && fileUpload.ContentType != "image/bmp")
+                {
+                    ModelState.AddModelError("Name", "An invalid file type was uploaded.  Please select a different file");
+                }
+            }
             if (ModelState.IsValid)
             {
+                m_Employee.Photo = ImageRepository.ToBinary(fileUpload);
                 EmployeeDirectoryRepository.Update(m_Employee);
                 return RedirectToAction("Index");
             }
@@ -256,6 +275,72 @@ namespace CMS.WebUI.Controllers
         {
             EmployeeDirectoryRepository.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        public ActionResult getLocation(int id)
+        {
+            ViewBag.Location = EmployeeDirectoryRepository.getLocation(id);
+            return View("getLocation");
+        }
+
+        public ActionResult getJobTitle(int id)
+        {
+            ViewBag.JobTitle = EmployeeDirectoryRepository.getJobTitle(id);
+            return View("getJobTitle");
+        }
+
+        [HttpGet]
+        public ActionResult Display(int id)
+        {
+            List<SkillsRegistry> m_Skills = SkillsRegistryRepository.RetrieveAll();
+            ViewBag.Skills = m_Skills;
+            Employee m_Employee = EmployeeDirectoryRepository.RetrieveOne(id);
+            return View("Display", m_Employee);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            Employee m_Employee = EmployeeDirectoryRepository.RetrieveOne(id);
+            List<SkillsRegistry> m_Skills = SkillsRegistryRepository.RetrieveAll();
+            List<JobTitles> m_JobTitles = JobTitleRepository.RetrieveAll();
+            List<Branch> m_Branches = Utility.BranchNames();
+
+            ViewBag.Skills = m_Skills;
+            ViewBag.JobTitles = m_JobTitles;
+            ViewBag.Branches = m_Branches;
+
+            return View("Edit", m_Employee);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Employee m_Employee, HttpPostedFileBase fileUpload)
+        {
+            if (fileUpload != null && fileUpload.ContentLength > 0)
+            {
+                if (fileUpload.ContentType != "image/jpg" && fileUpload.ContentType != "image/jpeg" && fileUpload.ContentType != "image/png" && fileUpload.ContentType != "image/gif" && fileUpload.ContentType != "image/bmp")
+                {
+                    ModelState.AddModelError("Name", "An invalid file type was uploaded.  Please select a different file");
+                }
+            }
+            if (ModelState.IsValid)
+            {
+                m_Employee.Photo = ImageRepository.ToBinary(fileUpload);
+                EmployeeDirectoryRepository.Update(m_Employee);
+                return RedirectToAction("Display", new { id = m_Employee.Id });
+            }
+            else
+            {
+                List<SkillsRegistry> m_Skills = SkillsRegistryRepository.RetrieveAll();
+                List<JobTitles> m_JobTitles = JobTitleRepository.RetrieveAll();
+                List<Branch> m_Branches = Utility.BranchNames();
+
+                ViewBag.Skills = m_Skills;
+                ViewBag.JobTitles = m_JobTitles;
+                ViewBag.Branches = m_Branches;
+
+                return View("Edit", m_Employee);
+            }
         }
 
     }

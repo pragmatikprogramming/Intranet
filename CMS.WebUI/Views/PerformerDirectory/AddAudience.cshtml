@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "AddAudience";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="header">
+    <h1 class="page-title">Add Audience</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="formcontainer">
+            <div style="line-height: 30px;">&nbsp;</div>
+            <div style="color: red">@Html.ValidationSummary()</div>
+
+            <div class="formlabel">&nbsp;</div>
+            <div class="formfield"><a href="/PerformerDirectory/Audiences"><button class="btn btn-primary"><i class="icon-reply"></i> Cancel</button></a></div>
+            <div class="clear">&nbsp;</div>
+            <div style="line-height: 30px;">&nbsp;</div>
+
+            <form action="/PerformerDirectory/AddAudience" method="post" id="audienceAdd">
+                <div class="formlabel">Audience:</div>
+                <div class="formfield"><input type="text" name="Name" id="Name" value="@Model.Name" /></div>
+                <div class="clear">&nbsp;</div>
+
+                <div style="line-height: 30px;">&nbsp;</div>
+                <div class="formlabel">&nbsp;</div>
+                <div class="formfield"><button form="audienceAdd" class="btn btn-primary"><i class="icon-save"></i> Save</button></div>
+                <div class="clear">&nbsp;</div>
+            </form>
+        </div>
+        

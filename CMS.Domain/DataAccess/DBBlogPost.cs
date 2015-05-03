@@ -320,9 +320,6 @@ namespace CMS.Domain.DataAccess
             SqlDataReader blogReader = getBlogPosts.ExecuteReader();
 
             int previousPageId = 0;
-
-            Logger.LogEvent(queryString);
-
             
 
             while (blogReader.Read())

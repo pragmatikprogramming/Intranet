@@ -1,0 +1,119 @@
+﻿@{
+    ViewBag.Title = "EditAct";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+        var a_count = 0;
+}
+
+
+<div class="header">
+    <h1 class="page-title">Edit Act</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="formcontainer">
+            <div style="line-height: 30px;">&nbsp;</div>
+            <div style="color: red">@Html.ValidationSummary()</div>
+
+            <div class="formlabel">&nbsp;</div>
+            <div class="formfield"><a href="/PerformerDirectory/Acts/@Model.PerformerId"><button class="btn btn-primary"><i class="icon-reply"></i> Cancel</button></a></div>
+            <div class="clear">&nbsp;</div>
+            <div style="line-height: 30px;">&nbsp;</div>
+
+            <form action="/PerformerDirectory/EditAct" method="post" id="actAdd">
+                <input type="hidden" name="Id" id="Id" value="@Model.Id" />
+                <input type="hidden" name="PerformerId" id="PerformerId" value="@Model.PerformerId" />
+
+                <div class="formlabel">Program Title:</div>
+                <div class="formfield"><input type="text" name="ProgramTitle" id="ProgramTitle" value="@Model.ProgramTitle" maxlength="255" /></div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">Description:</div>
+                <div class="formfield"><textarea rows="5" cols="10" maxlength="1000" name="Description">@Model.Description</textarea></div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">Cost:</div>
+                <div class="formfield"><input type="text" name="Cost" id="Cost" value="@Model.Cost" /> </div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">Duration:</div>
+                <div class="formfield"><input type="text" name="Duration" id="Duration" value="@Model.Duration" /></div>
+                <div class="clear">&nbsp;</div>
+
+                <div class="formlabel">Audiences:</div>
+                <div class="formfield">
+                    <table>
+                        @foreach (var audience in ViewBag.Audiences)
+                        {
+                            if (a_count % 4 == 0)
+                            {
+                                @:<tr>
+                            }
+                            if (Model.Audiences != null && Model.Audiences.Contains(audience.Id))
+                            {
+                                <td align="right">@audience.Name &nbsp;&nbsp;<input type="checkbox" value="@audience.Id" name="Audiences" id="Audiences" checked="checked" />&nbsp;&nbsp;</td>
+                            }
+                            else
+                            {
+                                <td align="right">@audience.Name &nbsp;&nbsp;<input type="checkbox" value="@audience.Id" name="Audiences" id="Audiences" />&nbsp;&nbsp;</td>
+                            }
+                            if (a_count % 4 == 3)
+                            {
+                                @:</tr>
+                            }
+
+                            a_count = a_count + 1;
+                        }
+                        @if (a_count % 4 != 3)
+                        {
+                            @:</tr>
+                        }
+                    </table>
+                </div>
+                <div class="clear">&nbsp;</div>
+                <div style="line-height: 30px;">&nbsp;</div>
+
+                <div class="formlabel">Branch(es):</div>
+                <div class="formfield">
+                    <table>
+                        @{ a_count = 0; }
+                        @foreach (var location in ViewBag.Locations)
+                        {
+                            if (a_count % 4 == 0)
+                            {
+                                @:<tr>
+                            }
+                            if (Model.Branches != null && Model.Branches.Contains(location.Id))
+                            {
+                                <td align="right">@location.Abreviation &nbsp;&nbsp;<input type="checkbox" value="@location.Id" name="Branches" id="Branches" checked="checked" />&nbsp;&nbsp;</td>
+                            }
+                            else
+                            {
+                                <td align="right">@location.Abreviation &nbsp;&nbsp;<input type="checkbox" value="@location.Id" name="Branches" id="Branches" />&nbsp;&nbsp;</td>
+                            }
+                            if (a_count % 4 == 3)
+                            {
+                                @:</tr>
+                            }
+
+                            a_count = a_count + 1;
+                        }
+                        @if (a_count % 4 != 3)
+                        {
+                            @:</tr>
+                        }
+                    </table>
+                </div>
+                <div class="clear">&nbsp;</div>
+                <div style="line-height: 30px;">&nbsp;</div>
+
+                <div class="formlabel">Notes:</div>
+                <div class="formfield"><textarea rows="5" cols="10" maxlength="1000" name="Notes">@Model.Notes</textarea></div>
+                <div class="clear">&nbsp;</div>
+
+                <div style="line-height: 30px;">&nbsp;</div>
+                <div class="formlabel">&nbsp;</div>
+                <div class="formfield"><button form="actAdd" class="btn btn-primary"><i class="icon-save"></i> Save</button></div>
+                <div class="clear">&nbsp;</div>
+            </form>
+        </div>

@@ -321,6 +321,10 @@ namespace CMS.WebUI.Controllers
             {
                 return View("getEmpDir");
             }
+            else if(mPageType == 7)
+            {
+                return View("getPerfDir");
+            }
             else
             {
                 ViewBag.Templates = Utility.GetTemplates();

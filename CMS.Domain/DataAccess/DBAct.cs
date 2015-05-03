@@ -17,13 +17,44 @@ namespace CMS.Domain.DataAccess
 
             string queryString = "INSERT INTO CMS_Acts(performerId, programTitle, description, cost, duration, notes) VALUES(@performerId, @programTitle, @description, @cost, @duration, @notes)";
             SqlCommand insAct = new SqlCommand(queryString, conn);
-            insAct.Parameters.AddWithValue("performerId", m_Act.Id);
+            insAct.Parameters.AddWithValue("performerId", m_Act.PerformerId);
             insAct.Parameters.AddWithValue("programTitle", m_Act.ProgramTitle ?? "");
             insAct.Parameters.AddWithValue("description", m_Act.Description ?? "");
             insAct.Parameters.AddWithValue("cost", m_Act.Cost);
             insAct.Parameters.AddWithValue("duration", m_Act.Duration);
             insAct.Parameters.AddWithValue("notes", m_Act.Notes);
             insAct.ExecuteNonQuery();
+
+            queryString = "SELECT IDENT_CURRENT('CMS_Acts')";
+            SqlCommand getActId = new SqlCommand(queryString, conn);
+            int m_ActId = (int)(decimal)getActId.ExecuteScalar();
+
+
+            if (m_Act.Audiences != null)
+            {
+                foreach (int audience in m_Act.Audiences)
+                {
+                    queryString = "INSERT INTO CMS_ActsToAudiences(actId, audienceId) VALUES(@actId, @audienceId)";
+                    SqlCommand insAct2Aud = new SqlCommand(queryString, conn);
+                    insAct2Aud.Parameters.AddWithValue("actId", m_ActId);
+                    insAct2Aud.Parameters.AddWithValue("audienceId", audience);
+
+                    insAct2Aud.ExecuteNonQuery();
+                }
+            }
+
+            if (m_Act.Branches != null)
+            {
+                foreach (int location in m_Act.Branches)
+                {
+                    queryString = "INSERT INTO CMS_ActsToBranches(branchId, actId) VALUES(@branchId, @actId)";
+                    SqlCommand insAct2Branch = new SqlCommand(queryString, conn);
+                    insAct2Branch.Parameters.AddWithValue("branchId", location);
+                    insAct2Branch.Parameters.AddWithValue("actId", m_ActId);
+
+                    insAct2Branch.ExecuteNonQuery();
+                }
+            }
 
             conn.Close();
         }
@@ -46,13 +77,43 @@ namespace CMS.Domain.DataAccess
                 m_Act.PerformerId = actReader.GetInt32(1);
                 m_Act.ProgramTitle = actReader.GetString(2);
                 m_Act.Description = actReader.GetString(3);
-                m_Act.Cost = actReader.GetFloat(4);
-                m_Act.Duration = actReader.GetFloat(5);
+                m_Act.Cost = actReader.GetDouble(4);
+                m_Act.Duration = actReader.GetDouble(5);
                 m_Act.Notes = actReader.GetString(6);
             }
             else
             {
                 m_Act.Id = 0;
+            }
+
+            conn.Close();
+            conn.Open();
+
+            queryString = "SELECT * FROM CMS_ActsToAudiences WHERE actId = @actId";
+            SqlCommand getAud = new SqlCommand(queryString, conn);
+            getAud.Parameters.AddWithValue("actId", m_Act.Id);
+            SqlDataReader audReader = getAud.ExecuteReader();
+
+            m_Act.Audiences = new List<int>();
+
+            while(audReader.Read())
+            {
+                m_Act.Audiences.Add(audReader.GetInt32(1));
+            }
+
+            conn.Close();
+            conn.Open();
+
+            queryString = "SELECT * FROM CMS_ActsToBranches WHERE actId = @actId";
+            SqlCommand getBranch = new SqlCommand(queryString, conn);
+            getBranch.Parameters.AddWithValue("actId", m_Act.Id);
+            SqlDataReader branchReader = getBranch.ExecuteReader();
+
+            m_Act.Branches = new List<int>();
+
+            while(branchReader.Read())
+            {
+                m_Act.Branches.Add(branchReader.GetInt32(0));
             }
 
             conn.Close();
@@ -79,8 +140,8 @@ namespace CMS.Domain.DataAccess
                 m_Act.PerformerId = actReader.GetInt32(1);
                 m_Act.ProgramTitle = actReader.GetString(2);
                 m_Act.Description = actReader.GetString(3);
-                m_Act.Cost = actReader.GetFloat(4);
-                m_Act.Duration = actReader.GetFloat(5);
+                m_Act.Cost = actReader.GetDouble(4);
+                m_Act.Duration = actReader.GetDouble(5);
                 m_Act.Notes = actReader.GetString(6);
 
                 m_Acts.Add(m_Act);
@@ -107,6 +168,36 @@ namespace CMS.Domain.DataAccess
             updAct.Parameters.AddWithValue("id", m_Act.Id);
 
             updAct.ExecuteNonQuery();
+
+            queryString = "DELETE FROM CMS_ActsToAudiences WHERE actId = @actId";
+            SqlCommand delA2A = new SqlCommand(queryString, conn);
+            delA2A.Parameters.AddWithValue("actId", m_Act.Id);
+            delA2A.ExecuteNonQuery();
+
+            queryString = "DELETE FROM CMS_ActsToBranches WHERE actId = @actId";
+            SqlCommand delA2B = new SqlCommand(queryString, conn);
+            delA2B.Parameters.AddWithValue("actId", m_Act.Id);
+            delA2B.ExecuteNonQuery();
+
+            foreach (int audience in m_Act.Audiences)
+            {
+                queryString = "INSERT INTO CMS_ActsToAudiences(actId, audienceId) VALUES(@actId, @audienceId)";
+                SqlCommand insAct2Aud = new SqlCommand(queryString, conn);
+                insAct2Aud.Parameters.AddWithValue("actId", m_Act.Id);
+                insAct2Aud.Parameters.AddWithValue("audienceId", audience);
+
+                insAct2Aud.ExecuteNonQuery();
+            }
+
+            foreach (int location in m_Act.Branches)
+            {
+                queryString = "INSERT INTO CMS_ActsToBranches(branchId, actId) VALUES(@branchId, @actId)";
+                SqlCommand insAct2Branch = new SqlCommand(queryString, conn);
+                insAct2Branch.Parameters.AddWithValue("branchId", location);
+                insAct2Branch.Parameters.AddWithValue("actId", m_Act.Id);
+
+                insAct2Branch.ExecuteNonQuery();
+            }
 
             conn.Close();
         }
