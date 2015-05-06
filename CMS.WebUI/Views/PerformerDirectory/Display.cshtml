@@ -2,16 +2,27 @@
     Layout = null;
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Display</title>
-</head>
-<body>
-    <div>
-        Test of Performer Directory
-    </div>
-</body>
-</html>
+<div style="line-height: 30px;">&nbsp;</div>
+<a href="/PerformerDirectory/PerformerAdd">Add Performer</a> | <a href="/PerformerDirectory/ActAdd">Add Act</a>
+<div style="line-height: 30px;">&nbsp;</div>
+<table class="directory-table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Average Rating</th>
+            <th>Acts</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var performer in Model)
+        {
+            <tr>
+                <td><a href="/PerformerDirectory/DisplayPerformer/@performer.Id">@performer.FirstName</a></td>
+                <td><a href="/PerformerDirectory/DisplayPerformer/@performer.Id">@performer.LastName</a></td>
+                <td>&nbsp;</td>
+                <td>@Html.Action("getActs", "PerformerDirectory", new { id = performer.Id })</td>
+            </tr>   
+        }
+    </tbody>
+</table>

@@ -2450,6 +2450,12 @@
     <Content Include="Views\PerformerDirectory\EditAudience.cshtml" />
     <Content Include="Views\Page\getPerfDir.cshtml" />
     <Content Include="Views\PerformerDirectory\Display.cshtml" />
+    <Content Include="Views\PerformerDirectory\DisplayPerformer.cshtml" />
+    <Content Include="Views\PerformerDirectory\PerformerAdd.cshtml" />
+    <Content Include="Views\PerformerDirectory\ShowAll.cshtml" />
+    <Content Include="Views\PerformerDirectory\PerformerEdit.cshtml" />
+    <Content Include="Views\PerformerDirectory\ActAdd.cshtml" />
+    <Content Include="Views\PerformerDirectory\getActs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

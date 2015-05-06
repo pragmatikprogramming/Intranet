@@ -294,7 +294,103 @@ namespace CMS.WebUI.Controllers
         [HttpGet]
         public ActionResult Display()
         {
-            return View("Display");
+            List<Performer> m_Performers = PerformerRepository.RetrieveAll();
+            return View("Display", m_Performers);
+        }
+
+        [HttpGet]
+        public ActionResult ShowAll()
+        {
+            List<Performer> m_Performers = PerformerRepository.RetrieveAll();
+            return View("ShowAll", m_Performers);
+        }
+
+        [HttpGet]
+        public ActionResult DisplayPerformer(int id)
+        {
+            Performer m_Performer = PerformerRepository.RetrieveOne(id);
+            return View("DisplayPerformer", m_Performer);
+        }
+
+        [HttpGet]
+        public ActionResult PerformerAdd()
+        {
+            Performer m_Performer = new Performer();
+            return View("PerformerAdd", m_Performer);
+        }
+
+        [HttpPost]
+        public ActionResult PerformerAdd(Performer m_Performer)
+        {
+            if (ModelState.IsValid)
+            {
+                PerformerRepository.Create(m_Performer);
+                return RedirectToAction("ShowAll");
+            }
+            else
+            {
+                return View("PerformerAdd", m_Performer);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult PerformerEdit(int id)
+        {
+            Performer m_Performer = PerformerRepository.RetrieveOne(id);
+            return View("PerformerEdit", m_Performer);
+        }
+
+        [HttpPost]
+        public ActionResult PerformerEdit(Performer m_Performer)
+        {
+            if(ModelState.IsValid)
+            {
+                PerformerRepository.Update(m_Performer);
+                return RedirectToAction("ShowAll");
+            }
+            else
+            {
+                return View("PerformerEdit", m_Performer);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ActAdd(int id = 0)
+        {
+            ViewBag.PerformerId = id;
+            ViewBag.Audiences = AudienceRepository.RetrieveAll();
+            ViewBag.Locations = Utility.BranchNames();
+            ViewBag.Performers = PerformerRepository.RetrieveAll();
+
+            Act m_Act = new Act();
+            m_Act.PerformerId = id;
+            
+            return View("ActAdd", m_Act);
+        }
+
+        [HttpPost]
+        public ActionResult ActAdd(Act m_Act)
+        {
+            if(ModelState.IsValid)
+            {
+                ActRepository.Create(m_Act);
+                return RedirectToAction("DisplayPerformer", new { id = m_Act.PerformerId });
+            }
+            else
+            {
+                ViewBag.Audiences = AudienceRepository.RetrieveAll();
+                ViewBag.Locations = Utility.BranchNames();
+                ViewBag.Performers = PerformerRepository.RetrieveAll();
+
+                return View("ActAdd", m_Act);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult getActs(int id)
+        {
+            List<Act> m_Acts = ActRepository.RetrieveAll(id);
+            return View("getActs", m_Acts);
         }
     }
 }

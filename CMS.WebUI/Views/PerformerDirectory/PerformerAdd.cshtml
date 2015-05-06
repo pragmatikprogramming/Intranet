@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "PerformerAdd";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<div style="line-height: 30px;">&nbsp;</div>
+<div style="padding-left: 45px; padding-top: 20px">
+    <h1>Add Performer</h1>
+
+    <form action="/PerformerDirectory/PerformerAdd" method="post" id="performerAdd">
+        <div class="formlabel">First Name:</div>
+        <div class="formfield"><input type="text" name="FirstName" id="FirstName" value="@Model.FirstName" /></div>
+        <div class="clear">&nbsp;</div>
+
+        <div class="formlabel">Last Name:</div>
+        <div class="formfield"><input type="text" name="LastName" id="LastName" value="@Model.LastName" /></div>
+        <div class="clear">&nbsp;</div>
+
+        <div class="formlabel">Address:</div>
+        <div class="formfield"><input type="text" name="Address" id="Address" value="@Model.Address" /></div>
+        <div class="clear">&nbsp;</div>
+
+        <div class="formlabel">Phone:</div>
+        <div class="formfield"><input type="text" name="Phone" id="Phone" value="@Model.Phone" /></div>
+        <div class="clear">&nbsp;</div>
+
+        <div class="formlabel">Fax:</div>
+        <div class="formfield"><input type="text" name="Fax" id="Fax" value="@Model.Fax" /></div>
+        <div class="clear">&nbsp;</div>
+
+        <div class="formlabel">Email:</div>
+        <div class="formfield"><input type="text" name="Email" id="Email" value="@Model.Email" /></div>
+        <div class="clear">&nbsp;</div>
+
+        <div class="formlabel">Website:</div>
+        <div class="formfield"><input type="text" name="Website" id="Website" value="@Model.Website" /></div>
+        <div class="clear">&nbsp;</div>
+
+        <div style="line-height: 30px;">&nbsp;</div>
+        <div class="formlabel">&nbsp;</div>
+        <div class="formfield"><button form="performerAdd" class="btn btn-primary"><i class="icon-save"></i> Save</button></div>
+        <div class="clear">&nbsp;</div>
+    </form>
+
+</div>
