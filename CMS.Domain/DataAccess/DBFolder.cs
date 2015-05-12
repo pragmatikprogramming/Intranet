@@ -15,7 +15,7 @@ namespace CMS.Domain.DataAccess
             SqlConnection conn = DB.DbConnect();
             conn.Open();
 
-            string queryString = "INSERT INTO CMS_Folders(name, parentId) VALUES(@name, @parentId)";
+            string queryString = "INSERT INTO CMS_Folders(name, parentId, pageWorkFlowState) VALUES(@name, @parentId, 2)";
             SqlCommand insertFolder = new SqlCommand(queryString, conn);
             insertFolder.Parameters.AddWithValue("name", m_Folder.Name);
             insertFolder.Parameters.AddWithValue("parentId", m_Folder.ParentId);
