@@ -54,7 +54,7 @@ namespace CMS.Domain.DataAccess
             SqlConnection conn = DB.DbConnect();
             conn.Open();
 
-            string queryString = "SELECT * FROM CMS_HTMLWidget WHERE pageWorkFlowState != 4";
+            string queryString = "SELECT * FROM CMS_HTMLWidget WHERE pageWorkFlowState != 4 ORDERY BY name";
             SqlCommand getWidgets = new SqlCommand(queryString, conn);
             SqlDataReader widgetReader = getWidgets.ExecuteReader();
 
