@@ -20,7 +20,7 @@ namespace CMS.Domain.DataAccess
             SqlConnection conn = DB.DbConnect();
             conn.Open();
 
-            string queryString = "INSERT INTO CMS_Images(name, altText, fileType, parentId, contentGroup) VALUES(@name, @altText, @fileType, @parentId, @contentGroup)";
+            string queryString = "INSERT INTO CMS_Images(name, altText, fileType, parentId, contentGroup, pageWorkFlowState) VALUES(@name, @altText, @fileType, @parentId, @contentGroup, 2)";
             SqlCommand insertImage = new SqlCommand(queryString, conn);
             insertImage.Parameters.AddWithValue("name", m_Image.Name);
             insertImage.Parameters.AddWithValue("altText", m_Image.AltText);

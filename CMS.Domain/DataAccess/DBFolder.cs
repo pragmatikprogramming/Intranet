@@ -53,7 +53,7 @@ namespace CMS.Domain.DataAccess
             SqlConnection conn = DB.DbConnect();
             conn.Open();
 
-            string queryString = "SELECT * FROM CMS_Folders WHERE parentId = @parentId AND pageWorkFlowState != 4";
+            string queryString = "SELECT * FROM CMS_Folders WHERE parentId = @parentId AND pageWorkFlowState != 4 ORDER BY name ASC";
             SqlCommand getFolders = new SqlCommand(queryString, conn);
             getFolders.Parameters.AddWithValue("parentId", id);
 

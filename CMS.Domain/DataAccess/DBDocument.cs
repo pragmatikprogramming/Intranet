@@ -15,7 +15,7 @@ namespace CMS.Domain.DataAccess
             SqlConnection conn = DB.DbConnect();
             conn.Open();
 
-            string queryString = "INSERT INTO CMS_Documents(name, parentId, fileType, contentGroup) VALUES(@name, @parentId, @fileType, @contentGroup)";
+            string queryString = "INSERT INTO CMS_Documents(name, parentId, fileType, contentGroup, pageWorkFlowState) VALUES(@name, @parentId, @fileType, @contentGroup, 2)";
             SqlCommand insertDoc = new SqlCommand(queryString, conn);
             insertDoc.Parameters.AddWithValue("name", m_Document.Name);
             insertDoc.Parameters.AddWithValue("parentId", m_Document.ParentId);

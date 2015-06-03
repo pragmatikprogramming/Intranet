@@ -15,7 +15,7 @@ namespace CMS.Domain.DataAccess
             SqlConnection conn = DB.DbConnect();
             conn.Open();
 
-            string queryString = "INSERT INTO CMS_Gallery(name, contentGroup) VALUES(@name, @contentGroup)";
+            string queryString = "INSERT INTO CMS_Gallery(name, contentGroup, pageWorkFlowState) VALUES(@name, @contentGroup, 2)";
             SqlCommand insertGallery = new SqlCommand(queryString, conn);
             insertGallery.Parameters.AddWithValue("name", m_Gallery.Name);
             insertGallery.Parameters.AddWithValue("contentGroup", m_Gallery.ContentGroup);
