@@ -140,8 +140,8 @@ namespace CMS.Domain.DataAccess
                 m_Act.PerformerId = actReader.GetInt32(1);
                 m_Act.ProgramTitle = actReader.GetString(2);
                 m_Act.Description = actReader.GetString(3);
-                m_Act.Cost = actReader.GetDouble(4);
-                m_Act.Duration = actReader.GetDouble(5);
+                m_Act.Cost = (double)actReader.GetDouble(4);
+                m_Act.Duration = (double)actReader.GetDouble(5);
                 m_Act.Notes = actReader.GetString(6);
 
                 m_Acts.Add(m_Act);
@@ -241,7 +241,7 @@ namespace CMS.Domain.DataAccess
             SqlConnection conn = DB.DbConnect();
             conn.Open();
 
-            string queryString = "select ROUND(AVG(CAST(rating as FLOAT)), 2) from CMS_Reviews WHERE actId = @id";
+            string queryString = "select ISNULL(ROUND(AVG(CAST(rating as FLOAT)), 2), 0) from CMS_Reviews WHERE actId = @id";
             SqlCommand getRating = new SqlCommand(queryString, conn);
             getRating.Parameters.AddWithValue("id", id);
             avgRating = (double)getRating.ExecuteScalar();

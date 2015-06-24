@@ -1,4 +1,12 @@
-﻿<style type="text/css">
+﻿<script>
+    //$(document).ready(function ({ collapsible: true, active: false }) {
+    //    $("#accordion").accordion();
+    //});
+    $(function() {
+        $("#accordion").accordion({ collapsible: true, active: false, autoHeight: false });
+    });
+</script>
+<style type="text/css">
     .ui-accordion {
         line-height: 20px;
     }
@@ -6,6 +14,7 @@
     .ui-accordion-content {
         margin-left: 25px;
         background-color: #ffffff;
+        max-height: 400px;
     }
     .ui-accordion-header{
         background-color: #ccc;
@@ -22,7 +31,7 @@
 @foreach (var question in Model)
 {
     <h3 style="color: black; font-size: 14px; color: #e98c24;">@question.FaqQuestion</h3>
-    <div>
+    <div style="line-height: 50px;">
         @Html.Raw(System.Web.HttpUtility.HtmlDecode(question.FaqAnswer))
     </div>
 }

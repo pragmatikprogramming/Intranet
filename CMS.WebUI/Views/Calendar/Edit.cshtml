@@ -282,6 +282,17 @@
                                                                                                         } /></div>
         <div class="clear">&nbsp;</div>
 
+        <div class="formlabel">Automation:</div>
+        <div class="formfield">
+            <input type="checkbox" name="StaffTraining" id="StaffTraining" value="1"
+                   @if (Model.StaffTraining == 1) 
+                   { 
+                       @: checked="checked"
+                   } />
+        </div>
+
+
+
         <div style="line-height: 30px;">&nbsp;</div>
 
         <button form="eventEdit" class="btn btn-primary"><i class="icon-save"></i> Save</button>

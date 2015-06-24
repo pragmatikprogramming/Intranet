@@ -178,7 +178,7 @@ namespace CMS.Domain.DataAccess
             SqlConnection conn = DB.DbConnect();
             conn.Open();
 
-            string queryString = "SELECT ROUND(AVG(CAST(rating as FLOAT)), 2) as Average FROM CMS_Performers as p INNER JOIN CMS_Acts as a ON p.id = a.performerId INNER JOIN CMS_Reviews  as r ON a.id = r.actId WHERE p.id = @id";
+            string queryString = "SELECT ISNULL(ROUND(AVG(CAST(rating as FLOAT)), 2), 0) as Average FROM CMS_Performers as p INNER JOIN CMS_Acts as a ON p.id = a.performerId INNER JOIN CMS_Reviews  as r ON a.id = r.actId WHERE p.id = @id";
             SqlCommand getRating = new SqlCommand(queryString, conn);
             getRating.Parameters.AddWithValue("id", id);
             avgRating = (double)getRating.ExecuteScalar();
