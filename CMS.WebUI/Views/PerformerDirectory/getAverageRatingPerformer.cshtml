@@ -1,0 +1,15 @@
+﻿@{var i = 0;}
+@for (i = 0; i < Math.Floor((double)ViewBag.Avg); i++)
+{
+    <img src="/Content/images/star.gif" width="10" height="10" alt="star">
+}
+@{ var m_Decimal = ViewBag.Avg - i;}
+
+@if (m_Decimal >= .4 && m_Decimal <= .6)
+{
+    <img src="/Content/images/halfstar.gif" width="10" height="10" alt="Half Star">
+}
+else if (m_Decimal > .6)
+{
+    <img src="/Content/images/star.gif" width="10" height="10" alt="star">
+}

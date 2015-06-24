@@ -14,5 +14,8 @@ namespace CMS.Domain.Abstract
         List<Performer> RetrieveAll();
         void Update(Performer m_Performer);
         void Delete(int id);
+        List<Performer> FilterPerformer(int m_Filter, string m_Order);
+        double GetAverageRating(int id);
+        int GetNumReviews(int id);
     }
 }

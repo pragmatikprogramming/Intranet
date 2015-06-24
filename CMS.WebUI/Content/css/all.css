@@ -7,21 +7,7 @@
 /* ---------------------------------------------------------
    1. Embedded fonts styles
    ---------------------------------------------------------*/
-.formlabel {
 
-    text-align: right;
-    float: left;
-}
-
-.formfield {
-    text-align: left;
-    padding-left: 15px;
-    float: left;
-}
-.clear {
-    clear: left;
-    line-height: 7px;
-}
 @font-face {
 	font-family: "handwritingmedium";
 	src: url("handwriting-webfont.eot");
@@ -563,6 +549,28 @@ table {
 	padding: 0;
 }
 
+/* ADDED BY MJS (6/8/2015) */
+.content-holder .innerheading {
+	font-size: 22px;
+	color: #4E95B0;
+	margin: 0 0 10px;
+	border-bottom:1px solid #CCC;
+	padding:1px 0 8px;
+}
+
+.content-holder h3 {
+	font-size: 18px;
+	color: #666;
+	margin: 0;
+	padding-bottom:8px;
+	padding-top:1px;
+}
+
+.content-holder h4 {
+	font-size:13px;
+	color:#4E95B0;
+}
+
 .content-holder .row:first-child .col {
 	margin: 0;
 }
@@ -612,16 +620,30 @@ table {
 	width: 300px;
 }
 
+.content-holder .directory img.staff {float:left;max-width:160px;max-height:120px;}
+.content-holder .directory .edit {float:right;}
+.content-holder .directory .edit a {padding:0 10px;}
+.content-holder .directory .profile {margin-left:190px;}
 .content-holder .directory-table {width:100%;border:1px solid #cecfce;}
 .content-holder .directory-table td, .content-holder .directory-table th {border:1px solid #cecfce;padding:4px;}
-
-.content-holder .directory-table th {text-align:left;background:#dedfde url(../images/arrow-none.gif) right center no-repeat;color:#525552;border-bottom:1px solid #313031;}
-
-.content-holder .directory-table th.active {text-align:left;background:#cecfce url(../images/arrow-down.gif) right center no-repeat;color:#525552;border-bottom:1px solid #313031;}
-
+.content-holder .directory-table th {text-align:left;background:#dedfde;color:#525552;border-bottom:1px solid #313031;}
+.content-holder .directory-table th img {float:right;}
+.content-holder .directory-table th.active {text-align:left;background:#cecfce;color:#525552;border-bottom:1px solid #313031;}
 .content-holder .directory-table tr {background:#ffffff;}
 .content-holder .directory-table tr.altrow {background:#f7f7f7;}
 
+/* ADDED BY MJS (6/8/2015) */
+.content-holder .performers h3 {font-size: 18px;color: #666;margin: 0;padding:0px;padding-top:1px;}
+.content-holder .performers p {margin-top:10px;}
+.content-holder .performers p.reviewer {padding-bottom:3px;border-bottom:1px solid #ccc;}
+.content-holder .performers form p {padding:5px 0;}
+.content-holder .performers form button {color:#fff;padding:5px 10px;background-color:#4E95B0;border:none;} 
+.content-holder .performers .edit {float:right;}
+.content-holder .performers .edit a {padding:0 10px;}
+.content-holder .performers .performer-table {}
+.content-holder .performers .performer-table th {border:1px solid #ccc;width:50%;padding:5px 10px 5px;text-align:left;color:#4E95B0;}
+.content-holder .performers .performer-table td {border:1px solid #ccc;line-height:1.75em;vertical-align:top;padding:5px 10px 5px;}
+.content-holder .performers .performer-table td p {line-height:1.75em;}
 
 .twocolumns {
 	float: left;

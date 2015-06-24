@@ -35,6 +35,18 @@ namespace CMS.WebUI
             );
 
             routes.MapRoute(
+                name: "Filter",
+                url: "{controller}/{action}/{m_Filter}/{m_Order}",
+                defaults: new { controller = "EmployeeDirectory", action = "Filter", m_Filter = 1, m_Order = "" }
+                );
+
+            routes.MapRoute(
+                name: "FilterPerformer",
+                url: "{controller}/{action}/{m_Filter}/{m_Order}",
+                defaults: new { controller = "PerformerDirectory", action = "Filter", m_Filter = 1, m_Order = "" }
+                );
+
+            routes.MapRoute(
                 name: "DeleteFAQQuestion",
                 url: "{controller}/{action}/{parentId}/{id}",
                 defaults: new { controller = "FAQ", action = "Index", parentId = 0, id = UrlParameter.Optional }

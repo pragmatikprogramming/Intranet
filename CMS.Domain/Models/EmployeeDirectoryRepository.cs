@@ -49,5 +49,11 @@ namespace CMS.Domain.Models
             JobTitles m_Job = DBJobTitle.RetrieveOne(id);
             return m_Job.JobTitle;
         }
+
+        public List<Employee> getEmployeeFiltered(int m_Filter, string m_Order)
+        {
+            List<Employee> m_Employees = DBEmployeeDirectory.RetrieveFiltered(m_Filter, m_Order);
+            return m_Employees;
+        }
     }
 }

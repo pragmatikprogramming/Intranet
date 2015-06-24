@@ -47,6 +47,7 @@ namespace CMS.Domain.DataAccess
                 m_Event.PageWorkFlowState = myEvent.GetInt32(7);
                 m_Event.LockedBy = myEvent.GetInt32(8);
                 m_Event.FeaturedEvent = myEvent.GetInt32(11);
+                m_Event.StaffTraining = myEvent.GetInt32(12);
 
                 if(m_Event.EventStartDate.Hour >= 12)
                 {
@@ -163,7 +164,7 @@ namespace CMS.Domain.DataAccess
             conn.Open();
 
             string queryString;
-            queryString = "INSERT INTO CMS_Events(contentGroup, eventTitle, eventStartDate, eventEndDate, branch, body, pageWorkFlowState, lockedBy, lastModifiedBy, lastModifiedDate, featuredEvent) VALUES(@contentGroup, @eventTitle, @eventStartDate, @eventEndDate, @branch, @body, 1, @lockedBy, @lastModifiedBy, @lastModifiedDate, @featuredEvent)";
+            queryString = "INSERT INTO CMS_Events(contentGroup, eventTitle, eventStartDate, eventEndDate, branch, body, pageWorkFlowState, lockedBy, lastModifiedBy, lastModifiedDate, featuredEvent, staffTraining) VALUES(@contentGroup, @eventTitle, @eventStartDate, @eventEndDate, @branch, @body, 1, @lockedBy, @lastModifiedBy, @lastModifiedDate, @featuredEvent, @staffTraining)";
             SqlCommand createEvent = new SqlCommand(queryString, conn);
 
             string myStartTime = string.Empty;
@@ -187,6 +188,8 @@ namespace CMS.Domain.DataAccess
             createEvent.Parameters.AddWithValue("lastModifiedBy", HttpContext.Current.Session["uid"]);
             createEvent.Parameters.AddWithValue("lastModifiedDate", DateTime.Now);
             createEvent.Parameters.AddWithValue("featuredEvent", m_Event.FeaturedEvent);
+            createEvent.Parameters.AddWithValue("staffTraining", m_Event.StaffTraining);
+
             
 
             createEvent.ExecuteNonQuery();
@@ -317,6 +320,67 @@ namespace CMS.Domain.DataAccess
             conn.Open();
 
             string queryString = "SELECT TOP 5 * FROM CMS_Events WHERE featuredEvent = 1 AND eventEndDate >= @startDate AND pageWorkFlowState = 2 ORDER BY eventStartDate ASC";
+            SqlCommand getEvents = new SqlCommand(queryString, conn);
+            getEvents.Parameters.AddWithValue("startDate", DateTime.Parse(DateTime.Now.ToString("MM/dd/yyyy") + " 00:00:00"));
+            //getEvents.Parameters.AddWithValue("endDate", DateTime.Parse(DateTime.Now.ToString("MM/dd/yyyy")));
+
+            SqlDataReader eventReader = getEvents.ExecuteReader();
+
+            List<Event> myEvents = new List<Event>();
+
+            while (eventReader.Read())
+            {
+                Event tempEvent = new Event();
+                tempEvent.EventID = eventReader.GetInt32(0);
+                tempEvent.EventTitle = eventReader.GetString(2);
+                tempEvent.PageWorkFlowState = eventReader.GetInt32(7);
+                tempEvent.LockedBy = eventReader.GetInt32(8);
+
+                DateTime startDate = eventReader.GetDateTime(3);
+                DateTime endDate = eventReader.GetDateTime(4);
+
+                tempEvent.EventStartDate = DateTime.Parse(startDate.ToString("MM/dd/yyyy"));
+                tempEvent.EventEndDate = DateTime.Parse(endDate.ToString("MM/dd/yyyy"));
+                tempEvent.EventStartHour = startDate.Hour % 12;
+                tempEvent.EventStartMin = startDate.Minute;
+                tempEvent.EventEndHour = endDate.Hour % 12;
+                tempEvent.EventEndMin = endDate.Minute;
+
+                if (startDate.Hour >= 12)
+                {
+                    tempEvent.AmpmStart = "PM";
+                }
+                else
+                {
+                    tempEvent.AmpmStart = "AM";
+                }
+
+                if (endDate.Hour >= 12)
+                {
+                    tempEvent.AmpmEnd = "PM";
+                }
+                else
+                {
+                    tempEvent.AmpmEnd = "AM";
+                }
+
+                tempEvent.Branch = eventReader.GetInt32(5);
+                tempEvent.BranchName = Utility.getBranchName(tempEvent.Branch);
+
+                myEvents.Add(tempEvent);
+            }
+
+            conn.Close();
+
+            return myEvents;
+        }
+
+        public static List<Event> getStaffTraining()
+        {
+            SqlConnection conn = DB.DbConnect();
+            conn.Open();
+
+            string queryString = "SELECT TOP 5 * FROM CMS_Events WHERE staffTraining = 1 AND eventEndDate >= @startDate AND pageWorkFlowState <> 4 ORDER BY eventStartDate ASC";
             SqlCommand getEvents = new SqlCommand(queryString, conn);
             getEvents.Parameters.AddWithValue("startDate", DateTime.Parse(DateTime.Now.ToString("MM/dd/yyyy") + " 00:00:00"));
             //getEvents.Parameters.AddWithValue("endDate", DateTime.Parse(DateTime.Now.ToString("MM/dd/yyyy")));

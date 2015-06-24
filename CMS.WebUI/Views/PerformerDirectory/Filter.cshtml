@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Filter";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<main class="main" role="main">
+    <div class="content-holder">
+        <div style="line-height: 30px;">&nbsp;</div>
+        <a href="/PerformerDirectory/PerformerAdd">Add Performer</a> | <a href="/PerformerDirectory/ActAdd">Add Act</a>
+        <div style="line-height: 30px;">&nbsp;</div>
+        <table class="directory-table">
+            <thead>
+                <tr>
+                    @if (ViewBag.Order == "asc" && ViewBag.Filter == 1)
+                    {
+                        <th>First Name<a href="/PerformerDirectory/Filter/1/desc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    else if (ViewBag.Order == "desc" && ViewBag.Filter == 1)
+                    {
+                        <th>First Name<a href="/PerformerDirectory/Filter/1/asc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    else
+                    {
+                        <th>First Name<a href="/PerformerDirectory/Filter/1/desc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    @if (ViewBag.Order == "asc" && ViewBag.Filter == 2)
+                    {
+                        <th>Last Name<a href="/PerformerDirectory/Filter/2/desc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    else if (ViewBag.Order == "desc" && ViewBag.Filter == 2)
+                    {
+                        <th>Last Name<a href="/PerformerDirectory/Filter/2/asc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    else
+                    {
+                        <th>Last Name<a href="/PerformerDirectory/Filter/2/desc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    <th>Average Rating<img src="/Content/images/arrow-none.gif" width="19" height="10"></th>
+                    <th>Acts</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var performer in Model)
+                {
+                    <tr>
+                        <td><a href="/PerformerDirectory/DisplayPerformer/@performer.Id">@performer.FirstName</a></td>
+                        <td><a href="/PerformerDirectory/DisplayPerformer/@performer.Id">@performer.LastName</a></td>
+                        <td>&nbsp;</td>
+                        <td>@Html.Action("getActs", "PerformerDirectory", new { id = performer.Id })</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</main>
+

@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "HomeFullWidth";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<main class="main" role="main">
+    <div class="content-holder">
+        <table class="directory-table">
+            <thead>
+                <tr>
+                    @if(ViewBag.Order == "asc" && ViewBag.Filter == 1)
+                    { 
+                        <th>First Name<a href="/EmployeeDirectory/Filter/1/desc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    else if(ViewBag.Order == "desc" && ViewBag.Filter == 1)
+                    {
+                        <th>First Name<a href="/EmployeeDirectory/Filter/1/asc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    else
+                    {
+                        <th>First Name<a href="/EmployeeDirectory/Filter/1/desc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    @if (ViewBag.Order == "asc" && ViewBag.Filter == 2)
+                    {
+                        <th>Last Name<a href="/EmployeeDirectory/Filter/2/desc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    else if (ViewBag.ORder == "desc" && ViewBag.Filter == 2)
+                    {
+                        <th>Last Name<a href="/EmployeeDirectory/Filter/2/asc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    else
+                    {
+                        <th>Last Name<a href="/EmployeeDirectory/Filter/2/desc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    @if (ViewBag.Order == "asc" && ViewBag.Filter == 3)
+                    {
+                        <th>Phone<a href="/EmployeeDirectory/Filter/3/desc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    else if (ViewBag.Order == "desc" && ViewBag.Filter == 3)
+                    {
+                        <th>Phone<a href="/EmployeeDirectory/Filter/3/asc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    else
+                    {
+                        <th>Phone<a href="/EmployeeDirectory/Filter/3/desc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    @if (ViewBag.Order == "asc" && ViewBag.Filter == 4)
+                    {
+                        <th>Email<a href="/EmployeeDirectory/Filter/4/desc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    else if (ViewBag.Order == "desc" && ViewBag.Filter == 4)
+                    {
+                        <th>Email<a href="/EmployeeDirectory/Filter/4/asc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    else
+                    {
+                        <th>Email<a href="/EmployeeDirectory/Filter/4/desc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }  
+                    @if (ViewBag.Order == "asc" && ViewBag.Filter == 6)
+                    {
+                        <th>Location<a href="/EmployeeDirectory/Filter/6/desc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    else if (ViewBag.Order == "desc" && ViewBag.Filter == 6)
+                    {
+                        <th>Location<a href="/EmployeeDirectory/Filter/6/asc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    else
+                    {
+                        <th>Location<a href="/EmployeeDirectory/Filter/6/desc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }          
+                    
+                    @if (ViewBag.Order == "asc" && ViewBag.Filter == 5)
+                    {
+                        <th>Job Title<a href="/EmployeeDirectory/Filter/5/desc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    else if (ViewBag.Order == "desc" && ViewBag.Filter == 5)
+                    {
+                        <th>Job Title<a href="/EmployeeDirectory/Filter/5/asc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    else
+                    {
+                        <th>Job Title<a href="/EmployeeDirectory/Filter/5/desc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    }
+                    
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var employee in Model)
+                {
+                    <tr>
+                        <td><a href="/EmployeeDirectory/Display/@employee.Id">@employee.FirstName</a></td>
+                        <td><a href="/EmployeeDirectory/Display/@employee.Id">@employee.LastName</a></td>
+                        <td>@employee.Phone</td>
+                        <td>@employee.Email</td>
+                        <td>@Html.Action("getLocation", "EmployeeDirectory", new { id = employee.Location })</td>
+                        <td>@Html.Action("getJobTitle", "EmployeeDirectory", new { id = employee.JobTitle })</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</main>

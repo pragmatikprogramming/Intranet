@@ -3,49 +3,64 @@
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
 
-<div style="line-height: 30px;">&nbsp;</div>
-<div style="padding-left: 45px; padding-top: 20px">
-    <h1>Performers Directory</h1>
-    <div style="line-height: 30px;">&nbsp;</div>
-    <a href="/PerformerDirectory/ShowAll">Back To Performer Directory</a>
-    <div style="line-height: 30px;">&nbsp;</div>
-    <h2>
-        @Model.FirstName
-        @if(Model.LastName.Length > 0)
-        {
-            @:, @Model.LastName
-        }
-    </h2>&nbsp;&nbsp;&nbsp;<a href="/PerformerDirectory/PerformerEdit/@Model.Id">Edit</a><br /><br />
-    <b>Overall Rating:</b><br /><br />
-    Contact<br /><br />
-    @Model.FirstName
-    @if (Model.LastName.Length > 0)
-    {
-        @:, @Model.LastName
-    }
-    <br />
-    @if(Model.Phone.Length > 0)
-    { 
-        <b>Phone: </b>@Model.Phone<br />
-    }
-    @if(Model.Fax.Length > 0)
-    { 
-        <b>Fax: </b>@Model.Fax<br />
-    }
-    @if(Model.Email.Length > 0)
-    { 
-        <b>Email: </b>@Model.Email<br />
-    }
-    @if(Model.Website.Length > 0)
-    { 
-        <b>Website: </b>@Model.Website<br />
-    }
 
-    <div style="line-height: 30px;">&nbsp;</div>
-    <h2>Acts</h2>
-    <div style="line-height: 30px;">&nbsp;</div>
-    Display Acts here
-    <div style="line-height: 30px;">&nbsp;</div>
-    <a href="">Add Act</a>
-    <div style="line-height: 30px;">&nbsp;</div>
-</div>
+<main class="main" role="main">
+    <div class="content-holder">
+        <div class="performers">
+            <h2 class="innerheading">Performers Directory</h2>
+            <p> <a href="/PerformerDirectory/ShowAll">Back to Performers Listing</a></p>
+            <div class="edit"><a href="/PerformerDirectory/PerformerEdit/@Model.Id" title="edit"><img src="/Content/images/edit_pencil.gif" width="30" height="13" border="0" alt="Edit"></a><a href="/PerformerDirectory/PerformerDelete/@Model.Id" title="delete" onclick="return confirm('Are you sure you want to delete @Model.FirstName ? This will also remove all their acts.');"><img src="/Content/images/delete_x.gif" width="15" height="13" border="0" alt="Delete"></a></div>
+
+            <h3>
+                @Model.FirstName
+                @if (Model.LastName.Length > 0)
+                {
+                    @:, @Model.LastName
+                }
+            </h3>
+            <p>Overall Rating: @Html.Action("getAverageRatingPerformer", "PerformerDirectory", new { id = Model.Id })  @Html.Action("getNumReviewsPerformer", "PerformerDirectory", new { id = Model.Id })</p>
+            <h4>
+                Contact
+
+            </h4>
+            <p>
+                @Model.FirstName
+                @if (Model.LastName.Length > 0)
+                {
+                    @:, @Model.LastName
+                }
+                <br>
+                <strong>Phone:</strong>
+                @if (Model.Phone.Length > 0)
+                {
+                    @Model.Phone<br />
+                }
+                <strong>Fax:</strong>
+                @if (Model.Fax.Length > 0)
+                {
+                    @Model.Fax<br />
+                }
+                <br />
+                <strong>Email:</strong>
+                @if (Model.Email.Length > 0)
+                {
+                    @Model.Email<br />
+                }
+                <strong>Website:</strong>
+                @if (Model.Website.Length > 0)
+                {
+                    <a href="@Model.Website" target="_blank">@Model.Website</a>
+                }
+
+            </p>
+            <h4>Acts</h4>
+
+            @foreach(var act in ViewBag.Acts)
+            { 
+                <p><a href="/PerformerDirectory/DisplayAct/@act.Id">@act.ProgramTitle</a> | Rating: @Html.Action("getAverageRatingAct", "PerformerDirectory", new { id = act.Id }) @Html.Action("getNumReviewsAct", "PerformerDirectory", new { id = act.Id })</p>
+            }
+            <p><a href="/PerformerDirectory/ActAdd">Add Act</a></p>
+        </div>
+    </div>
+</main>
+

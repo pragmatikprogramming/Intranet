@@ -170,5 +170,11 @@ namespace CMS.Domain.Models
 
             return m_Events;
         }
+
+        public List<Event> GetStaffTrainingEvents()
+        {
+            List<Event> m_Events = DBEvent.getStaffTraining();
+            return m_Events;
+        }
     }
 }

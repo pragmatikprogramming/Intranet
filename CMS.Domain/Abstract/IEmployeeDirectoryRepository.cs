@@ -16,5 +16,6 @@ namespace CMS.Domain.Abstract
         void Delete(int id);
         string getLocation(int id);
         string getJobTitle(int id);
+        List<Employee> getEmployeeFiltered(int m_Filter, string m_Order);
     }
 }

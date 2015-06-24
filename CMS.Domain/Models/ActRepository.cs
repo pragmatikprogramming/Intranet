@@ -35,5 +35,17 @@ namespace CMS.Domain.Models
             DBAct.Delete(id);
         }
 
+        public double GetAverageRatingAct(int id)
+        {
+            double avg = DBAct.getAverageRating(id);
+            return avg;
+        }
+
+        public int GetNumReviewsAct(int id)
+        {
+            int num = DBAct.numReviews(id);
+            return num;
+        }
+
     }
 }

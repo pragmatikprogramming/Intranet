@@ -309,6 +309,7 @@ namespace CMS.WebUI.Controllers
         public ActionResult DisplayPerformer(int id)
         {
             Performer m_Performer = PerformerRepository.RetrieveOne(id);
+            ViewBag.Acts = ActRepository.RetrieveAll(id);
             return View("DisplayPerformer", m_Performer);
         }
 
@@ -355,6 +356,25 @@ namespace CMS.WebUI.Controllers
         }
 
         [HttpGet]
+        public ActionResult PerformerDelete(int id)
+        {
+            PerformerRepository.Delete(id);
+            return Redirect("/performer-directory");
+        }
+
+        [HttpGet]
+        public ActionResult DisplayAct(int id)
+        {
+            Act m_Act = ActRepository.RetrieveOne(id);
+            ViewBag.PerformerId = m_Act.PerformerId;
+            ViewBag.Performer = PerformerRepository.RetrieveOne(m_Act.PerformerId);
+            ViewBag.Ratings = ReviewRepository.RetrieveAll(id);
+            ViewBag.Audiences = AudienceRepository.RetrieveAll();
+            ViewBag.Locations = Utility.BranchNames();
+            return View("DisplayAct", m_Act);
+        }
+
+        [HttpGet]
         public ActionResult ActAdd(int id = 0)
         {
             ViewBag.PerformerId = id;
@@ -387,10 +407,108 @@ namespace CMS.WebUI.Controllers
         }
 
         [HttpGet]
+        public ActionResult ActEdit(int id)
+        {
+            ViewBag.Audiences = AudienceRepository.RetrieveAll();
+            ViewBag.Locations = Utility.BranchNames();
+            Act m_Act = ActRepository.RetrieveOne(id);
+            return View("ActEdit", m_Act);
+        }
+
+        [HttpPost]
+        public ActionResult ActEdit(Act m_Act)
+        {
+            if (ModelState.IsValid)
+            {
+                ActRepository.Update(m_Act);
+                return RedirectToAction("DisplayPerformer", new { id = m_Act.PerformerId });
+            }
+            else
+            {
+                ViewBag.Audiences = AudienceRepository.RetrieveAll();
+                ViewBag.Locations = Utility.BranchNames();
+                return View("ActEdit", m_Act);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ActDelete(int id)
+        {
+            Act m_Act = ActRepository.RetrieveOne(id);
+            ActRepository.Delete(id);
+            return RedirectToAction("DisplayPerformer", new {id = m_Act.PerformerId});
+        }
+
+        [HttpGet]
         public ActionResult getActs(int id)
         {
             List<Act> m_Acts = ActRepository.RetrieveAll(id);
             return View("getActs", m_Acts);
+        }
+
+        [HttpPost]
+        public ActionResult ReviewAdd(Review m_Review)
+        {
+            ReviewRepository.Create(m_Review);
+            return RedirectToAction("DisplayAct", new { id = m_Review.ActId });
+        }
+
+        [HttpGet]
+        public ActionResult ReviewEdit(int id)
+        {
+            Review m_Review = ReviewRepository.RetrieveOne(id);
+            ViewBag.Review = m_Review;
+            Act m_Act = ActRepository.RetrieveOne(m_Review.ActId);
+            ViewBag.PerformerId = m_Act.PerformerId;
+            ViewBag.Performer = PerformerRepository.RetrieveOne(m_Act.PerformerId);
+            ViewBag.Ratings = ReviewRepository.RetrieveAll(m_Review.ActId);
+            ViewBag.Audiences = AudienceRepository.RetrieveAll();
+            ViewBag.Locations = Utility.BranchNames();
+            return View("ReviewEdit", m_Act);
+        }
+
+        [HttpPost]
+        public ActionResult ReviewEdit(Review m_Review)
+        {
+            ReviewRepository.Update(m_Review);
+            return RedirectToAction("DisplayAct", new { id = m_Review.ActId });
+        }
+
+        [HttpGet]
+        public ActionResult Filter(int m_Filter, string m_Order)
+        {
+            List<Performer> m_Performers = PerformerRepository.FilterPerformer(m_Filter, m_Order);
+            ViewBag.Order = m_Order;
+            ViewBag.Filter = m_Filter;
+            return View("Filter", m_Performers);
+        }
+
+        [HttpGet]
+        public ActionResult getAverageRatingPerformer(int id)
+        {
+            ViewBag.Avg = PerformerRepository.GetAverageRating(id);
+            return View("getAverageRatingPerformer");
+        }
+
+        [HttpGet]
+        public ActionResult getNumReviewsPerformer(int id)
+        {
+            ViewBag.NumRatings = PerformerRepository.GetNumReviews(id);
+            return View("getNumReviewsPerformer");
+        }
+
+        [HttpGet]
+        public ActionResult getAverageRatingAct(int id)
+        {
+            ViewBag.Avg = ActRepository.GetAverageRatingAct(id);
+            return View("getAverageRatingPerformer");
+        }
+
+        [HttpGet]
+        public ActionResult getNumReviewsAct(int id)
+        {
+            ViewBag.NumRatings = ActRepository.GetNumReviewsAct(id);
+            return View("getNumReviewsPerformer");
         }
     }
 }

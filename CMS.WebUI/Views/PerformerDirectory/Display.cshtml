@@ -8,9 +8,9 @@
 <table class="directory-table">
     <thead>
         <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Average Rating</th>
+            <th>First Name<a href="/PerformerDirectory/Filter/1/desc" ><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+            <th>Last Name<a href="/PerformerDirectory/Filter/2/desc" ><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+            <th>Average Rating<img src="/Content/images/arrow-none.gif" width="19" height="10"></th>
             <th>Acts</th>
         </tr>
     </thead>
@@ -20,7 +20,7 @@
             <tr>
                 <td><a href="/PerformerDirectory/DisplayPerformer/@performer.Id">@performer.FirstName</a></td>
                 <td><a href="/PerformerDirectory/DisplayPerformer/@performer.Id">@performer.LastName</a></td>
-                <td>&nbsp;</td>
+                <td>@Html.Action("getAverageRatingPerformer", "PerformerDirectory", new { id = performer.Id })  @Html.Action("getNumReviewsPerformer", "PerformerDirectory", new { id = performer.Id })</td>
                 <td>@Html.Action("getActs", "PerformerDirectory", new { id = performer.Id })</td>
             </tr>   
         }

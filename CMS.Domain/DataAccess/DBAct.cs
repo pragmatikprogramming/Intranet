@@ -179,26 +179,31 @@ namespace CMS.Domain.DataAccess
             delA2B.Parameters.AddWithValue("actId", m_Act.Id);
             delA2B.ExecuteNonQuery();
 
-            foreach (int audience in m_Act.Audiences)
+            if (m_Act.Audiences != null)
             {
-                queryString = "INSERT INTO CMS_ActsToAudiences(actId, audienceId) VALUES(@actId, @audienceId)";
-                SqlCommand insAct2Aud = new SqlCommand(queryString, conn);
-                insAct2Aud.Parameters.AddWithValue("actId", m_Act.Id);
-                insAct2Aud.Parameters.AddWithValue("audienceId", audience);
+                foreach (int audience in m_Act.Audiences)
+                {
+                    queryString = "INSERT INTO CMS_ActsToAudiences(actId, audienceId) VALUES(@actId, @audienceId)";
+                    SqlCommand insAct2Aud = new SqlCommand(queryString, conn);
+                    insAct2Aud.Parameters.AddWithValue("actId", m_Act.Id);
+                    insAct2Aud.Parameters.AddWithValue("audienceId", audience);
 
-                insAct2Aud.ExecuteNonQuery();
+                    insAct2Aud.ExecuteNonQuery();
+                }
             }
 
-            foreach (int location in m_Act.Branches)
+            if (m_Act.Branches != null)
             {
-                queryString = "INSERT INTO CMS_ActsToBranches(branchId, actId) VALUES(@branchId, @actId)";
-                SqlCommand insAct2Branch = new SqlCommand(queryString, conn);
-                insAct2Branch.Parameters.AddWithValue("branchId", location);
-                insAct2Branch.Parameters.AddWithValue("actId", m_Act.Id);
+                foreach (int location in m_Act.Branches)
+                {
+                    queryString = "INSERT INTO CMS_ActsToBranches(branchId, actId) VALUES(@branchId, @actId)";
+                    SqlCommand insAct2Branch = new SqlCommand(queryString, conn);
+                    insAct2Branch.Parameters.AddWithValue("branchId", location);
+                    insAct2Branch.Parameters.AddWithValue("actId", m_Act.Id);
 
-                insAct2Branch.ExecuteNonQuery();
+                    insAct2Branch.ExecuteNonQuery();
+                }
             }
-
             conn.Close();
         }
 
@@ -227,6 +232,38 @@ namespace CMS.Domain.DataAccess
             delA2B.Parameters.AddWithValue("id", id);
 
             conn.Close();
+        }
+
+        public static double getAverageRating(int id)
+        {
+            double avgRating;
+
+            SqlConnection conn = DB.DbConnect();
+            conn.Open();
+
+            string queryString = "select ROUND(AVG(CAST(rating as FLOAT)), 2) from CMS_Reviews WHERE actId = @id";
+            SqlCommand getRating = new SqlCommand(queryString, conn);
+            getRating.Parameters.AddWithValue("id", id);
+            avgRating = (double)getRating.ExecuteScalar();
+
+            conn.Close();
+
+            return avgRating;
+        }
+
+        public static int numReviews(int id)
+        {
+            SqlConnection conn = DB.DbConnect();
+            conn.Open();
+
+            string queryString = "select COUNT(rating) from CMS_Reviews WHERE actId = @id";
+            SqlCommand getRev = new SqlCommand(queryString, conn);
+            getRev.Parameters.AddWithValue("id", id);
+            int numReviews = (int)getRev.ExecuteScalar();
+
+            conn.Close();
+
+            return numReviews;
         }
     }
 }

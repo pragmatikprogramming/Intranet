@@ -34,5 +34,24 @@ namespace CMS.Domain.Models
         {
             DBPerformer.Delete(id);
         }
+
+        public List<Performer> FilterPerformer(int m_Filter, string m_Order)
+        {
+            List<Performer> m_Performers = DBPerformer.RetrieveFiltered(m_Filter, m_Order);
+            return m_Performers;
+        }
+
+        public double GetAverageRating(int id)
+        {
+            double avg = DBPerformer.getAverageRating(id);
+            return avg;
+        }
+
+        public int GetNumReviews(int id)
+        {
+            int num = DBPerformer.numReviews(id);
+            return num;
+        }
+
     }
 }

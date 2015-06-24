@@ -289,6 +289,7 @@ namespace CMS.WebUI.Controllers
             return View("getJobTitle");
         }
 
+
         [HttpGet]
         public ActionResult Display(int id)
         {
@@ -296,6 +297,15 @@ namespace CMS.WebUI.Controllers
             ViewBag.Skills = m_Skills;
             Employee m_Employee = EmployeeDirectoryRepository.RetrieveOne(id);
             return View("Display", m_Employee);
+        }
+
+        [HttpGet]
+        public ActionResult Filter(int m_Filter, string m_Order)
+        {
+            List<Employee> m_Employee = EmployeeDirectoryRepository.getEmployeeFiltered(m_Filter, m_Order);
+            ViewBag.Order = m_Order;
+            ViewBag.Filter = m_Filter;
+            return View("Filter", m_Employee);
         }
 
         [HttpGet]

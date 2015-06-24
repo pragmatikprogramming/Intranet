@@ -160,6 +160,54 @@ namespace CMS.Domain.DataAccess
             return m_Employees;
         }
 
+        public static List<Employee> RetrieveFiltered(int m_Filter, string m_Order)
+        {
+            SqlConnection conn = DB.DbConnect();
+            conn.Open();
+
+            string queryString = "SELECT e.id, e.firstName, e.lastName, e.jobTitle, e.phone, e.intercom, e.fax, e.email, e.location, e.photo, e.info, e.about, j.jobTitle, b.BranchName FROM CMS_EmployeeDirectory as e INNER JOIN CMS_JobTitles as j ON e.jobTitle = j.id INNER JOIN CMS_BranchNames as b ON e.location = b.id ORDER BY CASE  WHEN @filter =  1 THEN e.firstName WHEN @filter = 2 THEN e.lastName WHEN @filter = 3 THEN e.phone WHEN @filter = 4 THEN e.email WHEN @filter = 5 THEN j.jobTitle WHEN @filter = 6 THEN b.BranchName END";
+            if(m_Order == "desc")
+            {
+                queryString += " DESC";
+            }
+            else
+            {
+                queryString += " ASC";
+            }
+            SqlCommand getEmps = new SqlCommand(queryString, conn);
+            getEmps.Parameters.AddWithValue("filter", m_Filter.ToString());
+            SqlDataReader empReader = getEmps.ExecuteReader();
+
+            List<Employee> m_Employees = new List<Employee>();
+
+            while (empReader.Read())
+            {
+                Employee m_Employee = new Employee();
+
+                m_Employee.Id = empReader.GetInt32(0);
+                m_Employee.FirstName = empReader.GetString(1);
+                m_Employee.LastName = empReader.GetString(2);
+                m_Employee.JobTitle = empReader.GetInt32(3);
+                m_Employee.Phone = empReader.GetString(4);
+                m_Employee.Intercom = empReader.GetString(5);
+                m_Employee.Fax = empReader.GetString(6);
+                m_Employee.Email = empReader.GetString(7);
+                m_Employee.Location = empReader.GetInt32(8);
+                if (!empReader.IsDBNull(9))
+                {
+                    m_Employee.Photo = (byte[])empReader[9];
+                }
+                m_Employee.Info = empReader.GetString(10);
+                m_Employee.About = empReader.GetString(11);
+
+                m_Employees.Add(m_Employee);
+            }
+
+            conn.Close();
+
+            return m_Employees;
+        }
+
         public static void Update(Employee m_Employee)
         {
             SqlConnection conn = DB.DbConnect();

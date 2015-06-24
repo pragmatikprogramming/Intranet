@@ -92,6 +92,47 @@ namespace CMS.Domain.DataAccess
             return m_Performers;
         }
 
+        public static List<Performer> RetrieveFiltered(int m_Filter, string m_Order)
+        {
+            SqlConnection conn = DB.DbConnect();
+            conn.Open();
+
+            string queryString = "SELECT * FROM CMS_Performers ORDER BY CASE WHEN @filter = 1 THEN firstName WHEN @filter = 2 THEN lastName END";
+            if (m_Order == "desc")
+            {
+                queryString += " DESC";
+            }
+            else
+            {
+                queryString += " ASC";
+            }
+
+            SqlCommand getPerf = new SqlCommand(queryString, conn);
+            getPerf.Parameters.AddWithValue("filter", m_Filter);
+            SqlDataReader perfReader = getPerf.ExecuteReader();
+
+            List<Performer> m_Performers = new List<Performer>();
+
+            while(perfReader.Read())
+            {
+                Performer m_Performer = new Performer();
+                m_Performer.Id = perfReader.GetInt32(0);
+                m_Performer.FirstName = perfReader.GetString(1);
+                m_Performer.LastName = perfReader.GetString(2);
+                m_Performer.Address = perfReader.GetString(3);
+                m_Performer.Phone = perfReader.GetString(4);
+                m_Performer.Fax = perfReader.GetString(5);
+                m_Performer.Email = perfReader.GetString(6);
+                m_Performer.Website = perfReader.GetString(7);
+
+                m_Performers.Add(m_Performer);
+            }
+
+            conn.Close();
+
+            return m_Performers;
+        }
+
         public static void Update(Performer m_Performer)
         {
             SqlConnection conn = DB.DbConnect();
@@ -128,6 +169,38 @@ namespace CMS.Domain.DataAccess
             }
 
             conn.Close();
+        }
+
+        public static double getAverageRating(int id)
+        {
+            double avgRating;
+
+            SqlConnection conn = DB.DbConnect();
+            conn.Open();
+
+            string queryString = "SELECT ROUND(AVG(CAST(rating as FLOAT)), 2) as Average FROM CMS_Performers as p INNER JOIN CMS_Acts as a ON p.id = a.performerId INNER JOIN CMS_Reviews  as r ON a.id = r.actId WHERE p.id = @id";
+            SqlCommand getRating = new SqlCommand(queryString, conn);
+            getRating.Parameters.AddWithValue("id", id);
+            avgRating = (double)getRating.ExecuteScalar();
+
+            conn.Close();
+
+            return avgRating;
+        }
+
+        public static int numReviews(int id)
+        {
+            SqlConnection conn = DB.DbConnect();
+            conn.Open();
+
+            string queryString = "SELECT count(rating) FROM CMS_Performers as p INNER JOIN CMS_Acts as a ON p.id = a.performerId INNER JOIN CMS_Reviews  as r ON a.id = r.actId WHERE performerId = @id";
+            SqlCommand getRev = new SqlCommand(queryString, conn);
+            getRev.Parameters.AddWithValue("id", id);
+            int numReviews = (int)getRev.ExecuteScalar();
+
+            conn.Close();
+
+            return numReviews;
         }
     }
 }

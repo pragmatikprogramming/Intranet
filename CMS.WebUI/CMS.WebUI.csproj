@@ -2849,6 +2849,9 @@
     <Content Include="Content\images\arrow-down.gif" />
     <Content Include="Content\images\arrow-none.gif" />
     <Content Include="Content\images\bg-header.png" />
+    <Content Include="Content\images\delete_x.gif" />
+    <Content Include="Content\images\edit_pencil.gif" />
+    <Content Include="Content\images\halfstar.gif" />
     <Content Include="Content\images\ico1.png" />
     <Content Include="Content\images\img1.png" />
     <Content Include="Content\images\img2.png" />
@@ -2856,6 +2859,7 @@
     <Content Include="Content\images\img4.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\logo2.png" />
+    <Content Include="Content\images\star.gif" />
     <Content Include="Content\js\Admin\fullcalendar.min.js" />
     <Content Include="Content\js\Admin\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Content\js\Admin\bootstrap.js" />
@@ -2912,12 +2916,12 @@
     <Content Include="Views\Calendar\Add.cshtml" />
     <Content Include="Views\Calendar\Edit.cshtml" />
     <Content Include="Views\Calendar\CalendarData.cshtml" />
-    <Content Include="Views\EmployeeDirectory\FAQ\Index.cshtml" />
-    <Content Include="Views\EmployeeDirectory\FAQ\AddFAQ.cshtml" />
-    <Content Include="Views\EmployeeDirectory\FAQ\EditFAQ.cshtml" />
-    <Content Include="Views\EmployeeDirectory\FAQ\FAQQuestions.cshtml" />
-    <Content Include="Views\EmployeeDirectory\FAQ\FAQQuestionAdd.cshtml" />
-    <Content Include="Views\EmployeeDirectory\FAQ\FAQQuestionEdit.cshtml" />
+    <Content Include="Views\FAQ\Index.cshtml" />
+    <Content Include="Views\FAQ\AddFAQ.cshtml" />
+    <Content Include="Views\FAQ\EditFAQ.cshtml" />
+    <Content Include="Views\FAQ\FAQQuestions.cshtml" />
+    <Content Include="Views\FAQ\FAQQuestionAdd.cshtml" />
+    <Content Include="Views\FAQ\FAQQuestionEdit.cshtml" />
     <Content Include="Views\Gallery\Gallery.cshtml" />
     <Content Include="Views\Gallery\AddGallery.cshtml" />
     <Content Include="Views\Gallery\EditGallery.cshtml" />
@@ -3046,6 +3050,13 @@
     <Content Include="Views\PerformerDirectory\PerformerEdit.cshtml" />
     <Content Include="Views\PerformerDirectory\ActAdd.cshtml" />
     <Content Include="Views\PerformerDirectory\getActs.cshtml" />
+    <Content Include="Views\EmployeeDirectory\Filter.cshtml" />
+    <Content Include="Views\PerformerDirectory\DisplayAct.cshtml" />
+    <Content Include="Views\PerformerDirectory\ActEdit.cshtml" />
+    <Content Include="Views\PerformerDirectory\ReviewEdit.cshtml" />
+    <Content Include="Views\PerformerDirectory\Filter.cshtml" />
+    <Content Include="Views\PerformerDirectory\getAverageRatingPerformer.cshtml" />
+    <Content Include="Views\PerformerDirectory\getNumReviewsPerformer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

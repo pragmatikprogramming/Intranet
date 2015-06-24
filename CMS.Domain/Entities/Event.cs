@@ -27,6 +27,7 @@ namespace CMS.Domain.Entities
         private int lastModifiedBy;
         private DateTime lastModifiedDate;
         private int featuredEvent;
+        private int staffTraining;
 
 
 
@@ -262,6 +263,18 @@ namespace CMS.Domain.Entities
             set 
             { 
                 featuredEvent = value; 
+            }
+        }
+
+        public int StaffTraining
+        {
+            get
+            {
+                return staffTraining;
+            }
+            set
+            {
+                staffTraining = value;
             }
         }
     }

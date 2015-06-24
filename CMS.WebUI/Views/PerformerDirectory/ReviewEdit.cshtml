@@ -1,0 +1,153 @@
+﻿@{
+    ViewBag.Title = "DisplayAct";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+    var flag = 0;
+    var m_Audience = "";
+    var m_Locations = "";
+}
+
+<main class="main" role="main">
+    <div class="content-holder">
+        <div class="performers">
+
+            <h2 class="innerheading">Performers Directory</h2>
+            <p> <a href="/performer-directory">Back to Performers Listing</a> | <a href="">Rate This Act</a></p>
+            <div class="edit"><a href="/PerformerDirectory/ActEdit/@Model.Id" title="edit"><img src="/Content/images/edit_pencil.gif" width="30" height="13" border="0" alt="Edit"></a> <a href="/PerformerDirectory/ActDelete/@Model.Id" title="delete" onclick="return confirm('Are you sure you want to delete @Model.ProgramTitle?');"><img src="/Content/images/delete_x.gif" width="15" height="13" border="0" alt="Delete"></a></div>
+
+            <h3>@Model.ProgramTitle</h3>
+            <p>by <a href="/PerformerDirectory/DisplayPerformer/@ViewBag.PerformerId">@ViewBag.Performer.FirstName</a></p>
+            <p><strong> Rating:</strong> <img src="images/star.gif" width="10" height="10" alt="star"> <img src="images/star.gif" width="10" height="10" alt="star"> <img src="images/star.gif" width="10" height="10" alt="star"> <img src="images/halfstar.gif" width="10" height="10" alt="Half Star"> (1 rating) </p>
+            <p>@Model.Description</p>
+            @if (Model.Notes != null && Model.Notes.Length > 0)
+            {
+                <p><strong>Notes:</strong> @Model.Notes</p>
+            }
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="performer-table">
+                <tr>
+                    <th>Details</th>
+                    <th>Contact</th>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Cost:</strong> $@Model.Cost <br>
+                        <strong>Length:</strong> @Model.Duration hours<br>
+                        <strong>Audience:</strong>
+                        @foreach (var audience in ViewBag.Audiences)
+                        {
+                            if (Model.Audiences != null && Model.Audiences.Contains(audience.Id))
+                            {
+                                if (flag == 0)
+                                {
+                                    m_Audience = audience.Name;
+                                    flag = 1;
+                                }
+                                else
+                                {
+                                    m_Audience += ", " + audience.Name;
+                                }
+                            }
+                        }
+                        @m_Audience<br />
+                        <strong>Branches Hosted:</strong>
+                        @{flag = 0;}
+                        @foreach (var location in ViewBag.Locations)
+                        {
+                            if (Model.Branches != null && Model.Branches.Contains(location.Id))
+                            {
+                                if (flag == 0)
+                                {
+                                    m_Locations = location.Abreviation;
+                                    flag = 1;
+                                }
+                                else
+                                {
+                                    m_Locations += ", " + location.Abreviation;
+                                }
+                            }
+                        }
+                        @m_Locations
+                    </td>
+                    <td>
+                        @ViewBag.Performer.FirstName<br>
+                        <strong>Phone:</strong>@ViewBag.Performer.Phone<br />
+                        <strong>Fax:</strong>@ViewBag.Performer.Fax<br />
+                        <strong>Email:</strong>@ViewBag.Performer.Email<br />
+                        <strong>Website:</strong>@ViewBag.Performer.Website
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <h4>
+                Ratings
+            </h4>
+            @foreach (var rating in ViewBag.Ratings)
+            {
+                <p class="reviewer">
+                    @for (var i = 1; i <= rating.Rating; i++)
+                    {
+                        @:<img src="/Content/images/star.gif" width="10" height="10" alt="Star">
+                    }
+                    - @rating.Name <a href="/PerformerDirectory/ReviewEdit/@rating.Id">edit</a>
+                </p>
+                <p>@rating.Comments</p>
+            }
+
+            <h2 class="innerheading">Add Your Rating</h2>
+            <form class="request" method="post" id="review" action="/PerformerDirectory/ReviewEdit">
+                <div style="display: none;">
+                    <input name="ActId" value="@ViewBag.Review.ActId" type="hidden" />
+                    <input name="Id" value="@ViewBag.Review.Id" type="hidden" />
+                </div>
+                <fieldset class="textins">
+                    <legend></legend>
+                    <p>
+                        <label for="yourname">Your Name:</label>
+                        <input id="Name" name="Name" class="input1" type="text" value="@ViewBag.Review.Name">
+                    </p>
+                    <p>
+                        <label for="comment">Comments:</label>
+                        <textarea name="Comments" class="input1" cols="40" id="Comments" rows="4">@ViewBag.Review.Comments</textarea>
+                    </p>
+                    <p>
+                        <label for="rating">Rating:</label>
+                        <select id="rating" onchange="" size="1" name="rating" class="input1">
+                            <option value="">-----</option>
+                            <option value="5" 
+                                    @if(ViewBag.Review.Rating == 5)
+                                    { 
+                                        @:selected="selected" 
+                                    }
+                            >5 - Excellent</option>
+                            <option value="4"
+                                    @if(ViewBag.Review.Rating == 4)
+                                    {
+                                        @:selected="selected"
+                                    }
+                            >4 - Good</option>
+                            <option value="3"
+                                    @if(ViewBag.Review.Rating == 3)
+                                    {
+                                        @:selected="selected"
+                                    }
+                            >3 - Average</option>
+                            <option value="2"
+                                    @if(ViewBag.Review.Rating == 2)
+                                    {
+                                        @:selected="selected"
+                                    }
+                            >2 - Poor</option>
+                            <option value="1"
+                                    @if(ViewBag.Review.Rating == 1)
+                                    {
+                                        @:selected="selected"
+                                    }
+                            >1 - Abysmal</option>
+                        </select>
+                    </p>
+                    <p><button id="review" type="submit" value="Submit">Submit</button></p>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</main>
+

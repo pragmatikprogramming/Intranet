@@ -14,5 +14,7 @@ namespace CMS.Domain.Abstract
         List<Act> RetrieveAll(int performerId);
         void Update(Act m_Act);
         void Delete(int id);
+        double GetAverageRatingAct(int id);
+        int GetNumReviewsAct(int id);
     }
 }

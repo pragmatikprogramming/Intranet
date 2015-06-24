@@ -138,6 +138,12 @@ namespace CMS.WebUI.Controllers
             return View("FeaturedEvents", m_Events);
         }
 
+        public ActionResult StaffTraining()
+        {
+            List<Event> m_Events = EventRepository.GetStaffTrainingEvents();
+            return View("FeaturedEvents", m_Events);
+        }
+
         public ActionResult Event(int id)
         {
             Event m_Event = EventRepository.RetrieveOne(id);

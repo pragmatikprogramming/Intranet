@@ -22,5 +22,6 @@ namespace CMS.Domain.Abstract
         List<Event> getFeaturedEvents();
         bool EventTimeBothErrorChecking(Event m_Event);
         bool EventStartTimeBeforeEventEndTime(Event m_Event);
+        List<Event> GetStaffTrainingEvents();
     }
 }
