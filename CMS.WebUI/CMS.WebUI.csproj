@@ -39,6 +39,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CKFinder, Version=2.5.0.2768, Culture=neutral, PublicKeyToken=579e7adc719a1423, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Content\ckfinder\bin\Release\CKFinder.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -2605,60 +2609,6 @@
     <Content Include="Content\ckfinder\lang\zh-tw.js" />
     <Content Include="Content\ckfinder\lang\_translationstatus.txt" />
     <Content Include="Content\ckfinder\license.txt" />
-    <Content Include="Content\ckfinder\plugins\dummy\lang\en.js" />
-    <Content Include="Content\ckfinder\plugins\dummy\lang\pl.js" />
-    <Content Include="Content\ckfinder\plugins\dummy\plugin.js" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\bin\Debug\CKFinder_FileEditor.dll" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\bin\Debug\CKFinder_FileEditor.pdb" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\bin\Release\CKFinder_FileEditor.dll" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\bin\Release\CKFinder_FileEditor.pdb" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\addon\mode\overlay.js" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\lib\codemirror.css" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\lib\codemirror.js" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\mode\clike\clike.js" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\mode\css\css.js" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\mode\htmlmixed\htmlmixed.js" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\mode\javascript\javascript.js" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\mode\markdown\markdown.js" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\mode\perl\perl.js" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\mode\python\python.js" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\mode\rst\rst.js" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\mode\ruby\ruby.js" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\mode\sass\sass.js" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\mode\sql\sql.js" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\mode\stex\stex.js" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\mode\xml\xml.js" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\plugin.js" />
-    <Content Include="Content\ckfinder\plugins\flashupload\flash\Uploader.swf" />
-    <Content Include="Content\ckfinder\plugins\flashupload\Uploader.html" />
-    <Content Include="Content\ckfinder\plugins\gallery\colorbox\colorbox.css" />
-    <Content Include="Content\ckfinder\plugins\gallery\colorbox\images\border.png" />
-    <Content Include="Content\ckfinder\plugins\gallery\colorbox\images\controls.png" />
-    <Content Include="Content\ckfinder\plugins\gallery\colorbox\images\ie6\borderBottomCenter.png" />
-    <Content Include="Content\ckfinder\plugins\gallery\colorbox\images\ie6\borderBottomLeft.png" />
-    <Content Include="Content\ckfinder\plugins\gallery\colorbox\images\ie6\borderBottomRight.png" />
-    <Content Include="Content\ckfinder\plugins\gallery\colorbox\images\ie6\borderMiddleLeft.png" />
-    <Content Include="Content\ckfinder\plugins\gallery\colorbox\images\ie6\borderMiddleRight.png" />
-    <Content Include="Content\ckfinder\plugins\gallery\colorbox\images\ie6\borderTopCenter.png" />
-    <Content Include="Content\ckfinder\plugins\gallery\colorbox\images\ie6\borderTopLeft.png" />
-    <Content Include="Content\ckfinder\plugins\gallery\colorbox\images\ie6\borderTopRight.png" />
-    <Content Include="Content\ckfinder\plugins\gallery\colorbox\images\loading.gif" />
-    <Content Include="Content\ckfinder\plugins\gallery\colorbox\images\loading_background.png" />
-    <Content Include="Content\ckfinder\plugins\gallery\colorbox\images\overlay.png" />
-    <Content Include="Content\ckfinder\plugins\gallery\colorbox\jquery.colorbox-min.js" />
-    <Content Include="Content\ckfinder\plugins\gallery\colorbox\jquery.min.js" />
-    <Content Include="Content\ckfinder\plugins\gallery\colorbox\license.txt" />
-    <Content Include="Content\ckfinder\plugins\imageresize\bin\Debug\CKFinder_ImageResize.dll" />
-    <Content Include="Content\ckfinder\plugins\imageresize\bin\Debug\CKFinder_ImageResize.pdb" />
-    <Content Include="Content\ckfinder\plugins\imageresize\bin\Release\CKFinder_ImageResize.dll" />
-    <Content Include="Content\ckfinder\plugins\imageresize\bin\Release\CKFinder_ImageResize.pdb" />
-    <Content Include="Content\ckfinder\plugins\imageresize\images\mini.gif" />
-    <Content Include="Content\ckfinder\plugins\imageresize\plugin.js" />
-    <Content Include="Content\ckfinder\plugins\watermark\bin\Debug\CKFinder_Watermark.dll" />
-    <Content Include="Content\ckfinder\plugins\watermark\bin\Debug\CKFinder_Watermark.pdb" />
-    <Content Include="Content\ckfinder\plugins\watermark\bin\Release\CKFinder_Watermark.dll" />
-    <Content Include="Content\ckfinder\plugins\watermark\bin\Release\CKFinder_Watermark.pdb" />
-    <Content Include="Content\ckfinder\plugins\watermark\logo.gif" />
     <Content Include="Content\ckfinder\skins\kama\app.css" />
     <Content Include="Content\ckfinder\skins\kama\host.css" />
     <Content Include="Content\ckfinder\skins\kama\images\ckffolder.gif" />
@@ -2890,7 +2840,6 @@
     <Content Include="Content\fonts\mistral-webfont.eot" />
     <Content Include="Content\fonts\mistral-webfont.ttf" />
     <Content Include="Content\fonts\mistral-webfont.woff" />
-    <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
     <Content Include="Content\ckfinder\userfiles\.htaccess" />
     <None Include="Properties\PublishProfiles\IIS.pubxml" />
     <None Include="Properties\PublishProfiles\Intranet DEVELOPMENT.pubxml" />
