@@ -3,7 +3,7 @@
     //    $("#accordion").accordion();
     //});
     $(function() {
-        $("#accordion").accordion({ collapsible: true, active: false, autoHeight: false });
+        $("#accordion").accordion({ collapsible: true, active: false, autoHeight: false, heightStyle: "content" });
     });
 </script>
 <style type="text/css">
@@ -14,7 +14,7 @@
     .ui-accordion-content {
         margin-left: 25px;
         background-color: #ffffff;
-        max-height: 400px;
+        height: 100%;
     }
     .ui-accordion-header{
         background-color: #ccc;
