@@ -2,8 +2,8 @@
     //$(document).ready(function ({ collapsible: true, active: false }) {
     //    $("#accordion").accordion();
     //});
-    $(function() {
-        $("#accordion").accordion({ collapsible: true, active: false, autoHeight: false });
+    $(function () {
+        $("#accordion").accordion({ collapsible: true, active: false, autoHeight: false, heightStyle: "content" });
     });
 </script>
 <style type="text/css">
@@ -14,26 +14,26 @@
     .ui-accordion-content {
         margin-left: 25px;
         background-color: #ffffff;
-        max-height: 400px;
+        height: 100%;
     }
-    .ui-accordion-header{
+
+    .ui-accordion-header {
         background-color: #ccc;
     }
 </style>
 <style type="text/css">
     h3:hover {
-          cursor: pointer;
-      }
+        cursor: pointer;
+    }
 </style>
- 
+
 
 <div id="accordion">
-@foreach (var question in Model)
-{
-    <h3 style="color: black; font-size: 14px; color: #e98c24;">@question.FaqQuestion</h3>
-    <div style="line-height: 50px;">
-        @Html.Raw(System.Web.HttpUtility.HtmlDecode(question.FaqAnswer))
-    </div>
-}
+    @foreach (var question in Model)
+    {
+        <h3 style="color: black; font-size: 14px; color: #e98c24;">@question.FaqQuestion</h3>
+        <div style="line-height: 50px;">
+            @Html.Raw(System.Web.HttpUtility.HtmlDecode(question.FaqAnswer))
+        </div>
+    }
 </div>
-
