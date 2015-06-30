@@ -4,10 +4,11 @@
 }
 
 <div style="line-height: 30px;">&nbsp;</div>
+<div style="color: red">@Html.ValidationSummary()</div>
 <div style="padding-left: 45px; padding-top: 20px">
     <h1>Add Performer</h1>
 
-    <form action="/PerformerDirectory/PerformerAdd" method="post" id="performerAdd">
+    <form action="/PerformerDirectory/PerformerAdd" method="post" id="performerAdd" name="performerAdd">
         <div class="formlabel">First Name:</div>
         <div class="formfield"><input type="text" name="FirstName" id="FirstName" value="@Model.FirstName" /></div>
         <div class="clear">&nbsp;</div>

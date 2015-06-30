@@ -54,7 +54,6 @@ namespace CMS.Domain.Entities
             }
         }
 
-        [Required(ErrorMessage = "Please enter an Address")]
         public string Address
         {
             get
@@ -67,8 +66,6 @@ namespace CMS.Domain.Entities
             }
         }
 
-        [Required(ErrorMessage = "Please enter a Phone Number")]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Please enter a valid phone number")]
         public string Phone
         {
             get
@@ -93,8 +90,6 @@ namespace CMS.Domain.Entities
             }
         }
 
-        [Required(ErrorMessage = "Please enter an Email")]
-        [RegularExpression(".+\\@.+\\..+", ErrorMessage = "Please enter a valid Email Address")]
         public string Email
         {
             get
@@ -107,8 +102,6 @@ namespace CMS.Domain.Entities
             }
         }
 
-        [Required(ErrorMessage = "Please enter a Website")]
-        [RegularExpression(@"^http(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?$", ErrorMessage = "Please enter a valid URL")]
         public string Website
         {
             get
