@@ -20,7 +20,14 @@ namespace CMS.Domain.DataAccess
             insertFormField.Parameters.AddWithValue("label", m_FormField.Label ?? "");
             insertFormField.Parameters.AddWithValue("fieldType", m_FormField.FieldType);
             insertFormField.Parameters.AddWithValue("parentId", m_FormField.ParentId);
-            insertFormField.Parameters.AddWithValue("validationType", m_FormField.ValidationType);
+            if (m_FormField.ValidationType == null)
+            {
+                insertFormField.Parameters.AddWithValue("validationType", 0);
+            }
+            else
+            {
+                insertFormField.Parameters.AddWithValue("validationType", m_FormField.ValidationType);
+            }
             insertFormField.Parameters.AddWithValue("fieldText", m_FormField.LabelText ?? string.Empty);
 
             insertFormField.ExecuteNonQuery();
@@ -31,11 +38,12 @@ namespace CMS.Domain.DataAccess
 
             foreach (FormField temp in m_FormField.Children)
             {
-                queryString = "INSERT INTO CMS_FormFields(label, fieldType, parentId, pageWorkFlowState) VALUES(@label, @fieldType, @parentId, 2)";
+                queryString = "INSERT INTO CMS_FormFields(label, fieldType, parentId, validationType, pageWorkFlowState) VALUES(@label, @fieldType, @parentId, @validationType, 2)";
                 SqlCommand insertTemp = new SqlCommand(queryString, conn);
                 insertTemp.Parameters.AddWithValue("label", temp.Label ?? "");
                 insertTemp.Parameters.AddWithValue("fieldType", temp.FieldType);
                 insertTemp.Parameters.AddWithValue("parentId", m_FormFieldId);
+                insertTemp.Parameters.AddWithValue("validationType", 0);
 
                 insertTemp.ExecuteNonQuery(); 
             }

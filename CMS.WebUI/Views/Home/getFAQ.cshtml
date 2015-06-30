@@ -2,13 +2,11 @@
     //$(document).ready(function ({ collapsible: true, active: false }) {
     //    $("#accordion").accordion();
     //});
-<<<<<<< HEAD
-    $(function () {
-=======
     $(function() {
->>>>>>> origin/master
         $("#accordion").accordion({ collapsible: true, active: false, autoHeight: false, heightStyle: "content" });
     });
+
+    
 </script>
 <style type="text/css">
     .ui-accordion {
@@ -31,7 +29,8 @@
     }
 </style>
 
-
+<button>Toggle Expand</button>
+<div style="line-height: 45px;">&nbsp;</div>
 <div id="accordion">
     @foreach (var question in Model)
     {
@@ -41,3 +40,23 @@
         </div>
     }
 </div>
+
+    <div id="plain-text" style="display: none;">
+        @foreach (var question in Model)
+        {
+            <h3 style="color: black; font-size: 14px; color: #e98c24;">@question.FaqQuestion</h3>
+            <div style="line-height: 50px;">
+                @Html.Raw(System.Web.HttpUtility.HtmlDecode(question.FaqAnswer))
+            </div>
+        }
+    </div>
+
+<script>
+    $( "button" ).click(function() {
+        $( "#accordion" ).toggle();
+    });
+
+    $("button").click(function () {
+        $("#plain-text").toggle();
+    });
+</script>
