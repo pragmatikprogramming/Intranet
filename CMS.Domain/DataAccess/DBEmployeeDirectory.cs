@@ -126,7 +126,7 @@ namespace CMS.Domain.DataAccess
             SqlConnection conn = DB.DbConnect();
             conn.Open();
 
-            string queryString = "SELECT * FROM CMS_EmployeeDirectory ORDER BY firstName ASC";
+            string queryString = "SELECT * FROM CMS_EmployeeDirectory ORDER BY lastName ASC";
             SqlCommand getEmps = new SqlCommand(queryString, conn);
             SqlDataReader empReader = getEmps.ExecuteReader();
 

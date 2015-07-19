@@ -111,7 +111,6 @@ namespace CMS.Domain.Entities
             }
         }
 
-        [Required(ErrorMessage = "Please enter an Email")]
         public string Email
         {
             get
