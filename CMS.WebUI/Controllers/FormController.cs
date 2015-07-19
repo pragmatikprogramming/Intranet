@@ -75,7 +75,6 @@ namespace CMS.WebUI.Controllers
             }
             else
             {
-                m_Form.MyFormFields = new List<int>();
                 ViewBag.FormFields = FormFieldRepository.RetrieveAll();
                 return View("EditForm", m_Form);
             }
