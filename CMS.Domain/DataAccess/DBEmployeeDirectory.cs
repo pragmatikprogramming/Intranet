@@ -37,7 +37,7 @@ namespace CMS.Domain.DataAccess
             insEmp.Parameters.AddWithValue("phone", m_Employee.Phone);
             insEmp.Parameters.AddWithValue("intercom", m_Employee.Intercom ?? "");
             insEmp.Parameters.AddWithValue("fax", m_Employee.Fax ?? "");
-            insEmp.Parameters.AddWithValue("email", m_Employee.Email);
+            insEmp.Parameters.AddWithValue("email", m_Employee.Email ?? "");
             insEmp.Parameters.AddWithValue("location", m_Employee.Location);
             insEmp.Parameters.AddWithValue("info", m_Employee.Info ?? "");
             insEmp.Parameters.AddWithValue("about", m_Employee.About ?? "");
@@ -231,7 +231,7 @@ namespace CMS.Domain.DataAccess
             updEmp.Parameters.AddWithValue("phone", m_Employee.Phone);
             updEmp.Parameters.AddWithValue("intercom", m_Employee.Intercom ?? "");
             updEmp.Parameters.AddWithValue("fax", m_Employee.Fax ?? "");
-            updEmp.Parameters.AddWithValue("email", m_Employee.Email);
+            updEmp.Parameters.AddWithValue("email", m_Employee.Email ?? "");
             updEmp.Parameters.AddWithValue("location", m_Employee.Location);
             updEmp.Parameters.AddWithValue("info", m_Employee.Info ?? "");
             updEmp.Parameters.AddWithValue("about", m_Employee.About ?? "");
