@@ -117,6 +117,10 @@
         {
             @Html.Action("Display", "PerformerDirectory")
         }
+        else if (ViewBag.PageType == 8)
+        {
+            @Html.Action("Display", "List", new { id = ViewBag.id })
+        }
         else
         {
             @Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Content))

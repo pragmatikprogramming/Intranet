@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="header">
+    <h2>Lists</h2>
+</div>
+<script type="text/javascript">
+    var myID = 0;
+
+    function doWork(id)
+    {
+        myID = id;
+    }
+
+</script>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="row-fluid">
+            <div class="btn-toolbar">
+                <a href="/List/AddList"><button class="btn btn-primary"><i class="icon-plus"></i> New List</button></a>
+                <div class="btn-group">
+                </div>
+            </div>
+            <div class="well">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>List Name</th>
+                            <th>List Type</th>
+                            <th style="width: 36px;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var list in Model)
+                        {
+                            <tr>
+                                <td><a href="/List/DisplayChildren/@list.Id">@list.ListName</a></td>
+                                <td>
+                                    @if(list.ListType == 1)
+                                    {
+                                        @: Forms
+                                    }
+                                </td>
+                                <td>
+                                    <a href="/List/EditList/@list.Id"><i class="icon-pencil"></i></a>
+                                    <a href="#myModal" role="button" data-toggle="modal" id="1" onclick="doWork(@list.Id);"><i class="icon-remove"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+            </div>
+            <div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h3 id="myModalLabel">Delete Confirmation</h3>
+                </div>
+                <div class="modal-body">
+                    <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Are you sure you want to delete the List?</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                    <button class="btn btn-danger" data-dismiss="modal" onclick="document.location.href ='/List/DeleteList/' + myID;">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>

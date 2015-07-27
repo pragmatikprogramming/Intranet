@@ -55,5 +55,11 @@ namespace CMS.Domain.Models
             List<Employee> m_Employees = DBEmployeeDirectory.RetrieveFiltered(m_Filter, m_Order);
             return m_Employees;
         }
+
+        public List<Employee> ReportsFilter(List<int> JobTitles, List<int> Skills, List<int> Locations)
+        {
+            List<Employee> m_Employees = DBEmployeeDirectory.ReportsFilter(JobTitles, Skills, Locations);
+            return m_Employees;
+        }
     }
 }

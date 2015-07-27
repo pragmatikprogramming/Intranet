@@ -151,6 +151,7 @@
     <Compile Include="Controllers\HTMLWidgetController.cs" />
     <Compile Include="Controllers\ImageHandlerController.cs" />
     <Compile Include="Controllers\JSONController.cs" />
+    <Compile Include="Controllers\ListController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PageController.cs" />
@@ -3006,6 +3007,16 @@
     <Content Include="Views\PerformerDirectory\Filter.cshtml" />
     <Content Include="Views\PerformerDirectory\getAverageRatingPerformer.cshtml" />
     <Content Include="Views\PerformerDirectory\getNumReviewsPerformer.cshtml" />
+    <Content Include="Views\EmployeeDirectory\ReportsFilter.cshtml" />
+    <Content Include="Views\List\Index.cshtml" />
+    <Content Include="Views\List\AddList.cshtml" />
+    <Content Include="Views\List\EditList.cshtml" />
+    <Content Include="Views\List\DisplayChildren.cshtml" />
+    <Content Include="Views\List\AddChild.cshtml" />
+    <Content Include="Views\List\EditChild.cshtml" />
+    <Content Include="Views\Page\getFormsList.cshtml" />
+    <Content Include="Views\List\Display.cshtml" />
+    <Content Include="Views\Shared\InteriorNoLeft.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

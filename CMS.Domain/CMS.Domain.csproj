@@ -138,6 +138,7 @@
     <Compile Include="Abstract\IImageRepository.cs" />
     <Compile Include="Abstract\IJobTitleRepository.cs" />
     <Compile Include="Abstract\IJSONRepository.cs" />
+    <Compile Include="Abstract\IListRepository.cs" />
     <Compile Include="Abstract\IMenuItemRepository.cs" />
     <Compile Include="Abstract\IMenuRepository.cs" />
     <Compile Include="Abstract\INewsRepository.cs" />
@@ -171,6 +172,8 @@
     <Compile Include="DataAccess\DBImage.cs" />
     <Compile Include="DataAccess\DBJobTitle.cs" />
     <Compile Include="DataAccess\DBJSON.cs" />
+    <Compile Include="DataAccess\DBListChildren.cs" />
+    <Compile Include="DataAccess\DBListRepository.cs" />
     <Compile Include="DataAccess\DBMenu.cs" />
     <Compile Include="DataAccess\DBMenuItem.cs" />
     <Compile Include="DataAccess\DBPage.cs" />
@@ -188,6 +191,7 @@
     <Compile Include="Entities\BlogPostComment.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Branch.cs" />
+    <Compile Include="Entities\CMSList.cs" />
     <Compile Include="Entities\ContentGroup.cs" />
     <Compile Include="Entities\Document.cs" />
     <Compile Include="Entities\Employee.cs" />
@@ -202,6 +206,7 @@
     <Compile Include="Entities\Image.cs" />
     <Compile Include="Entities\JobTitles.cs" />
     <Compile Include="Entities\JSONImages.cs" />
+    <Compile Include="Entities\ListChild.cs" />
     <Compile Include="Entities\Menu.cs" />
     <Compile Include="Entities\MenuItem.cs" />
     <Compile Include="Entities\Page.cs" />
@@ -228,6 +233,7 @@
     <Compile Include="Models\AudienceRepository.cs" />
     <Compile Include="Models\BlogPostRepository.cs" />
     <Compile Include="Models\CategoryRepository.cs" />
+    <Compile Include="Models\CMSListRepository.cs" />
     <Compile Include="Models\DocumentRepository.cs" />
     <Compile Include="Models\EmployeeDirectoryRepository.cs" />
     <Compile Include="Models\EventRepository.cs" />

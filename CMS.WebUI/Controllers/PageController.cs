@@ -20,9 +20,10 @@ namespace CMS.WebUI.Controllers
         IBlogPostRepository BlogPostRepository;
         IImageRepository ImageRepository;
         IWidgetContainer WidgetContainerRepository;
+        IListRepository ListRepository;
 
         
-        public PageController(IPageRepository PageRepo, IJSONRepository JSONRepo, IFormRepository FormRepo, IFAQRepository FAQRepo, IBlogPostRepository BlogPostRepo, IImageRepository ImageRepo, IWidgetContainer WidgetContainerRepo)
+        public PageController(IPageRepository PageRepo, IJSONRepository JSONRepo, IFormRepository FormRepo, IFAQRepository FAQRepo, IBlogPostRepository BlogPostRepo, IImageRepository ImageRepo, IWidgetContainer WidgetContainerRepo, IListRepository ListRepo)
         {
             PageRepository = PageRepo;
             JSONRepository = JSONRepo;
@@ -31,6 +32,7 @@ namespace CMS.WebUI.Controllers
             BlogPostRepository = BlogPostRepo;
             ImageRepository = ImageRepo;
             WidgetContainerRepository = WidgetContainerRepo;
+            ListRepository = ListRepo;
         }
 
         [HttpGet]
@@ -324,6 +326,11 @@ namespace CMS.WebUI.Controllers
             else if(mPageType == 7)
             {
                 return View("getPerfDir");
+            }
+            else if(mPageType == 8)
+            {
+                List<CMSList> m_Lists = ListRepository.RetrieveAll();
+                return View("getFormsList", m_Lists);
             }
             else
             {

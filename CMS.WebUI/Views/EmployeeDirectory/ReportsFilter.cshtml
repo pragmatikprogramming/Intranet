@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Employee Directory";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+<style type="text/css">
+    .filterContainer {
+        width: 100%;
+    }
+
+    .jobTitleContainer {
+        float: left;
+        width: 33%;
+    }
+
+    .skillContainer {
+        float: left;
+        width: 20%;
+    }
+
+    .locationContainer {
+        float: left;
+        width: 10%;
+    }
+</style>
+
+Use arrows to sort by column. Click name to view or update profile. Check out our <a href="#" id="report">Reports</a> to get a list of staff by Job Title, Specialization or Location. <br /><br />
+
+<main class="main" role="main">
+    <div class="content-holder">
+        <form method="post" action="/EmployeeDirectory/ReportsFilter">
+            <div class="filterContainer" id="filterContainer">
+                <div class="jobTitleContainer">
+                    @foreach (var job in ViewBag.JobTitles)
+                    {
+                        <input type="checkbox" name="JobTitles" id="JobTitles" value="@job.Id" /> @job.JobTitle <br />
+                    }
+                </div>
+                <div class="skillContainer">
+                    @foreach (var skill in ViewBag.Skills)
+                    {
+                        <input type="checkbox" name="Skills" id="Skills" value="@skill.Id" /> @skill.SkillName <br />
+                    }
+                </div>
+                <div class="locationContainer">
+                    @foreach (var location in ViewBag.Locations)
+                    {
+                        <input type="checkbox" name="Locations" id="Locations" value="@location.Id" /> @location.Abreviation <br />
+                    }
+                </div>
+                <div class="clear">&nbsp;</div>
+                <input type="submit" value="Filter" />
+            </div>
+        </form>
+        <br />
+        <br />
+        <table class="directory-table">
+            <thead>
+                <tr>
+                    <th>First Name<a href=""><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    <th>Last Name<a href=""><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    <th>Phone<a href=""><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    <th>Email<a href=""><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    <th>Location<a href=""><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                    <th>Job Title<a href=""><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var employee in Model)
+                {
+                    <tr>
+                        <td><a href="/EmployeeDirectory/Display/@employee.Id">@employee.FirstName</a></td>
+                        <td><a href="/EmployeeDirectory/Display/@employee.Id">@employee.LastName</a></td>
+                        <td>@employee.Phone</td>
+                        <td>@employee.Email</td>
+                        <td>@Html.Action("getLocation", "EmployeeDirectory", new { id = employee.Location })</td>
+                        <td>@Html.Action("getJobTitle", "EmployeeDirectory", new { id = employee.JobTitle })</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        <script type="text/javascript">
+            $("#report").click(function () {
+                $("#filterContainer").toggle();
+            });
+        </script>
+    </div>
+</main>

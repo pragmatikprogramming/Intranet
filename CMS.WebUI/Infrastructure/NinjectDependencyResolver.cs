@@ -62,6 +62,7 @@ namespace CMS.WebUI.Infrastructure
             kernel.Bind<IActRepository>().To<ActRepository>();
             kernel.Bind<IAudienceRepository>().To<AudienceRepository>();
             kernel.Bind<IReviewRepository>().To<ReviewRepository>();
+            kernel.Bind<IListRepository>().To<CMSListRepository>();
         }
     }
 }

@@ -17,5 +17,6 @@ namespace CMS.Domain.Abstract
         string getLocation(int id);
         string getJobTitle(int id);
         List<Employee> getEmployeeFiltered(int m_Filter, string m_Order);
+        List<Employee> ReportsFilter(List<int> JobTitles, List<int> Skills, List<int> Locations);
     }
 }

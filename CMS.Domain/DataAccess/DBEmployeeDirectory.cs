@@ -282,5 +282,84 @@ namespace CMS.Domain.DataAccess
 
             conn.Close();
         }
+
+        public static List<Employee> ReportsFilter(List<int> JobTitles, List<int> Skills, List<int> Locations)
+        {
+            SqlConnection conn = DB.DbConnect();
+            conn.Open();
+
+            string queryString = "SELECT e.id, firstName, lastName, jobTitle, phone, email, location FROM CMS_EmployeeDirectory AS e WHERE ";
+
+            if (Skills != null)
+            {
+                string m_Skills = "";
+                int flag = 0;
+
+                foreach (var skill in Skills)
+                {
+                    if(flag == 0)
+                    {
+                        flag = 1;
+                        m_Skills += skill.ToString();
+                    }
+                    else
+                    {
+                        m_Skills += ", " + skill.ToString();
+                    }
+
+                }
+
+                if(m_Skills.Length > 0)
+                {
+                    queryString += "e.ID IN(SELECT distinct employeeId FROM CMS_EmployeeToSkills WHERE skillId IN(" + m_Skills + "))";
+                }
+            }
+            else
+            {
+                queryString += "e.id > 0";
+            }
+
+            if(JobTitles != null)
+            {
+                foreach(var job in JobTitles)
+                {
+                    queryString += " AND jobTitle = " + job.ToString();
+                }
+            }
+
+            
+            if(Locations != null)
+            {
+                foreach(var location in Locations)
+                {
+                    queryString += " AND location = " + location.ToString();
+                }
+            }
+
+            Logger.LogEvent(queryString);
+            SqlCommand getEmps = new SqlCommand(queryString, conn);
+            SqlDataReader empReader = getEmps.ExecuteReader();
+
+            List<Employee> m_Employees = new List<Employee>();
+
+            while (empReader.Read())
+            {
+                Employee m_Employee = new Employee();
+
+                m_Employee.Id = empReader.GetInt32(0);
+                m_Employee.FirstName = empReader.GetString(1);
+                m_Employee.LastName = empReader.GetString(2);
+                m_Employee.JobTitle = empReader.GetInt32(3);
+                m_Employee.Phone = empReader.GetString(4);
+                m_Employee.Email = empReader.GetString(5);
+                m_Employee.Location = empReader.GetInt32(6);
+
+                m_Employees.Add(m_Employee);
+            }
+
+            conn.Close();
+
+            return m_Employees;
+        }
     }
 }

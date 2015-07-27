@@ -1,22 +1,11 @@
 ﻿@{
-    ViewBag.Title = "Interior";
+    ViewBag.Title = "InteriorNoLeft";
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
 
 <main class="main" role="main">
     <div class="twocolumns">
-        <aside class="aside">
-            
-            @Html.Action("SystemMenuTopLevel", "Home", new { parentId = Model.ParentId, id = Model.PageID })
-            
-            <article class="box-info">
-                <div class="info">
-                    <strong class="title">Need Help?</strong>
-                    <p>Most every question you might have has already been answered in <a href="#">FAQS</a></p>
-                </div>
-            </article>
-        </aside>
-        <!-- center content -->
+
         <div class="content">
             @if (ViewBag.PageType == 2 || ViewBag.PageType == 3)
             {
@@ -121,13 +110,13 @@
                 <br /><br /><br />
                 <p>@Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Body))</p>
             }
-            else if(ViewBag.PageType == 7)
+            else if (ViewBag.PageType == 7)
             {
-                
+
             }
-            else if(ViewBag.PageType == 8)
+            else if (ViewBag.PageType == 8)
             {
-                @Html.Action("Display", "List", new {  id = ViewBag.id })
+                @Html.Action("Display", "List", new { id = ViewBag.id })
             }
             else
             {
@@ -136,10 +125,8 @@
 
         </div>
     </div>
-    <!-- contain sidebar of the page (right side bar)-->
+    <!-- contain sidebar of the page -->
     <aside class="sidebar">
-        
         @Html.Action("Container", "Home", new { id = Model.WidgetContainerId })
-        
     </aside>
 </main>

@@ -353,5 +353,22 @@ namespace CMS.WebUI.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult ReportsFilter(List<int> JobTitles, List<int> Skills, List<int> Locations)
+        {
+            if(JobTitles == null && Skills == null && Locations == null)
+            {
+                return Redirect("/employee-directory");
+            }
+            else
+            {
+                List<Employee> m_Employees = EmployeeDirectoryRepository.ReportsFilter(JobTitles, Skills, Locations);
+                ViewBag.JobTitles = JobTitleRepository.RetrieveAll();
+                ViewBag.Skills = SkillsRegistryRepository.RetrieveAll();
+                ViewBag.Locations = Utility.BranchNames();
+                return View("ReportsFilter", m_Employees);
+            }
+        }
+
     }
 }

@@ -1,0 +1,39 @@
+﻿<input type="hidden" value="@ViewBag.PageType" name="PageType" />
+
+<div class="formlabel">Form Lists:</div>
+<div class="formfield">
+    <select name="PageTypeId">
+        @foreach (var list in Model)
+        {
+            <option value="@list.Id"
+            @if (ViewBag.m_Page.PageTypeId == list.Id) 
+            { 
+                @: selected="selected"
+            }>
+            @list.ListName
+            </option>
+        }
+    </select>
+</div>
+<div class="clear">&nbsp;</div>
+
+<div class="formlabel">Template:</div>
+<div class="formfield">
+    <select name="TemplateId" aria-readonly="true">
+        @foreach (var template in ViewBag.Templates)
+        {
+            if (template.TemplateName != "Home")
+            {
+                if (template.TemplateId == ViewBag.m_Page.TemplateId)
+                {
+                    <option value="@template.TemplateId" selected="selected">@template.TemplateName</option>
+                }
+                else
+                {
+                    <option value="@template.TemplateId">@template.TemplateName</option>
+                }
+            }
+        }
+    </select>
+</div>
+<div class="clear">&nbsp;</div>

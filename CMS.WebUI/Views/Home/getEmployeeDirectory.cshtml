@@ -1,4 +1,55 @@
-﻿<table class="directory-table">
+﻿<style type="text/css">
+    .filterContainer
+    {
+        width: 100%;
+        display: none;
+    }
+    .jobTitleContainer
+    {
+        float: left;
+        width: 33%
+    }
+    .skillContainer
+    {
+        float: left;
+        width: 20%
+    }
+    .locationContainer
+    {
+        float: left;
+        width: 10%;
+    }
+</style>
+
+Use arrows to sort by column. Click name to view or update profile. Check out our <a href="#" id="report">Reports</a> to get a list of staff by Job Title, Specialization or Location. <br /><br />
+
+<form method="post" action="/EmployeeDirectory/ReportsFilter">
+    <div class="filterContainer" id="filterContainer">
+        <div class="jobTitleContainer">
+            @foreach(var job in ViewBag.JobTitles)
+            {
+                <input type="checkbox" name="JobTitles" id="JobTitles" value="@job.Id" /> @job.JobTitle <br />
+            }
+        </div>
+        <div class="skillContainer">
+            @foreach(var skill in ViewBag.Skills)
+            {
+                <input type="checkbox" name="Skills" id="Skills" value="@skill.Id" /> @skill.SkillName <br />
+            }
+        </div>
+        <div class="locationContainer">
+            @foreach(var location in ViewBag.Locations)
+            {
+                <input type="checkbox" name="Locations" id="Locations" value="location.Id" /> @location.Abreviation <br />
+            }
+        </div>
+        <div class="clear">&nbsp;</div>
+        <input type="submit" value="Filter" />
+    </div>
+</form>
+<br />
+<br />
+<table class="directory-table">
     <thead>
         <tr>
             <th>First Name<a href="/EmployeeDirectory/Filter/1/desc"><img src="/Content/images/arrow-none.gif" width="19" height="10"></a></th>
@@ -25,4 +76,9 @@
 
     </tbody>
 </table>
+<script type="text/javascript">
+    $("#report").click(function () {
+        $("#filterContainer").toggle();
+    });
+</script>
 

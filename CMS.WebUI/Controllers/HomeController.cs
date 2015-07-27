@@ -23,13 +23,15 @@ namespace CMS.WebUI.Controllers
         IEventRepository EventRepository;
         IHTMLWidgetRepository HTMLWidgetRepository;
         IEmployeeDirectoryRepository EmployeeDirectoryRepository;
+        IJobTitleRepository JobTitleRepository;
+        ISkillsRegistryRepository SkillsRegistryRepository;
 
         public HomeController()
         {
 
         }
 
-        public HomeController(IPageRepository PageRepo, IHomeRepository HomeRepo, IImageRepository ImageRepo, IFormRepository FormRepo, IFAQRepository FAQRepo, IBlogPostRepository BlogPostRepo, IEventRepository EventRepo, IHTMLWidgetRepository HTMLWidgetRepo, IEmployeeDirectoryRepository EmployeeRepo)
+        public HomeController(IPageRepository PageRepo, IHomeRepository HomeRepo, IImageRepository ImageRepo, IFormRepository FormRepo, IFAQRepository FAQRepo, IBlogPostRepository BlogPostRepo, IEventRepository EventRepo, IHTMLWidgetRepository HTMLWidgetRepo, IEmployeeDirectoryRepository EmployeeRepo, IJobTitleRepository JobTitleRepo, ISkillsRegistryRepository SkillsRegistryRepo)
         {
             PageRepository = PageRepo;
             HomeRepository = HomeRepo;
@@ -40,6 +42,8 @@ namespace CMS.WebUI.Controllers
             EventRepository = EventRepo;
             HTMLWidgetRepository = HTMLWidgetRepo;
             EmployeeDirectoryRepository = EmployeeRepo;
+            JobTitleRepository = JobTitleRepo;
+            SkillsRegistryRepository = SkillsRegistryRepo;
         }
 
         public ActionResult Index(string friendlyURL, int id = 0)
@@ -195,6 +199,9 @@ namespace CMS.WebUI.Controllers
         public ActionResult getEmployeeDirectory()
         {
             List<Employee> m_Employees = EmployeeDirectoryRepository.RetrieveAll();
+            ViewBag.JobTitles = JobTitleRepository.RetrieveAll();
+            ViewBag.Skills = SkillsRegistryRepository.RetrieveAll();
+            ViewBag.Locations = Utility.BranchNames();
 
             return View("getEmployeeDirectory", m_Employees);
         }
