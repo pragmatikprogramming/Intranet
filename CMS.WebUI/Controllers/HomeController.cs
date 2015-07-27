@@ -320,12 +320,12 @@ namespace CMS.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult ProcessForm(int parentId, int id, string recaptcha_challenge_field, string recaptcha_response_field)
+        public ActionResult ProcessForm(int parentId, int id/*, string recaptcha_challenge_field, string recaptcha_response_field*/)
         {
             /** RECAPTCHA VERIFICATION **/
 
 
-            RecaptchaValidator m_Validator = new RecaptchaValidator();
+            /*RecaptchaValidator m_Validator = new RecaptchaValidator();
             m_Validator.Challenge = recaptcha_challenge_field;
             m_Validator.Response = recaptcha_response_field;
             m_Validator.PrivateKey = "6Ldz_fcSAAAAAJwhvY4Ns3YP9GWDehrct05bUYSj";
@@ -336,7 +336,7 @@ namespace CMS.WebUI.Controllers
             if (!m_Response.IsValid)
             {
                 ModelState.AddModelError("captcha", "Incorrect Captcha Response");
-            }
+            }*/
 
             string formData = "";
             string emailBody = "";
