@@ -59,7 +59,7 @@ namespace CMS.Domain.DataAccess
             SqlConnection conn = DB.DbConnect();
             conn.Open();
 
-            string queryString = "SELECT * FROM CMS_ListChildren WHERE listId = @id";
+            string queryString = "SELECT * FROM CMS_ListChildren WHERE listId = @id ORDER BY childLabel";
             SqlCommand getChildren = new SqlCommand(queryString, conn);
             getChildren.Parameters.AddWithValue("id", id);
             SqlDataReader childReader = getChildren.ExecuteReader();

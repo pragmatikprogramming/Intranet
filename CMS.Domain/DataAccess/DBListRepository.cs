@@ -53,7 +53,7 @@ namespace CMS.Domain.DataAccess
             SqlConnection conn = DB.DbConnect();
             conn.Open();
 
-            string queryString = "SELECT * FROM CMS_Lists";
+            string queryString = "SELECT * FROM CMS_Lists ORDER BY listName";
             SqlCommand getLists = new SqlCommand(queryString, conn);
             SqlDataReader listReader = getLists.ExecuteReader();
 

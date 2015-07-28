@@ -81,11 +81,18 @@
                     }
                 >Employee Directory</option>
                 <option value="7"
-                    @if (Model.PageType == 5) 
+                    @if (Model.PageType == 7) 
                     { 
                         @: selected="selected"
                     }
-                    >Employee Directory
+                    >Performer Directory
+                </option>
+                <option value="8"
+                    @if(Model.PageType == 8)
+                    {
+                        @: selected="selected"
+                    }
+                    >Forms List
                 </option>
 
             </select>
