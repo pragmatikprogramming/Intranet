@@ -1,4 +1,22 @@
-﻿@foreach(var child in Model)
-{
-    <a href="@child.Link">@child.Label</a><br />
-}
+﻿<table class="table">
+    <thead>
+        <tr>
+            <th width="30%" align="left">Form Name</th>
+            <th width="15%" align="left">Form Number</th>
+            <th width="15%" align="left">Policy Name</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var child in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@child.Link">@child.Label</a>
+                </td>
+                <td>@child.FormNumber</td>
+                <td>@child.PolicyName</td>
+            </tr>
+        }
+    </tbody>
+</table>

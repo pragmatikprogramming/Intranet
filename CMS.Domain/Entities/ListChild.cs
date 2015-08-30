@@ -12,6 +12,8 @@ namespace CMS.Domain.Entities
         private int listId;
         private string label;
         private string link;
+        private string formNumber;
+        private string policyName;
 
         public int Id
         {
@@ -64,5 +66,30 @@ namespace CMS.Domain.Entities
                 link = value;
             }
         }
+
+        public string FormNumber
+        {
+            get
+            {
+                return formNumber;
+            }
+            set
+            {
+                formNumber = value;
+            }
+        }
+
+        public string PolicyName
+        {
+            get
+            {
+                return policyName;
+            }
+            set
+            {
+                policyName = value;
+            }
+        }
+
     }
 }

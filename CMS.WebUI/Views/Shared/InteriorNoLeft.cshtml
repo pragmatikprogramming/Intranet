@@ -116,6 +116,10 @@
             }
             else if (ViewBag.PageType == 8)
             {
+                if (Model.Content != null)
+                {
+                    @Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Content))
+                }
                 @Html.Action("Display", "List", new { id = ViewBag.id })
             }
             else

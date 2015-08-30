@@ -187,13 +187,21 @@ namespace CMS.WebUI.Controllers
         public ActionResult BlogPost(int id, int parentId = 5)
         {
             BlogPost m_BlogPost = BlogPostRepository.RetrieveOne(id);
+            if(m_BlogPost.RedirectUrl != null && m_BlogPost.RedirectUrl.Length > 0)
+            {
+                return Redirect(m_BlogPost.RedirectUrl);
+            }
+            else
+            {
+                return View("HomeFullWidth", m_BlogPost);
+            }
             /*ViewBag.PageType = 5;
             ViewBag.PageId = null;
             ViewBag.TemplateId = parentId;
             ViewBag.Comment = new BlogPostComment();
             string m_Template = Utility.GetTemplateById(parentId);*/
 
-            return View("HomeFullWidth", m_BlogPost);
+            
         }
 
         public ActionResult getEmployeeDirectory()

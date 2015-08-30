@@ -10,7 +10,7 @@
 </script>
 <style type="text/css">
     .ui-accordion {
-        line-height: 20px;
+        line-height: 17px;
     }
 
     .ui-accordion-content {
@@ -27,15 +27,24 @@
     h3:hover {
         cursor: pointer;
     }
-</style>
 
+a{
+color: #e98c24;
+}
+.ui-widget{
+    font-size: 1em;
+}
+.ui-widget-content a{
+    color: #e98c24;
+}
+</style>
 <button>Toggle Expand</button>
 <div style="line-height: 45px;">&nbsp;</div>
 <div id="accordion">
     @foreach (var question in Model)
     {
         <h3 style="color: black; font-size: 14px; color: #e98c24;">@question.FaqQuestion</h3>
-        <div style="line-height: 50px;">
+        <div style="">
             @Html.Raw(System.Web.HttpUtility.HtmlDecode(question.FaqAnswer))
         </div>
     }
@@ -45,7 +54,7 @@
         @foreach (var question in Model)
         {
             <h3 style="color: black; font-size: 14px; color: #e98c24;">@question.FaqQuestion</h3>
-            <div style="line-height: 50px;">
+            <div style="">
                 @Html.Raw(System.Web.HttpUtility.HtmlDecode(question.FaqAnswer))
             </div>
         }

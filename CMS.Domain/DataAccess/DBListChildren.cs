@@ -15,11 +15,13 @@ namespace CMS.Domain.DataAccess
             SqlConnection conn = DB.DbConnect();
             conn.Open();
 
-            string queryString = "INSERT INTO CMS_ListChildren(listId, childLabel, childLink) VALUES(@listId, @childLabel, @childLink)";
+            string queryString = "INSERT INTO CMS_ListChildren(listId, childLabel, childLink, formNumber, policyName) VALUES(@listId, @childLabel, @childLink, @formNumber, @policyName)";
             SqlCommand insChild = new SqlCommand(queryString, conn);
             insChild.Parameters.AddWithValue("listId", m_Child.ListId);
             insChild.Parameters.AddWithValue("childLabel", m_Child.Label);
             insChild.Parameters.AddWithValue("childLink", m_Child.Link);
+            insChild.Parameters.AddWithValue("formNumber", m_Child.FormNumber ?? "");
+            insChild.Parameters.AddWithValue("policyName", m_Child.PolicyName ?? "");
             insChild.ExecuteNonQuery();
 
             conn.Close();
@@ -43,6 +45,8 @@ namespace CMS.Domain.DataAccess
                 m_Child.ListId = childReader.GetInt32(1);
                 m_Child.Label = childReader.GetString(2);
                 m_Child.Link = childReader.GetString(3);
+                m_Child.FormNumber = childReader.GetString(4);
+                m_Child.PolicyName = childReader.GetString(5);
             }
             else
             {
@@ -74,6 +78,8 @@ namespace CMS.Domain.DataAccess
                 m_Child.ListId = childReader.GetInt32(1);
                 m_Child.Label = childReader.GetString(2);
                 m_Child.Link = childReader.GetString(3);
+                m_Child.FormNumber = childReader.GetString(4);
+                m_Child.PolicyName = childReader.GetString(5);
 
                 m_Children.Add(m_Child);
             }
@@ -88,10 +94,12 @@ namespace CMS.Domain.DataAccess
             SqlConnection conn = DB.DbConnect();
             conn.Open();
 
-            string queryString = "UPDATE CMS_ListChildren SET childLabel = @childLabel, childLink = @childLink WHERE id = @id";
+            string queryString = "UPDATE CMS_ListChildren SET childLabel = @childLabel, childLink = @childLink, formNumber = @formNumber, policyName = @policyName WHERE id = @id";
             SqlCommand updChild = new SqlCommand(queryString, conn);
             updChild.Parameters.AddWithValue("childLabel", m_Child.Label);
             updChild.Parameters.AddWithValue("childLink", m_Child.Link);
+            updChild.Parameters.AddWithValue("formNumber", m_Child.FormNumber ?? "");
+            updChild.Parameters.AddWithValue("policyName", m_Child.PolicyName ?? "");
             updChild.Parameters.AddWithValue("id", m_Child.Id);
             updChild.ExecuteNonQuery();
 

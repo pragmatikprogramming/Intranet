@@ -12,7 +12,7 @@
             <article class="box-info">
                 <div class="info">
                     <strong class="title">Need Help?</strong>
-                    <p>Most every question you might have has already been answered in <a href="#">FAQS</a></p>
+                    <p>Most every question you might have has already been answered in <a href="/need-help">FAQS</a></p>
                 </div>
             </article>
         </aside>
@@ -127,6 +127,11 @@
             }
             else if(ViewBag.PageType == 8)
             {
+                if(Model.Content != null)
+                { 
+                    @Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Content))
+                }
+                
                 @Html.Action("Display", "List", new {  id = ViewBag.id })
             }
             else
