@@ -248,24 +248,10 @@ namespace CMS.WebUI.Controllers
 
        
 
-        public RedirectResult Search(string q, int searchType)
+        public ActionResult Search(string SearchValue)
         {
-            if(searchType == 1)
-            {
-               return Redirect("http://ls2pac.snap.lib.ca.us/?config=SOLANO#section=search&term=" + HttpUtility.UrlEncode(q));
-            }
-            else if(searchType == 2)
-            {
-                return Redirect("/search-results?q=" + Url.Encode(q));
-            }
-            else if(searchType == 3)
-            {
-                return Redirect("http://www.google.com?q=" + Url.Encode(q));
-            }
-            else
-            {
-                return Redirect("/Home");
-            }
+            List<SearchResult> m_SearchResults = HomeRepository.Search(SearchValue);
+            return View("SearchResults", m_SearchResults);
         }
 
         

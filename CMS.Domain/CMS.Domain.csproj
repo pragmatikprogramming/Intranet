@@ -212,6 +212,7 @@
     <Compile Include="Entities\Page.cs" />
     <Compile Include="Entities\Performer.cs" />
     <Compile Include="Entities\Review.cs" />
+    <Compile Include="Entities\SearchResult.cs" />
     <Compile Include="Entities\SkillsRegistry.cs" />
     <Compile Include="Entities\SystemSettings.cs" />
     <Compile Include="Entities\Template.cs" />

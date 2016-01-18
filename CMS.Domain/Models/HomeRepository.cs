@@ -72,5 +72,53 @@ namespace CMS.Domain.Models
             client.Send(m_Message);*/
         }
 
+        public List<SearchResult> Search(string searchParam)
+        {
+            int flag = 0;
+            string newSearchParam = "";
+            string newSearchParamOr = "";
+            string[] words = searchParam.Split(' ');
+            foreach(string word in words)
+            {
+                if (flag == 0)
+                {
+                    newSearchParam += @"""" + word + @""" ";
+                    newSearchParamOr += @"""" + word + @""" ";
+                    flag = 1;
+                }
+                else
+                {
+                    newSearchParam += @"and """ + word + @""" ";
+                    newSearchParamOr += @"or """ + word + @""" ";
+                }
+            }
+
+            newSearchParam.Trim();
+            newSearchParamOr.Trim();
+
+            //string newSearchParam = @"""" + searchParam + @"""";
+            List<SearchResult> m_SearchResults = DBHome.Search(newSearchParam, searchParam, newSearchParamOr);
+
+            for (int i = 0; i < m_SearchResults.Count; i++ )
+            {
+                if (m_SearchResults[i].ContentType == "Performer")
+                {
+                    string[] m_Words = m_SearchResults[i].Content.Split('^');
+                    string m_Content = "";
+
+                    foreach (string word in m_Words)
+                    {
+                        if (word.Length > 0)
+                        {
+                            m_Content += word + "<br />";
+                        }
+                    }
+
+                    m_SearchResults[i].Content = m_Content;
+                }
+            }
+
+            return m_SearchResults;
+        }
     }
 }

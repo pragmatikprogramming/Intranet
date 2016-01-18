@@ -645,6 +645,9 @@ table {
 .content-holder .performers .performer-table td {border:1px solid #ccc;line-height:1.75em;vertical-align:top;padding:5px 10px 5px;}
 .content-holder .performers .performer-table td p {line-height:1.75em;}
 
+/* ADDED BY MJS (10/12/2015) */
+.content-holder .search-results ul, .content-holder .search-results li {margin:0;padding:0 0 20px 0; list-style-type:none;}
+
 .twocolumns {
 	float: left;
 	width: 634px;

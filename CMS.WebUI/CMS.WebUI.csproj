@@ -2843,7 +2843,7 @@
     <Content Include="Content\fonts\mistral-webfont.woff" />
     <Content Include="Content\ckfinder\userfiles\.htaccess" />
     <None Include="Properties\PublishProfiles\IIS.pubxml" />
-    <None Include="Properties\PublishProfiles\Intranet DEVELOPMENT.pubxml" />
+    <None Include="Properties\PublishProfiles\Intranet LIVE.pubxml" />
     <None Include="Properties\PublishProfiles\MJSDEV.pubxml" />
     <None Include="Properties\PublishProfiles\SOLANO LIBRARY LIVE.pubxml" />
     <Content Include="Views\Web.config" />
@@ -3017,6 +3017,7 @@
     <Content Include="Views\Page\getFormsList.cshtml" />
     <Content Include="Views\List\Display.cshtml" />
     <Content Include="Views\Shared\InteriorNoLeft.cshtml" />
+    <Content Include="Views\Home\SearchResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

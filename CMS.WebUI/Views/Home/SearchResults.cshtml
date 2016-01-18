@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "SearchResults";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<main class="main" role="main">
+    <div class="content-holder">
+        <div class="search-results">
+            <ul>
+                @if(Model != null)
+                {
+                    foreach(var result in Model)
+                    {
+                        <li>
+                            @if(result.ContentType == "Page")
+                            { 
+                                <a href="/@result.TypeId">@result.Title</a>
+                            }
+                            else if (result.ContentType == "Blog")
+                            {
+                                <a href="/Home/BlogPost/@result.TypeId">@result.Title</a>
+                            }
+                            else if(result.ContentType == "Employee Directory")
+                            {
+                                <a href="/EmployeeDirectory/Display/@result.Id">@result.Title</a>
+                            }
+                            else if (result.ContentType == "FAQ")
+                            {
+                                <a href="/@result.TypeId">@result.Title</a>
+                            }
+                            else if (result.ContentType == "Performer")
+                            {
+                                <a href="/PerformerDirectory/DisplayPerformer/@result.TypeId">@result.Title</a>
+                            }
+                            else if(result.ContentType == "Act")
+                            {
+                                <a href="/PerformerDirectory/DisplayAct/@result.TypeId">@result.Title</a>
+                            }
+                            else
+                            {
+
+                            }
+                            <br />
+                            @result.ContentType<br />
+                            @Html.Raw(System.Web.HttpUtility.HtmlDecode(result.Content))<br />
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+</main>
