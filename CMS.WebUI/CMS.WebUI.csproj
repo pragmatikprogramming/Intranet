@@ -2843,6 +2843,7 @@
     <Content Include="Content\fonts\mistral-webfont.woff" />
     <Content Include="Content\ckfinder\userfiles\.htaccess" />
     <None Include="Properties\PublishProfiles\IIS.pubxml" />
+    <None Include="Properties\PublishProfiles\Intranet DEV.pubxml" />
     <None Include="Properties\PublishProfiles\Intranet LIVE.pubxml" />
     <None Include="Properties\PublishProfiles\MJSDEV.pubxml" />
     <None Include="Properties\PublishProfiles\SOLANO LIBRARY LIVE.pubxml" />
