@@ -361,7 +361,7 @@ namespace CMS.WebUI.Controllers
                 {
                     ModelState.AddModelError(key, "Please enter a value for " + key);
                 }
-                if (key != "recaptcha_challenge_field" && key != "recaptcha_response_field")
+                if (key != "recaptcha_challenge_field" && key != "recaptcha_response_field" && key != "x" && key != "y")
                 {
                     formData += FormRepository.RemoveLineEndings(key) + "::" + FormRepository.RemoveLineEndings(Request.Form[key]) + "^^";
                     emailBody += "<tr><td style='border: 1px solid black; padding-left: 10px; padding-right: 20px;'>" + key + "</td><td style='border: 1px solid black; padding-left: 10px;'>" + Request.Form[key] + "</td></tr>";
